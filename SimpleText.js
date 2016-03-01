@@ -6,6 +6,8 @@
 
 /**
 * Preloads the assets needed by the Simple Text menu.
+* This function has to be called before any other
+* function related to the Simple Text interface.
 *
 * @param Phaser.Game game
 * - the Phaser.Game object to use for preloading.
