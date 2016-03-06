@@ -28,15 +28,22 @@ function preloadTextArea(game){
 * - the game object to use when creating the text area.
 *
 * @param number x
-* - the x value of the text area. Default is 0.
+* - the x value of the text area. 
 *
 * @param number y
-* - the y value of the text area. Default is 0.
+* - the y value of the text area. 
+*
+* @param number width
+* - the width of the text area. 
+*
+* @param number height
+* - the height the text area. 
 *
 * @param boolean isEditable
 * - Sets whether the TextArea is editable. Default is true.
 */
-var TextArea = function(game, x=0, y=0, width, height, isEditable=true){
+var TextArea = function(game, x, y, width, height, isEditable){
+//function TextArea(game, x, y, width, height, isEditable){
 	this.game = game;
 	this.text = "";
 	this.x = null;
@@ -60,7 +67,7 @@ var TextArea = function(game, x=0, y=0, width, height, isEditable=true){
 	this.setY(y);
 	this.setWidth(width);
 	this.setHeight(height);
-	this.setEditable(isEditable);
+	this.setEditable( (isEditable ? true: false) );
 
 	this.scroller = new TextArea.Scroller(this);
 };
