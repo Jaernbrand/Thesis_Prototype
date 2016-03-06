@@ -36,7 +36,7 @@ function preloadTextArea(game){
 * @param boolean isEditable
 * - Sets whether the TextArea is editable. Default is true.
 */
-function TextArea(game, x=0, y=0, width, height, isEditable=true){
+var TextArea = function(game, x=0, y=0, width, height, isEditable=true){
 	this.game = game;
 	this.text = "";
 	this.x = null;
@@ -63,7 +63,7 @@ function TextArea(game, x=0, y=0, width, height, isEditable=true){
 	this.setEditable(isEditable);
 
 	this.scroller = new TextArea.Scroller(this);
-} // TextArea
+};
 
 /**
 * Sets the x value for the TextArea object.
@@ -120,7 +120,7 @@ TextArea.prototype.adjustMask = function(){
 
 		this.mask.drawRect(this.x, this.y, this.width, this.height);
 	}
-}
+};
 
 /**
 * Appends the given text to the current
@@ -300,7 +300,7 @@ TextArea.Scroller.prototype.createScrollIndicator = function(){
 	function dragUpdate(){
 		this.scrollTo(this.scrollIndicator.y);
 	}
-}
+};
 
 /**
 * Adjusts the propotions of the scroller. It is called by
@@ -313,7 +313,7 @@ TextArea.Scroller.prototype.adjustScroller = function(){
 		this.createScrollIndicator();
 		this.currTextHeight = this.textArea.height;
 	}
-}
+};
 
 /**
 * Scrolls the text in the TextArea object the supplied
@@ -330,7 +330,7 @@ TextArea.Scroller.prototype.scroll = function(change){
 		this.scrollIndicator.y += change/this.scale;
 		this.textArea.foreground.y = newPos;
 	}
-}
+};
 
 /**
 * Scrolls the text in the TextArea to the corresponding
@@ -341,7 +341,7 @@ TextArea.Scroller.prototype.scroll = function(change){
 */
 TextArea.Scroller.prototype.scrollTo = function(pos){
 	this.textArea.foreground.y = -1*(pos-this.scrollUp.height)*this.scale;
-}
+};
 
 
 
