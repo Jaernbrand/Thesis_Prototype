@@ -1,0 +1,65 @@
+body{
+	margin: 0;
+	background-image: url("../assets/web/brick.png");
+	background-repeat: repeat;
+}
+
+canvas{
+	padding: 0;
+    margin: auto;
+    display: block;
+    position: absolute;
+    top: -5%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+
+#simpleTextStart{
+    margin:10%;
+    height:400px;
+    width:900px;
+    border: 10px solid black;
+    position:fixed;
+    background-color: white;
+    z-index: 2;
+    visibility: hidden;
+}
+
+#simpleTextStart .content{
+    margin: 15px;
+}
+
+
+#simpleTextStart .content h1{
+    margin:0;
+    padding-bottom:10px;
+}
+
+#simpleTextStart .content textarea{
+    resize: none;
+    width:860px;
+    height:250px;
+    font-size: 1.5em;
+}
+
+#simpleTextStart .content button{
+    font-size: 1.2em;
+    
+}
+
+#simpleTextStart .content #flagButton{
+    margin: 30px 10px 10px 0px;
+
+}
+
+#simpleTextStart .content #simpleTextButton{
+    margin: 10px;
+}
+
+#simpleTextStart .content #okButton{
+    margin: 30px 10px 10px 0px;
+    float: right;
+}
