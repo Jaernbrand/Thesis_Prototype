@@ -4,7 +4,7 @@
 
 
 /**
-* Fills the database with data.
+* Populates the database with data.
 */
 function fillDatabase(){
 	SimpleText.database.addAuthor("Nisse");

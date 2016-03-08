@@ -1,22 +1,21 @@
-/**
-* Stores and retrieves information related to
-* SimpleText.
-*/
 
 /**
 * @class SimpleText.Database
 *
-* Constructor for SimpleText.Database.
+* Stores and retrieves information related to
+* SimpleText.
 */
 SimpleText.Database = function(){
 
 	/**
-	* @property object authors
+	* @property {object.<string, Author>} authors
+	* Map of Author objects with Author.name as the key
 	*/
 	this.authors = {}
 
 	/**
-	* @property object contributions
+	* @property {object.<string, Contribution>} contributions
+	* Map of Contribution objects with questID as the key
 	*/
 	this.contributions = {};
 };
@@ -24,8 +23,8 @@ SimpleText.Database = function(){
 /**
 * Adds the given author name to the database.
 *
-* @param string name
-* - name of the author.
+* @param {string} name
+* Name of the author.
 */
 SimpleText.Database.prototype.addAuthor = function(name){
 	if (typeof name !== "string"){
@@ -34,10 +33,10 @@ SimpleText.Database.prototype.addAuthor = function(name){
 	}
 
 	/**
-	* @struct Author
+	* @typedef {object} Author
 	*
-	* @property string name
-	* @property int favourited
+	* @property {string} name
+	* @property {int} favourited
 	*/
 	this.authors[name] = {
 		name: name,
@@ -49,8 +48,8 @@ SimpleText.Database.prototype.addAuthor = function(name){
 * Decrements the number of users that favourited 
 * the author.
 *
-* @param string name
-* - name of the author to defavourite.
+* @param {string} name
+* Name of the author to defavourite.
 */
 SimpleText.Database.prototype.defavouriteAuthor = function(name){
 	if (typeof name !== "string"){
@@ -65,8 +64,8 @@ SimpleText.Database.prototype.defavouriteAuthor = function(name){
 * Increments the number of users that favourited 
 * the author.
 *
-* @param string name
-* - name of the author to favourite.
+* @param {string} name
+* Name of the author to favourite.
 */
 SimpleText.Database.prototype.favouriteAuthor = function(name){
 	if (typeof name !== "string"){
@@ -82,11 +81,11 @@ SimpleText.Database.prototype.favouriteAuthor = function(name){
 * is a simplified text of the quest text with the given
 * quest id.
 *
-* @param string questID
-* - the id of the quest for which to add a contribution.
+* @param {string} questID
+* The id of the quest for which to add a contribution.
 *
-* @return string
-* - id of the newly added contribution.
+* @return {string}
+* ID of the newly added contribution.
 */
 SimpleText.Database.prototype.addContribution = function(questID, author, text){
 	if (typeof questID !== "string"){
@@ -101,16 +100,16 @@ SimpleText.Database.prototype.addContribution = function(questID, author, text){
 	var id = this.contributions[questID].length.toString();
 
 	/**
-	* @struct Contribution
+	* @typedef {object} Contribution
 	*
-	* @property string contID
-	* @property string author
-	* @property int votes
-	* @property int flags
-	* @property array comments
-	* @property string text
-	* @property array pictures,
-	* @property array sounds
+	* @property {string} contID
+	* @property {string} author
+	* @property {int} votes
+	* @property {int} flags
+	* @property {array} comments
+	* @property {string} text
+	* @property {array} pictures,
+	* @property {array} sounds
 	*/
 	this.contributions[questID].push({
 		contID: id,
@@ -131,14 +130,14 @@ SimpleText.Database.prototype.addContribution = function(questID, author, text){
 * the specified contribution ID and for the quest with
 * the specified quest ID.
 *
-* @param string questID
-* - the ID of the quest to which the contribution belongs.
+* @param {string} questID
+* The ID of the quest to which the contribution belongs.
 *
-* @param string contID
-* - the ID of the contribution for which to add the sound file.
+* @param {string} contID
+* The ID of the contribution for which to add the sound file.
 *
-* @param string picture
-* - path to the picture.
+* @param {string} picture
+* Path to the picture.
 */
 SimpleText.Database.prototype.addPicture = function(questID, contID, picture){
 	if (typeof questID !== "string"){
@@ -167,14 +166,14 @@ SimpleText.Database.prototype.addPicture = function(questID, contID, picture){
 * the specified contribution ID and for the quest with
 * the specified quest ID.
 *
-* @param string questID
-* - the ID of the quest to which the contribution belongs.
+* @param {string} questID
+* The ID of the quest to which the contribution belongs.
 *
-* @param string contID
-* - the ID of the contribution for which to add the sound file.
+* @param {string} contID
+* The ID of the contribution for which to add the sound file.
 *
-* @param string sound
-* - path to the sound file.
+* @param {string} sound
+* Path to the sound file.
 */
 SimpleText.Database.prototype.addSound = function(questID, contID, sound){
 	if (typeof questID !== "string"){
@@ -203,20 +202,20 @@ SimpleText.Database.prototype.addSound = function(questID, contID, sound){
 * with the given quest ID and with the given 
 * contribution ID.
 *
-* @param string questID
-* - the ID of the quest to which the contribution belongs.
+* @param {string} questID
+* The ID of the quest to which the contribution belongs.
 *
-* @param string contID
-* - the ID of teh contribution for which to add the comment.
+* @param {string} contID
+* The ID of teh contribution for which to add the comment.
 *
-* @param string author
-* - the author of the comment.
+* @param {string} author
+* The author of the comment.
 *
-* @param string text
-* - the comment text. 
+* @param {string} text
+* The comment text. 
 *
-* @return string
-* - the comment id of the newly added comment.
+* @return {string}
+* The comment id of the newly added comment.
 */
 SimpleText.Database.prototype.addComment = function(questID, contID, author, text){
 	if (typeof questID !== "string"){
@@ -238,11 +237,11 @@ SimpleText.Database.prototype.addComment = function(questID, contID, author, tex
 			id = this.contributions[questID][i].comments.length.toString();
 	
 			/**
-			* @struct Comment
+			* @typedef {object} Comment
 			*
-			* @property string comID
-			* @property string author
-			* @property string text
+			* @property {string} comID
+			* @property {string} author
+			* @property {string} text
 			*/
 			this.contributions[questID][i].comments.push({
 				comID: id,
@@ -259,11 +258,11 @@ SimpleText.Database.prototype.addComment = function(questID, contID, author, tex
 /**
 * Fetches the author with the specified name.
 *
-* @param string name
-* - name of the author to fetch.
+* @param {string} name
+* Name of the author to fetch.
 *
-* @return object
-* - object representing an author.
+* @return {Author}
+* Representation of an author.
 */
 SimpleText.Database.prototype.fetchAuthor = function(name){
 	if (typeof name !== "string"){
@@ -277,11 +276,11 @@ SimpleText.Database.prototype.fetchAuthor = function(name){
 /**
 * Fetches the contributions for the supplied quest ID.
 *
-* @param string questID
-* - the ID of the quest for which to fetch the contributions.
+* @param {string} questID
+* The ID of the quest for which to fetch the contributions.
 *
-* @return array
-* - the quest contributions.
+* @return {array.<Contribution>}
+* The quest contributions.
 */
 SimpleText.Database.prototype.fetchContributions = function(questID){
 	if (typeof questID !== "string"){
@@ -296,14 +295,14 @@ SimpleText.Database.prototype.fetchContributions = function(questID){
 * Fetches the comments for the quest with the given quest ID
 * and with the given contribution ID.
 *
-* @param string questID
-* - the quest ID for which to fetch the comments.
+* @param {string} questID
+* The quest ID for which to fetch the comments.
 *
-* @param string contID
-* - the contributions ID for which to fetch the comments.
+* @param {string} contID
+* The contributions ID for which to fetch the comments.
 *
-* @return array
-* - the comments for the contribution to the quest.
+* @return {array.<Comment>}
+* The comments for the contribution to the quest.
 */
 SimpleText.Database.prototype.fetchComments = function(questID, contID){
 	if (typeof questID !== "string"){

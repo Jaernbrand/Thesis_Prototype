@@ -19,7 +19,7 @@ $(BUILD):
 all: doc $(BUILD)
 
 clean:
-	rm -rf $(BUILD) $(DOC_DIR)
+	rm -rf $(BUILD_DIR) $(DOC_DIR)
 
 doc: 
 	mkdir -p $(DOC_DIR)
