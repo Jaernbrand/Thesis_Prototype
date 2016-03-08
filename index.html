@@ -24,8 +24,8 @@
 
 
 
-
-<div id="simpleTextStart">
+<!-- SIMPLE TEXT START -->
+<div id="simpleTextStart" class="mainWindow">
 	<div class="content">
 		<h1>Quest: 1/10</h1>
 		<textarea name="test" readonly>
@@ -33,18 +33,104 @@ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor
 
 Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. 
 
-Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</textarea>
-
-	
+Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+</textarea>
 
 	<button type="button" id="flagButton">Flag</button>
 	<button type="button" id="simpleTextButton">Simple Text</button>
 	<button type="button" id="okButton">OK</button>
 	</div>
 </div>
+<!-- SIMPLE TEXT END -->
 
 
 
+<!-- CONTRIBUTIONS START -->
+<div id="contributions" class="mainWindow">
+	<div class="content">
+		<h1>Quest: 1/10</h1>
+		<p class="subheading">Simple text versions:</p>
+		
+		<select id="sortContributions">
+  			<option value="highest">highest rating</option>
+  			<option value="newest">newest first</option>
+  			<option value="oldest">oldest first</option>
+  			<option value="author">favourite author(s)</option>
+		</select>
+
+		<div id="contributionsList">
+			<div class="itemWrapper" onclick="test()">
+				<p class="textExcerpt">Lorem Ipsum är en utfyllnadstext från tryck- och förlagsindustrin. Lorem ipsum har varit standard ända sedan 1500-talet, när en okänd boksättare tog att antal bokstäver och blandade dem för att göra ett provexemplar av en bok. Lorem ipsum har inte bara överlevt fem århundraden, utan även övergången till elektronisk typografi utan större förändringar. Det blev allmänt känt på 1960-talet i samband med lanseringen av Letraset-ark med avsnitt av Lorem Ipsum, och senare med mjukvaror som Aldus PageMaker.</p>
+				<div class="likesAndAuthorWrapper">
+					<div class="likesWrapper">
+						<p class="numberLikes">300</p>
+						<img src="assets/web/like.png" alt="likes"> 
+					</div>
+
+					<div class="authorWrapper">
+						<p class="by">BY: </p>
+						<p class="author">John</p>	
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="contributionsBtnsWrapper">
+			<button type="button" id="contributeBack">BACK</button>
+			<button type="button" id="contributeCreate">CREATE</button>
+		</div>
+	</div>
+
+</div>
+<!-- CONTRIBUTIONS END -->
+
+
+
+
+<!-- VIEW SINGLE CONTRIBUTION START -->
+
+<div id="viewSingleContribution" class="mainWindow">
+	<div class="content">
+		<h1>Quest: 1/10</h1>
+		<textarea name="test" readonly>
+Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+		</textarea>
+
+		<div class="imagesWrapper">
+			<a href="assets/web/wow1.jpg"><img class="contributionImgOne" src="assets/web/wow1.jpg"></a>
+			<a href="assets/web/wow2.jpg"><img class="contributionImgTwo" src="assets/web/wow2.jpg"></a>
+			<a href="assets/web/wow3.jpg"><img class="contributionImgThree" src="assets/web/wow3.jpg"></a>
+		</div>
+
+		<div class="bottomAreaWrapper">
+			<audio controls>
+				<source src="assets/audio/Dr.Alban-Hello_Africa_(fast_blast_club_mix).mp3" type="audio/mpeg">
+				This browser doesn't support the audio element.
+			</audio>
+
+
+			<div id="authorNameAndAddAuthorBtn">
+				<p>BY: John</p>
+				<img src="assets/web/star.png">
+			</div>
+
+
+			<div id="contributionBtnGroup">
+				<img src="assets/web/comment.png">
+				<img src="assets/web/flag.png">
+				<img src="assets/web/like.png">
+			</div>
+
+
+			<button type="button" id="viewContributionBack">BACK</button>
+		</div>
+	</div>
+</div>
+
+
+
+
+<!-- VIEW SINGLE CONTRIBUTION END -->
 
 
 

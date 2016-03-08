@@ -16,38 +16,52 @@ canvas{
     z-index: 1;
 }
 
-
-#simpleTextStart{
+/* MAIN WINDOW START */
+.mainWindow{
     margin:10%;
-    height:400px;
+    height:430px;
     width:900px;
     border: 10px solid black;
     position:fixed;
     background-color: white;
     z-index: 2;
-    visibility: hidden;
 }
 
-#simpleTextStart .content{
-    margin: 15px;
-}
-
-
-#simpleTextStart .content h1{
+.mainWindow h1{
     margin:0;
     padding-bottom:10px;
 }
+
+.mainWindow .content{
+    margin: 15px;
+}
+
+.mainWindow .subheading{
+    font-size: 1.3em;
+    margin:0 0 10px 0;
+    display: inline;
+}
+
+.mainWindow button{
+    font-size: 1.2em;   
+}
+/* MAIN WINDOW END */
+
+
+
+
+
+/*SIMPLE TEXT START*/
+#simpleTextStart{
+    visibility: hidden;
+}
+
 
 #simpleTextStart .content textarea{
     resize: none;
     width:860px;
     height:250px;
     font-size: 1.5em;
-}
-
-#simpleTextStart .content button{
-    font-size: 1.2em;
-    
 }
 
 #simpleTextStart .content #flagButton{
@@ -63,3 +77,167 @@ canvas{
     margin: 30px 10px 10px 0px;
     float: right;
 }
+/*SIMPLE TEXT END*/
+
+
+
+
+
+/*CONTRIBUTIONS START*/
+#contributions{
+    visibility: hidden;
+}
+
+#contributions #sortContributions{
+    float:right;
+}
+
+#contributions #contributionsList{
+    width: 865px;
+    height: 250px;
+    border: 2px solid black;
+    overflow-y: scroll;
+}
+
+#contributions #contributionsBtnsWrapper{
+    float: right;
+}
+
+#contributions #contributeBack{
+    margin: 15px 10px 0px 0px;
+}
+
+#contributions #contributionsList .itemWrapper{
+    height: 84px;
+    width: 100%;
+    background-color: grey;
+    margin: 0;
+    overflow-y: hidden;
+    border-bottom: 1px solid black;
+}
+
+#contributions #contributionsList .itemWrapper .textExcerpt{
+    margin:0;
+    width: 700px; 
+    float: left;
+    font-size: 1.1em;
+    padding: 5px;
+    line-height: 140%;
+}
+
+#contributions #contributionsList .itemWrapper .textExcerpt p{
+    padding:0;
+    margin: 0;
+
+}
+
+
+#contributions #contributionsList .itemWrapper .likesAndAuthorWrapper{
+    float:right;
+    padding: 10px;
+}
+
+#contributions #contributionsList .itemWrapper .likesAndAuthorWrapper p{
+    padding: 0;
+    margin:0;
+    display:inline;
+}
+
+#contributions #contributionsList .itemWrapper .likesAndAuthorWrapper .numberLikes{
+    font-size: 1.4em;
+}
+
+#contributions #contributionsList .itemWrapper .likesAndAuthorWrapper .authorWrapper{
+    font-size: 1.2em;
+}
+
+
+
+/*CONTRIBUTIONS END*/
+
+
+
+
+/*VIEW SINGLE CONTRIBUTION START*/
+#viewSingleContribution{
+    visibility: hidden;
+}
+
+
+
+#viewSingleContribution .content textarea{
+    resize: none;
+    width:650px;
+    height:250px;
+    font-size: 1.5em;
+    float: left;
+}
+
+#viewSingleContribution .content .imagesWrapper{
+    float: right;
+    width:200px;
+    height:250px;
+    text-align: center;
+}
+
+
+#viewSingleContribution .content .bottomAreaWrapper{
+    width:655px;
+}
+
+#viewSingleContribution .content .imagesWrapper img{
+    width:180px;
+    height: auto;
+    margin-bottom: 10px;
+
+}
+
+#viewSingleContribution .content .bottomAreaWrapper  audio{
+    width: 656px;
+    display: block;
+}
+
+
+
+#viewSingleContribution .content #authorNameAndAddAuthorBtn{
+    padding-top: 5px;
+    width: 550px;
+    float:left;
+}
+
+#viewSingleContribution .content #authorNameAndAddAuthorBtn img{
+    width:25px;
+    height: auto;
+    padding-left:5px;
+}
+
+#viewSingleContribution .content #authorNameAndAddAuthorBtn p{
+    font-size: 1.2em;
+    display:inline;
+    float:left;
+    padding:0;
+    margin:0;
+}
+
+#viewSingleContribution .content #contributionBtnGroup{
+    padding-top: 5px;
+    float: right;
+}
+
+#viewSingleContribution .content #contributionBtnGroup img{
+    width:25px;
+    height: auto;
+    padding-left:5px;
+}
+
+#viewSingleContribution .content #viewContributionBack{
+    margin-top: 5px;
+}
+
+
+
+
+
+
+
+/*VIEW SINGLE CONTRIBUTION END*/
