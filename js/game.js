@@ -4,41 +4,49 @@
 
 /**
 * @property {Phaser.Game} game
+* The game object running the game.
 */
 var game = new Phaser.Game(1280, 720, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update });
 
 /**
 * @property {Phaser.Tilemap} map
+* The tilemap of the game.
 */
 var map;
 
 /**
 * @property {Phaser.Sprite} player
+* The user controlled sprite.
 */
 var player;
 
 /**
 * @property {Phaser.Sprite} friend
+* Friendly sprite.
 */
 var friend;
 
 /**
 * @property {Phaser.Group} coins
+* Coins collectible by the player.
 */
 var coins;
 
 /**
 * @property {object} cursors
+* Contains the cursos keys.
 */
 var cursors;
 
 /**
 * @property {Phaser.Sound} music
+* The game's background music.
 */
 var music;
 
 /**
 * @property {Phaser.Sprite} wall
+* An impassable wall.
 */
 var wall;
 
