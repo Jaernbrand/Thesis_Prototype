@@ -10,7 +10,7 @@ Do this via the commandline when the target is called.
 
 Usage:
 ```
-make install location=<location directory>
+make install location=<install directory>
 ```
 
 Example:
