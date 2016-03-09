@@ -1,20 +1,61 @@
+// *****************************************************
 // **************** GLOBAL VARIABLES *******************
 // *****************************************************
+
+/**
+* @property {Phaser.Game} game
+*/
 var game = new Phaser.Game(1280, 720, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update });
+
+/**
+* @property {Phaser.Tilemap} map
+*/
 var map;
+
+/**
+* @property {Phaser.Sprite} player
+*/
 var player;
+
+/**
+* @property {Phaser.Sprite} friend
+*/
 var friend;
+
+/**
+* @property {Phaser.Group} coins
+*/
 var coins;
+
+/**
+* @property {object} cursors
+*/
 var cursors;
+
+/**
+* @property {Phaser.Sound} music
+*/
 var music;
+
+/**
+* @property {Phaser.Sprite} wall
+*/
 var wall;
+
 // *****************************************************
 // *****************************************************
 
+/**
+* Preloads the assets needed by the game.
+*/
 function preload() {
     //  Load tilemap
-    game.load.tilemap('map', 'assets/tile/map_no_objects.csv', null, Phaser.Tilemap.CSV);
-    //  Load the tileset. This is just an image, loaded in via the normal way we load images:
+    game.load.tilemap('map', 
+				'assets/tile/map_no_objects.csv', 
+				null, 
+				Phaser.Tilemap.CSV);
+    //  Load the tileset. This is just an image, 
+    // loaded in via the normal way we load images:
     game.load.image('tiles', 'assets/tile/simples_pimples.png');
     // game.load.image('bat', 'assets/tile/bat.png');
     game.load.image('coin', 'assets/tile/coin.png');
@@ -31,11 +72,14 @@ function preload() {
 
 }
 
-
+/**
+* Creates the variables and objects needed by the game.
+*/
 function create() {
     map = game.add.tilemap('map', 16, 16);
-    //  The first parameter is the tileset name, as specified in the Tiled map editor (and in the tilemap json file)
-    //  The second parameter maps this name to the Phaser.Cache key 'tiles'
+    //  The first parameter is the tileset name, 
+    // as specified in the Tiled map editor (and in the tilemap json file)
+    // The second parameter maps this name to the Phaser.Cache key 'tiles'
     map.addTilesetImage('simples_pimples', 'tiles');
     //  Creates a layer from the layers in the map data.
     layer = map.createLayer(0);
@@ -74,7 +118,9 @@ function create() {
 }
 
 
-
+/**
+* Updates the gamestate one tick.
+*/
 function update() {
     game.physics.arcade.collide(player, layer);
     game.physics.arcade.overlap(player, coins, collectCoin, null, this);
@@ -108,14 +154,29 @@ function update() {
 
 // *****************************************
 // ********** HELPER FUNCTIONS *************
+// *****************************************
 
-function collectCoin (player, coin) {
+/**
+* Collects the given coin as the supplied player.
+*
+* @param {Phaser.Sprite} player
+* Player to collect coin.
+*
+* @param {Phaser.Sprite} coin
+* The coin to collect.
+*/
+function collectCoin(player, coin) {
     coin.kill();
     coinSound.play();
 }
 
+/**
+* Shows a quest description on screen.
+*/
 function talkWithFriend(){
     document.getElementById("simpleTextStart").style.visibility = "visible";
     player.hasTalked = true;
     wall.kill();
 }
+
+
