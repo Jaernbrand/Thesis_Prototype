@@ -1,7 +1,11 @@
 /**
 * Setup for the user tests of the prototype.
+* Should be run before each user test.
+*
+* @module Setup
 */
 
+SimpleText.username = "TestUser";
 
 /**
 * Populates the database with data.
