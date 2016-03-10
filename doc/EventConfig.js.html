@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: EventConfig.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: EventConfig.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+* @module EventConfig
+*/
+
+// Run when the DOM is loaded and ready
+/**
+* Run when the DOM is loaded and ready
+*/
+$(document).ready(function(){
+	
+	//Needed to be able to fade-in/fade-out infoBox when user clicks any icon 
+	//when viewing a single contribution.
+	//If visibility is set with css, jQuery function fadeIn() &amp; fadeOut() can't
+	//be used
+	$("#infoBox").hide();
+
+
+
+	/** 
+	*Close simpleTextStart window
+	*/
+	document.getElementById("okButton").onclick = function () { 
+		document.getElementById("simpleTextStart").style.visibility = "hidden";
+	};
+
+	// Open contribution list
+	document.getElementById("simpleTextButton").onclick = function () { 
+		document.getElementById("simpleTextStart").style.visibility = "hidden";
+		document.getElementById("contributions").style.visibility = "visible";
+	};
+
+	// Go back to simpleTextStart from contribution list
+	document.getElementById("contributeBack").onclick = function () { 
+		document.getElementById("contributions").style.visibility = "hidden";
+		document.getElementById("simpleTextStart").style.visibility = "visible";
+		
+	};
+
+	// Go back to simpleTextStart from contribution list
+	document.getElementById("viewContributionBack").onclick = function () { 
+		document.getElementById("viewSingleContribution").style.visibility = "hidden";
+		document.getElementById("contributions").style.visibility = "visible";
+		
+	};
+
+
+	// comment quest contribution
+	document.getElementById("commentContribution").onclick = function () { 
+		//document.getElementById("viewSingleContribution").style.visibility = "hidden";
+		// show comments on contribution
+
+	};
+
+
+	// Util function to display and hide infoBox - a popup message when
+	// the user interacts with buttons "add, flag, like"
+	function displayInfoBox(imgClicked, message, filled, imgPath){
+		var infoBox = $("#infoBox").stop();
+		infoBox.hide();
+		var messageTag = document.getElementById("infoMessage");
+		if(!filled){
+			$(imgClicked).attr('src', imgPath);
+			messageTag.innerHTML = message;
+			infoBox.stop(true).hide().fadeIn(300);
+			infoBox.delay(2000).fadeOut(500);
+		}else{
+			$(imgClicked).attr('src', imgPath);
+			messageTag.innerHTML = message;
+			infoBox.stop(true).hide().fadeIn(300);
+			infoBox.delay(2000).fadeOut(500); 
+		}
+	}
+
+
+	// Add author as favourite
+	var filled = false;
+	$("#favouriteAuthor").click(function() {
+		if(!filled){
+			filled = true;
+			var message = "Added as favourite author.";
+			var path = "assets/web/addFilled.png";
+			displayInfoBox(this, message, filled, path);
+			//Database stuff...
+		}else{
+			filled = false;
+			var message = "Removed author from favourites.";
+			var path = "assets/web/add.png";
+			displayInfoBox(this, message, filled, path);
+			//Database stuff...
+		}
+
+	});
+
+
+	// Flag single contribution
+	var flagged = false;
+	$("#flagSingleContribution").click(function() {
+		if(!flagged){
+			flagged = true;
+			var message = "Marked content as inappropriate.";
+			var path = "assets/web/flagFilled.png";
+			displayInfoBox(this, message, flagged, path);
+			//Database stuff...
+		}else{
+			flagged = false;
+			var message = "Removed inappropriate marking.";
+			var path = "assets/web/flag.png";
+			displayInfoBox(this, message, flagged, path);
+			//Database stuff...
+		}
+
+	});
+
+
+	// Like single contribution
+	var likesAuthor = false;
+	$("#likeContribution").click(function() {
+		if(!likesAuthor){
+			likesAuthor = true;
+			var message = "You like this contribution.";
+			var path = "assets/web/likeFilled.png";
+			displayInfoBox(this, message, likesAuthor, path);
+			//Database stuff...
+		}else{
+			likesAuthor = false;
+			var message = "Like removed.";
+			var path = "assets/web/like.png";
+			displayInfoBox(this, message, likesAuthor, path);
+			//Database stuff...
+		}
+
+	});
+
+
+
+	// Makes cursor into hand when hovering over buttons: add, comment, flag, like
+	$('#favouriteAuthor').hover(function() {
+        $(this).css('cursor','pointer');
+    });
+
+    $('#flagSingleContribution').hover(function() {
+        $(this).css('cursor','pointer');
+    });
+
+    $('#likeContribution').hover(function() {
+        $(this).css('cursor','pointer');
+    });
+
+    $('#commentContribution').hover(function() {
+        $(this).css('cursor','pointer');
+    });
+
+    // Makes cursor into hand when hovering over items in the contributions list
+    $('.itemWrapper').hover(function() {
+        $(this).css('cursor','pointer');
+    });
+
+
+
+});//document has finished loading
+
+
+
+/**
+* View a single contribution. Reached by clicking a contribution from the contributions list
+*/
+function viewSingleContribution(){
+	var author = document.getElementById("author");
+	//database stuff...
+	//load data into viewSingleContribution before showing it
+
+	//just for now
+	document.getElementById("contributions").style.visibility = "hidden";
+	document.getElementById("viewSingleContribution").style.visibility = "visible";
+
+}
+
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-EventConfig.html">EventConfig</a></li><li><a href="module-Setup.html">Setup</a></li></ul><h3>Classes</h3><ul><li><a href="SimpleText.Database.html">Database</a></li></ul><h3>Namespaces</h3><ul><li><a href="SimpleText.html">SimpleText</a></li></ul><h3>Global</h3><ul><li><a href="global.html#coins">coins</a></li><li><a href="global.html#collectItem">collectItem</a></li><li><a href="global.html#create">create</a></li><li><a href="global.html#cursors">cursors</a></li><li><a href="global.html#friend">friend</a></li><li><a href="global.html#friendMap">friendMap</a></li><li><a href="global.html#game">game</a></li><li><a href="global.html#map">map</a></li><li><a href="global.html#music">music</a></li><li><a href="global.html#player">player</a></li><li><a href="global.html#preload">preload</a></li><li><a href="global.html#talkWithFriend">talkWithFriend</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#wall">wall</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Mar 10 2016 14:20:23 GMT+0100 (CET)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
