@@ -8,7 +8,7 @@ BUILD=$(BUILD_DIR)/$(BUILD_NAME)
 
 JS_SRC_DIR=js
 JS_SRC_FILES=$(JS_SRC_DIR)/Database.js $(JS_SRC_DIR)/EventConfig.js $(JS_SRC_DIR)/game.js \
-			$(JS_SRC_DIR)/SimpleText.js $(JS_SRC_DIR)/Setup.js
+			$(JS_SRC_DIR)/SimpleText.js $(JS_SRC_DIR)/UserTestSetup.js
 
 .PHONY: all clean doc install
 
