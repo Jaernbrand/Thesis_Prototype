@@ -109,7 +109,7 @@ SimpleText.Database.prototype.addContribution = function(questID, author, text){
 	* @property {number} timestamp
 	* @property {array} comments
 	* @property {string} text
-	* @property {array} pictures,
+	* @property {array} pictures
 	* @property {array} sounds
 	*/
 	this.contributions[questID].push({
@@ -194,6 +194,66 @@ SimpleText.Database.prototype.addSound = function(questID, contID, sound){
 	for(var i=0; i < this.contributions[questID].length; ++i){
 		if (this.contributions[questID][i].contID === contID){
 			this.contributions[questID][i].sounds.push(sound);
+			break;
+		}
+	}
+}
+
+/**
+* Increments the number of flags by one for the contribution with 
+* the specified contribution ID for the quest with
+* the specified quest ID.
+*
+* @param {string} questID
+* The ID of the quest to which the contribution belongs.
+*
+* @param {string} contID
+* The ID of the contribution for which to increment the
+* number of flags.
+*/
+SimpleText.Database.prototype.addFlag = function(questID, contID){
+	if (typeof questID !== "string"){
+		throw "questID: Invalid type " + (typeof questID) +
+				" Expected string.";
+	}
+	if (typeof contID !== "string"){
+		throw "contID: Invalid type " + (typeof contID) +
+				" Expected string.";
+	}
+
+	for(var i=0; i < this.contributions[questID].length; ++i){
+		if (this.contributions[questID][i].contID === contID){
+			this.contributions[questID][i].flags++;
+			break;
+		}
+	}
+}
+
+/**
+* Decrements the number of flags by one for the contribution with 
+* the specified contribution ID for the quest with
+* the specified quest ID.
+*
+* @param {string} questID
+* The ID of the quest to which the contribution belongs.
+*
+* @param {string} contID
+* The ID of the contribution for which to decrement the
+* number of flags.
+*/
+SimpleText.Database.prototype.removeFlag = function(questID, contID){
+	if (typeof questID !== "string"){
+		throw "questID: Invalid type " + (typeof questID) +
+				" Expected string.";
+	}
+	if (typeof contID !== "string"){
+		throw "contID: Invalid type " + (typeof contID) +
+				" Expected string.";
+	}
+
+	for(var i=0; i < this.contributions[questID].length; ++i){
+		if (this.contributions[questID][i].contID === contID){
+			this.contributions[questID][i].flags--;
 			break;
 		}
 	}

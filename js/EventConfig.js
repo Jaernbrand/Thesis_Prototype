@@ -1,3 +1,7 @@
+/**
+* @module EventConfig
+*/
+
 // Run when the DOM is loaded and ready
 $(document).ready(function(){
 	
@@ -59,8 +63,15 @@ $(document).ready(function(){
 	createContribution
 
 
-	// Util function to display and hide infoBox - a popup message when
-	// the user interacts with buttons "add, flag, like"
+	/** 
+	* Utility function to display and hide infoBox - a popup message when
+	* the user interacts with buttons "add", "flag" and "like".
+	*
+	* @param {string} imgClicked
+	* @param {string} message
+	* @param {boolean} filled
+	* @param {string} imgPath
+	*/
 	function displayInfoBox(imgClicked, message, filled, imgPath){
 		var infoBox = $("#infoBox").stop();
 		infoBox.hide();
@@ -87,13 +98,18 @@ $(document).ready(function(){
 			var message = "Added as favourite author.";
 			var path = "assets/web/addFilled.png";
 			displayInfoBox(this, message, filled, path);
-			//Database stuff...
+
+			var authorName = document.getElementById("singleContributionAuthor").innerHTML;
+			SimpleText.database.favouriteAuthor(authorName);
+
 		}else{
 			filled = false;
 			var message = "Removed author from favourites.";
 			var path = "assets/web/add.png";
 			displayInfoBox(this, message, filled, path);
-			//Database stuff...
+
+			var authorName = document.getElementById("singleContributionAuthor").innerHTML;
+			SimpleText.database.defavouriteAuthor(authorName);
 		}
 
 	});
@@ -107,13 +123,20 @@ $(document).ready(function(){
 			var message = "Marked content as inappropriate.";
 			var path = "assets/web/flagFilled.png";
 			displayInfoBox(this, message, flagged, path);
-			//Database stuff...
+
+			var questID = document.getElementById("singleContributionQuestID").innerHTML;
+			var contID = document.getElementById("singleContributionContID").innerHTML;
+			SimpleText.database.addFlag(questID, contID);
+
 		}else{
 			flagged = false;
 			var message = "Removed inappropriate marking.";
 			var path = "assets/web/flag.png";
 			displayInfoBox(this, message, flagged, path);
-			//Database stuff...
+
+			var questID = document.getElementById("singleContributionQuestID").innerHTML;
+			var contID = document.getElementById("singleContributionContID").innerHTML;
+			SimpleText.database.removeFlag(questID, contID);
 		}
 
 	});
@@ -127,13 +150,20 @@ $(document).ready(function(){
 			var message = "You like this contribution.";
 			var path = "assets/web/likeFilled.png";
 			displayInfoBox(this, message, likesAuthor, path);
-			//Database stuff...
+
+			var questID = document.getElementById("singleContributionQuestID").innerHTML;
+			var contID = document.getElementById("singleContributionContID").innerHTML;
+			SimpleText.database.addVote(questID, contID);
+
 		}else{
 			likesAuthor = false;
 			var message = "Like removed.";
 			var path = "assets/web/like.png";
 			displayInfoBox(this, message, likesAuthor, path);
-			//Database stuff...
+
+			var questID = document.getElementById("singleContributionQuestID").innerHTML;
+			var contID = document.getElementById("singleContributionContID").innerHTML;
+			SimpleText.database.removeVote(questID, contID);
 		}
 
 	});
@@ -168,16 +198,41 @@ $(document).ready(function(){
 
 
 
-//View single contribution - when clicking a contribution from the contributions list
+/**
+* View a single contribution. Reached by clicking a contribution from the contributions list.
+*/
 function viewSingleContribution(){
 	var author = document.getElementById("author");
+
+	// var questID = TODO Get quest ID
+	// var contID = TODO Get cont ID
+
 	//database stuff...
 	//load data into viewSingleContribution before showing it
 
+	/*
+	document.getElementById("singleContributionAuthor").innerHTML = ;
+	document.getElementById("singleContributionQuestID").innerHTML = ;
+	document.getElementById("singleContributionContID").innerHTML = ;
+	*/
+	
 	//just for now
 	document.getElementById("contributions").style.visibility = "hidden";
 	document.getElementById("viewSingleContribution").style.visibility = "visible";
 
 }
+
+function listContributions(){
+	var questID = ;
+	var contributions = SimpleText.database.fetchContributions(questID);
+	for (var i=0; i < contributions.length; ++i){
+		contributions[i].
+
+
+
+
+	}
+}
+
 
 

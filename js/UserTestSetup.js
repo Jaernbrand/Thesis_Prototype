@@ -28,15 +28,17 @@ function fillDatabase(){
 		}
 
 		var oleContId = SimpleText.database.addContribution(questID, "óle", "Try jumping.");
-		SimpleText.database.addComment(quest1, oleContId, "Fred", "You can't jump in this game.");
+		SimpleText.database.addComment(questID, oleContId, "Fred", "You can't jump in this game.");
 	}
 
 	populateAuthors();
 	populateQuest1("quest1");
 
 	// TODO
+	/*
 	SimpleText.database.addPicture(quest1, contId, "path/picture");
 	SimpleText.database.addSound(quest1, contId, "path/picture");
+	*/
 };
 
 fillDatabase();
