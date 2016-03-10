@@ -14,10 +14,9 @@ $(document).ready(function(){
 	//Load fancybox
 	$(".fancybox").fancybox();
 
-	//Change the default name on file upload
-	$('#choose-file').inputFileText({ 
-		text: 'Select File' 
-	});
+	//Hide guidelines so they can be shown later using jquery
+	$("#guidelinesWrapper").hide();
+
 
 	// Close simpleTextStart window
 	document.getElementById("okButton").onclick = function () { 
@@ -60,7 +59,41 @@ $(document).ready(function(){
 	};
 
 
-	createContribution
+	// Go back to contributions list from create simple text
+	document.getElementById("cancelCreateText").onclick = function () { 
+		document.getElementById("createContribution").style.visibility = "hidden";
+		document.getElementById("contributions").style.visibility = "visible";
+
+	};
+
+	// show guidelines
+	document.getElementById("guidelines").onclick = function () { 
+		$("#closeGuidelines").fadeIn(350);
+		$("#guidelinesWrapper").fadeIn(400);
+
+	};
+
+	// Submit simple text contribution
+	document.getElementById("submitCreateText").onclick = function () { 
+		document.getElementById("createContribution").style.visibility = "hidden";
+		
+		//Database
+		//	- add new contribution
+		//	- update contributions list before making it visible
+
+		document.getElementById("contributions").style.visibility = "visible";
+		var infoBox = $("#infoBox").fadeIn(300);
+		var message = document.getElementById("infoMessage").innerHTML = "Thank you, your contribution has been added!";
+
+		infoBox.delay(3000).fadeOut(500);
+	};
+
+
+	//Close guidelines
+	$("#closeGuidelines").click(function() {
+		$("#guidelinesWrapper").fadeOut(300);
+		$(this).fadeOut(350);
+	});
 
 
 	/** 
@@ -192,6 +225,15 @@ $(document).ready(function(){
         $(this).css('cursor','pointer');
     });
 
+    // Makes cursor into hand when hovering over guidelines close window image
+    $('#closeGuidelines').hover(function() {
+        $(this).css('cursor','pointer');
+    });
+
+
+
+
+
 
 
 });//document has finished loading
@@ -201,38 +243,38 @@ $(document).ready(function(){
 /**
 * View a single contribution. Reached by clicking a contribution from the contributions list.
 */
-function viewSingleContribution(){
-	var author = document.getElementById("author");
+// function viewSingleContribution(){
+// 	var author = document.getElementById("author");
 
-	// var questID = TODO Get quest ID
-	// var contID = TODO Get cont ID
+// 	// var questID = TODO Get quest ID
+// 	// var contID = TODO Get cont ID
 
-	//database stuff...
-	//load data into viewSingleContribution before showing it
+// 	//database stuff...
+// 	//load data into viewSingleContribution before showing it
 
-	/*
-	document.getElementById("singleContributionAuthor").innerHTML = ;
-	document.getElementById("singleContributionQuestID").innerHTML = ;
-	document.getElementById("singleContributionContID").innerHTML = ;
-	*/
 	
-	//just for now
-	document.getElementById("contributions").style.visibility = "hidden";
-	document.getElementById("viewSingleContribution").style.visibility = "visible";
+// 	document.getElementById("singleContributionAuthor").innerHTML = ;
+// 	document.getElementById("singleContributionQuestID").innerHTML = ;
+// 	document.getElementById("singleContributionContID").innerHTML = ;
+	
+	
+// 	//just for now
+// 	document.getElementById("contributions").style.visibility = "hidden";
+// 	document.getElementById("viewSingleContribution").style.visibility = "visible";
 
-}
+// }
 
-function listContributions(){
-	var questID = ;
-	var contributions = SimpleText.database.fetchContributions(questID);
-	for (var i=0; i < contributions.length; ++i){
-		contributions[i].
-
-
+// function listContributions(){
+// 	// var questID = ;
+// 	// var contributions = SimpleText.database.fetchContributions(questID);
+// 	// for (var i=0; i < contributions.length; ++i){
+// 	// 	contributions[i].
 
 
-	}
-}
+
+
+// 	// }
+// }
 
 
 

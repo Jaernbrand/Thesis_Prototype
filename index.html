@@ -11,7 +11,7 @@
 	<script type="text/javascript" src="js/EventConfig.js"></script>
 	<script type="text/javascript" src="js/SimpleText.js"></script>
 	<script type="text/javascript" src="js/Database.js"></script>
-	<script type="text/javascript" src="js/Setup.js"></script>
+	<!-- // <script type="text/javascript" src="js/Setup.js"></script> -->
 
 	<!-- fancyBox START -->
 	<link rel="stylesheet" href="assets/fancybox/jquery.fancybox.css" type="text/css"/>
@@ -168,20 +168,35 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
 		<br>
 		<p></p>
 		<p class="textAreaHeading">Your version</p>
-		<textarea name="new"></textarea>
+		<textarea name="new" placeholder="..."></textarea>
 
 		<div class="fill"></div>
 		
 		<button type="button" id="guidelines">GUIDELINES</button>
 		<div class="navigationButtonsWrapper">
-			<button type="button">CANCEL</button>
-			<button type="button">SUBMIT</button>
+			<button type="button" id="cancelCreateText">CANCEL</button>
+			<button type="button" id="submitCreateText">SUBMIT</button>
 		</div>
 </div>
-
-
 <!-- CREATE SIMPLE TEXT END -->
 
+
+
+
+<!-- SHOW GUIDELINES START -->
+<div id="guidelinesWrapper">
+	<img src="assets/web/close.png" id="closeGuidelines"/>
+	<h1>Guidelines</h1>
+	<h2>How to write simple text</h2>
+	<p>Lättläst text skapas genom en översättning av en befintlig text till en mer lättläst variant. Den nya texten ska fortfarande innehålla samma information och budskap men den ska vara skriven och formaterad på ett sådant sätt att den blir lättare att läsa (Saggion, Gómez-Martínez, Etayo, Anula & Bourg, 2011). Syftet med den förenklade texten är att göra innehållet tillgängligt för människor med lässvårigheter, detta berör bl.a. personer med kognitiv nedsättning. Svårigheterna med införandet av dessa förenklingar är att behålla textens innebörd och  flyt.</p>
+
+	<h3>Lexikal förenkling</h3>
+	<p>Lexikal förenkling berör ordens komplexitet. Detta hanteras bl.a. genom att byta ut komplexa ord i en text till mer lättförståeliga synonymer eller förenklade förklaringar.</p>
+	
+	<h3>Syntaktisk förenkling</h3>
+	<p>Syntaktisk förenkling har inverkan på textens struktur och grammatik. Ett exempel på detta är relativsatser som kan vara lättare att förstå om de separeras till två huvudsatser.</p>
+</div>
+<!-- SHOW GUIDELINES END -->
 
 </body>
 </html>

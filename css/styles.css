@@ -16,6 +16,11 @@ canvas{
     z-index: 1;
 }
 
+h2, h3{
+    margin-bottom: -15px;
+    margin-left: 10px;
+}
+
 /* MAIN WINDOW START */
 .mainWindow{
     position: fixed;
@@ -318,3 +323,44 @@ canvas{
     float:right;
 }
 /*CREATE SIMPLE TEXT END*/
+
+
+
+/*GUIDELINES START*/
+#guidelinesWrapper{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 500px;
+    height:500px;
+    margin-top: -250px;
+    margin-left: -250px;
+
+    border: 2px solid black;
+    background-color: white;
+    z-index: 3;
+    /*overflow-y: scroll;*/
+    box-shadow: 5px 5px 5px #888888;
+}
+
+#guidelinesWrapper p{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+#guidelinesWrapper h1{
+    margin: -30px 0px -10px 5px;
+    padding: 0px; 
+}
+
+#guidelinesWrapper #closeGuidelines{
+    width:30px;
+    height: auto;
+    position: relative;
+    left: 485px;
+    bottom: 12px;
+}
+
+
+/*GUIDELINES END*/
