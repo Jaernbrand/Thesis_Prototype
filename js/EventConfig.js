@@ -7,7 +7,8 @@ $(document).ready(function(){
 	//be used
 	$("#infoBox").hide();
 
-
+	//Load fancybox
+	$(".fancybox").fancybox();
 
 	// Close simpleTextStart window
 	document.getElementById("okButton").onclick = function () { 

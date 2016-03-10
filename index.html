@@ -3,6 +3,8 @@
   <head> 
   	<meta charset="UTF-8" />
   	<title>Phazer Prototype</title>
+  	<link rel="stylesheet" type="text/css" href="css/styles.css">
+
   	<script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>
   	<script type="text/javascript" src="js/phaser.js"></script>
 	<script type="text/javascript" src="js/game.js"></script>
@@ -11,7 +13,16 @@
 	<script type="text/javascript" src="js/Database.js"></script>
 	<script type="text/javascript" src="js/Setup.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
+	<!-- fancyBox START -->
+	<link rel="stylesheet" href="assets/fancybox/jquery.fancybox.css" type="text/css"/>
+	<script type="text/javascript" src="assets/fancybox/jquery.fancybox.pack.js"></script>
+	<link rel="stylesheet" href="assets/fancybox/jquery.fancybox-buttons.css" type="text/css">
+	<script type="text/javascript" src="assets/fancybox/jquery.fancybox-buttons.js"></script>
+	<script type="text/javascript" src="assets/fancybox/jquery.fancybox-media.js"></script>
+	<link rel="stylesheet" href="assets/fancybox/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
+	<script type="text/javascript" src="assets/fancybox/jquery.fancybox-thumbs.css"></script>
+	<!-- fancyBox END -->
+    
   </head>
 <body>
 
@@ -89,9 +100,14 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
 		</textarea>
 
 		<div class="imagesWrapper">
-			<a href="assets/web/wow1.jpg"><img class="contributionImgOne" src="assets/web/wow1.jpg"></a>
-			<a href="assets/web/wow2.jpg"><img class="contributionImgTwo" src="assets/web/wow2.jpg"></a>
-			<a href="assets/web/wow3.jpg"><img class="contributionImgThree" src="assets/web/wow3.jpg"></a>
+			<a class="fancybox" rel="group" href="assets/web/wow1.jpg"><img src="assets/web/wow1.jpg" class="contributionImgOne"/></a>
+		
+			<a class="fancybox" rel="group" href="assets/web/wow2.jpg"><img src="assets/web/wow2.jpg" class="contributionImgTwo"/></a>
+
+			<a class="fancybox" rel="group" href="assets/web/wow3.jpg"><img src="assets/web/wow3.jpg" class="contributionImgThree"/></a>
+
+			<!-- <a href="assets/web/wow2.jpg"><img class="contributionImgTwo" src="assets/web/wow2.jpg"></a> -->
+			<!-- <a href="assets/web/wow3.jpg"><img class="contributionImgThree" src="assets/web/wow3.jpg"></a> -->
 		</div>
 
 		<div class="bottomAreaWrapper">

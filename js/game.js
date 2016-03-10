@@ -143,7 +143,6 @@ function create() {
 * Updates the gamestate one tick.
 */
 function update() {
-	console.log(player);
     game.physics.arcade.collide(player, layer);
     game.physics.arcade.overlap(player, coins, collectItem, null, this);
     game.physics.arcade.overlap(player, 
