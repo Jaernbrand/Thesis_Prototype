@@ -16,6 +16,3 @@ var SimpleText = {
 	username: null
 };
 
-
-
-
