@@ -241,7 +241,7 @@ SimpleText.Database.prototype.addVote = function(questID, contID){
 * The ID of the contribution for which to decrement the
 * number of votes.
 */
-SimpleText.Database.prototype.addVote = function(questID, contID){
+SimpleText.Database.prototype.removeVote = function(questID, contID){
 	if (typeof questID !== "string"){
 		throw "questID: Invalid type " + (typeof questID) +
 				" Expected string.";
