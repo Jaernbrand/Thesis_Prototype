@@ -1,10 +1,14 @@
 /**
 * Setup for the user tests of the prototype.
+* Should be run before each user test.
+*
+* @module Setup
 */
 
+SimpleText.username = "TestUser";
 
 /**
-* Fills the database with data.
+* Populates the database with data.
 */
 function fillDatabase(){
 	SimpleText.database.addAuthor("Nisse");
