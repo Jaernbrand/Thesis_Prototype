@@ -186,21 +186,26 @@ $(document).ready(function(){
 /**
 * View a single contribution. Reached by clicking a contribution from the contributions list.
 */
-function viewSingleContribution(){
-	var author = document.getElementById("author");
+function viewSingleContribution(contributions, contID){
 
-	// var questID = TODO Get quest ID
-	// var contID = TODO Get cont ID
+	var questID = document.getElementById("questID").innerHTML;
 
-	//database stuff...
-	//load data into viewSingleContribution before showing it
+	var currCont;
+	for (var i=0; i < contributions.length; ++i){
+		if (contributions[i].contID === contID){
+			currCont = contributions[i].contID;
+			break;
+		}
+	}
 
-	/*
-	document.getElementById("singleContributionAuthor").innerHTML = ;
-	document.getElementById("singleContributionQuestID").innerHTML = ;
-	document.getElementById("singleContributionContID").innerHTML = ;
-	*/
+	document.getElementById("singleContributionAuthor").innerHTML = currCont.author;
+	document.getElementById("singleContributionQuestID").innerHTML = questID;
+	document.getElementById("singleContributionContID").innerHTML = contID;
+
+	var singCont = document.getElementById("viewSingleContribution");
+	singCont.getElementsByTagName("textarea")[0] = currCont.text;
 	
+	//load data into viewSingleContribution before showing it
 	//just for now
 	document.getElementById("contributions").style.visibility = "hidden";
 	document.getElementById("viewSingleContribution").style.visibility = "visible";
@@ -208,14 +213,33 @@ function viewSingleContribution(){
 }
 
 function listContributions(){
-	var questID = ;
+	var questID = document.getElementById("questID").innerHTML;
 	var contributions = SimpleText.database.fetchContributions(questID);
+
+	var template = document.getElementById("contWrapper");
+	var currItem;
 	for (var i=0; i < contributions.length; ++i){
-		contributions[i].
+		currItem = template.cloneNode(true);
 
+		currItem.getElementsByClassName("textExcerpt")[0].innerHTML = (function(){ 
+			var intro;
+			var maxLength = 20;
+			if (contributions > maxLength){
+				var endIdx = contributions[i].text.lastIndexOf(" ", maxLength);
+				contributions[i].text.substr(0, endIdx) + "[...]";
+			} else {
+				intro = contributions[i].text;
+			}
+			return intro;
+		})();
+		currItem.getElementsByClassName("numberLikes")[0].innerHTML = contributions[i].votes;
+		currItem.getElementsByClassName("authorWrapper")[0].childNodes[1].innerHTML = contributions[i].votes;
 
+		currItem.onclick = function(){ 
+			viewSingleContribution(contributions, currItem.contID); 
+		};
 
-
+		document.getElementById("contributionsList").appendChild(currItem);
 	}
 }
 
