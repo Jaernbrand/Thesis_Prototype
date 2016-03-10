@@ -106,6 +106,7 @@ SimpleText.Database.prototype.addContribution = function(questID, author, text){
 	* @property {string} author
 	* @property {int} votes
 	* @property {int} flags
+	* @property {number} timestamp
 	* @property {array} comments
 	* @property {string} text
 	* @property {array} pictures,
@@ -116,6 +117,7 @@ SimpleText.Database.prototype.addContribution = function(questID, author, text){
 		author: author,
 		votes: 0,
 		flags: 0,
+		timestamp: Date.now(),
 		comments: [],
 		text: text,
 		pictures: [],

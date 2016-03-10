@@ -78,6 +78,12 @@ var music;
 */
 var wall;
 
+/**
+* @property {Phaser.Sprite} friendMap
+* Map the player is tasked to find.
+*/
+var friendMap;
+
 // *****************************************************
 // *****************************************************
 
@@ -90,6 +96,7 @@ function preload() {
 				'assets/tile/map_no_objects.csv', 
 				null, 
 				Phaser.Tilemap.CSV);
+
     //  Load the tileset. This is just an image, 
     // loaded in via the normal way we load images:
     game.load.image('tiles', 'assets/tile/simples_pimples.png');
@@ -103,9 +110,10 @@ function preload() {
     game.load.spritesheet('player', 'assets/tile/feminist_sheet.png', 20, 20);
     // game.load.audio('money', 'assets/audio/money.mp3');
     game.load.image('wall', 'assets/tile/wall.png');
-    game.load.audio('coinSound', 'assets/audio/money.mp3');
+    game.load.audio('collectSound', 'assets/audio/money.mp3');
     game.load.audio('music', 'assets/audio/mathgrant_-_Sober_Lullaby.mp3');
 
+    game.load.image('map', 'assets/tile/map_14.png');
 }
 
 /**
@@ -113,7 +121,7 @@ function preload() {
 */
 function create() {
     map = game.add.tilemap('map', 16, 16);
-    //  The first parameter is the tileset name, 
+    // The first parameter is the tileset name, 
     // as specified in the Tiled map editor (and in the tilemap json file)
     // The second parameter maps this name to the Phaser.Cache key 'tiles'
     map.addTilesetImage('simples_pimples', 'tiles');
@@ -123,15 +131,15 @@ function create() {
     map.setCollisionBetween(3000, 4000); 
     cursors = game.input.keyboard.createCursorKeys();
 
-    coinSound = game.add.audio('coinSound');
+    collectSound = game.add.audio('collectSound');
     music = game.add.audio('music');
 
-    var star_coords_x = [180, 180, 180, 205, 205];
-    var star_coords_y = [210, 230, 250, 450, 430];
+    var coin_coords_x = [180, 180, 180, 205, 205, 51*16, 51*16];
+    var coin_coords_y = [210, 230, 250, 450, 430, 13*16, 14*16];
     coins = game.add.group();
     coins.enableBody = true;
-    for(var i = 0; i &lt; star_coords_x.length; i++){
-        coins.create(star_coords_x[i], star_coords_y[i], 'coin');
+    for(var i = 0; i &lt; coin_coords_x.length; i++){
+        coins.create(coin_coords_x[i], coin_coords_y[i], 'coin');
     }
    
     player = game.add.sprite(80, game.world.height - 90, 'player');
@@ -151,6 +159,11 @@ function create() {
     wall.body.immovable = true;
       
     // music.play();
+
+	friendMap = game.add.sprite(game.world.width - 128, game.world.height - 64, 'map');
+	friendMap.scale.setTo(0.5, 0.5);
+	friendMap.isCollected = false;
+    game.physics.enable(friendMap);
 }
 
 
@@ -158,11 +171,28 @@ function create() {
 * Updates the gamestate one tick.
 */
 function update() {
+	console.log(player);
     game.physics.arcade.collide(player, layer);
-    game.physics.arcade.overlap(player, coins, collectCoin, null, this);
-    if(game.physics.arcade.collide(player, friend) &amp;&amp; !player.hasTalked){
-        talkWithFriend();
-    }
+    game.physics.arcade.overlap(player, coins, collectItem, null, this);
+    game.physics.arcade.overlap(player, 
+								friendMap, 
+								function(player, friendMap) { 
+									friendMap.isCollected = true;
+									collectItem(player, friendMap);
+								}, 
+								null, 
+								this);
+
+
+	if(game.physics.arcade.collide(player, friend)){
+		if (!friendMap.isCollected &amp;&amp; !player.hasTalked){
+        	talkWithFriend();
+		} else if (friendMap.isCollected){
+			// TODO Should get a new talk/quest.
+			document.getElementById("simpleTextStart").style.visibility = "visible";
+		}
+	}
+
     game.physics.arcade.collide(player, wall);
 
 
@@ -201,9 +231,9 @@ function update() {
 * @param {Phaser.Sprite} coin
 * The coin to collect.
 */
-function collectCoin(player, coin) {
-    coin.kill();
-    coinSound.play();
+function collectItem(player, item) {
+    item.kill();
+    collectSound.play();
 }
 
 /**
@@ -226,13 +256,13 @@ function talkWithFriend(){
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Setup.html">Setup</a></li></ul><h3>Classes</h3><ul><li><a href="SimpleText.Database.html">Database</a></li></ul><h3>Namespaces</h3><ul><li><a href="SimpleText.html">SimpleText</a></li></ul><h3>Global</h3><ul><li><a href="global.html#coins">coins</a></li><li><a href="global.html#collectCoin">collectCoin</a></li><li><a href="global.html#create">create</a></li><li><a href="global.html#cursors">cursors</a></li><li><a href="global.html#friend">friend</a></li><li><a href="global.html#game">game</a></li><li><a href="global.html#map">map</a></li><li><a href="global.html#music">music</a></li><li><a href="global.html#player">player</a></li><li><a href="global.html#preload">preload</a></li><li><a href="global.html#talkWithFriend">talkWithFriend</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#wall">wall</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Setup.html">Setup</a></li></ul><h3>Classes</h3><ul><li><a href="SimpleText.Database.html">Database</a></li></ul><h3>Namespaces</h3><ul><li><a href="SimpleText.html">SimpleText</a></li></ul><h3>Global</h3><ul><li><a href="global.html#coins">coins</a></li><li><a href="global.html#collectItem">collectItem</a></li><li><a href="global.html#create">create</a></li><li><a href="global.html#cursors">cursors</a></li><li><a href="global.html#friend">friend</a></li><li><a href="global.html#friendMap">friendMap</a></li><li><a href="global.html#game">game</a></li><li><a href="global.html#map">map</a></li><li><a href="global.html#music">music</a></li><li><a href="global.html#player">player</a></li><li><a href="global.html#preload">preload</a></li><li><a href="global.html#talkWithFriend">talkWithFriend</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#wall">wall</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Mar 10 2016 09:10:13 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Mar 10 2016 12:40:29 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>
