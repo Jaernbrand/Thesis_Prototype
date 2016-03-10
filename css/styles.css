@@ -21,9 +21,9 @@ canvas{
     position: fixed;
     top: 50%;
     left: 50%;
-    height:430px;
-    width:900px;
-    margin-top: -215px;      /* height/2 */
+    height:660px;
+    width:890px;
+    margin-top: -350px;      /* height/2 */
     margin-left: -450px;     /* width/2 */
    
     border: 10px solid black;
@@ -164,7 +164,7 @@ canvas{
 
 /*VIEW SINGLE CONTRIBUTION START*/
 #viewSingleContribution{
-    visibility: visible;
+    visibility: hidden;
 }
 
 
@@ -265,3 +265,56 @@ canvas{
 /*INFO BOX END*/
 
 
+/*CREATE SIMPLE TEXT START*/
+#createContribution{
+    visibility: hidden;
+}
+
+#createContribution .content .textAreaHeading{
+    font-size: 1.2em;
+    margin-bottom: 0;
+}
+
+#createContribution .content textarea{
+    resize: none;
+    width:635px;
+    height:210px;
+    font-size: 1.2em;
+}
+
+#createContribution .content .uploadArea{
+    float:right;
+    width: 210px;
+    height:210px;
+}
+
+#createContribution .content .uploadArea p{
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+#createContribution .content .uploadArea .uploadAudioHeading{
+    margin-top: 28px;
+}
+
+#createContribution .content .uploadArea input{
+    margin-bottom: 10px;
+}
+
+#createContribution .content .fill{
+    float:right;
+    width:210px;
+    height:210px;
+}
+
+#createContribution .content #guidelines{
+    margin-top: 8px;
+    float:left;
+}
+
+
+#createContribution .content .navigationButtonsWrapper{
+    padding-top: 8px;
+    float:right;
+}
+/*CREATE SIMPLE TEXT END*/

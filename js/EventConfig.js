@@ -10,6 +10,11 @@ $(document).ready(function(){
 	//Load fancybox
 	$(".fancybox").fancybox();
 
+	//Change the default name on file upload
+	$('#choose-file').inputFileText({ 
+		text: 'Select File' 
+	});
+
 	// Close simpleTextStart window
 	document.getElementById("okButton").onclick = function () { 
 		document.getElementById("simpleTextStart").style.visibility = "hidden";
@@ -42,6 +47,16 @@ $(document).ready(function(){
 		// show comments on contribution
 
 	};
+
+	// Show create simple text / contribution
+	document.getElementById("contributeCreate").onclick = function () { 
+		document.getElementById("contributions").style.visibility = "hidden";
+		document.getElementById("createContribution").style.visibility = "visible";
+
+	};
+
+
+	createContribution
 
 
 	// Util function to display and hide infoBox - a popup message when
