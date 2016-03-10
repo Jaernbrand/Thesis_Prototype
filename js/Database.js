@@ -200,6 +200,66 @@ SimpleText.Database.prototype.addSound = function(questID, contID, sound){
 }
 
 /**
+* Increments the number of votes by one for the contribution with 
+* the specified contribution ID for the quest with
+* the specified quest ID.
+*
+* @param {string} questID
+* The ID of the quest to which the contribution belongs.
+*
+* @param {string} contID
+* The ID of the contribution for which to increment the
+* number of votes.
+*/
+SimpleText.Database.prototype.addVote = function(questID, contID){
+	if (typeof questID !== "string"){
+		throw "questID: Invalid type " + (typeof questID) +
+				" Expected string.";
+	}
+	if (typeof contID !== "string"){
+		throw "contID: Invalid type " + (typeof contID) +
+				" Expected string.";
+	}
+
+	for(var i=0; i < this.contributions[questID].length; ++i){
+		if (this.contributions[questID][i].contID === contID){
+			this.contributions[questID][i].votes++;
+			break;
+		}
+	}
+}
+
+/**
+* Decrements the number of votes by one for the contribution with 
+* the specified contribution ID for the quest with
+* the specified quest ID.
+*
+* @param {string} questID
+* The ID of the quest to which the contribution belongs.
+*
+* @param {string} contID
+* The ID of the contribution for which to decrement the
+* number of votes.
+*/
+SimpleText.Database.prototype.removeVote = function(questID, contID){
+	if (typeof questID !== "string"){
+		throw "questID: Invalid type " + (typeof questID) +
+				" Expected string.";
+	}
+	if (typeof contID !== "string"){
+		throw "contID: Invalid type " + (typeof contID) +
+				" Expected string.";
+	}
+
+	for(var i=0; i < this.contributions[questID].length; ++i){
+		if (this.contributions[questID][i].contID === contID){
+			this.contributions[questID][i].votes--;
+			break;
+		}
+	}
+}
+
+/**
 * Adds a comment to the contribution for the quest
 * with the given quest ID and with the given 
 * contribution ID.
