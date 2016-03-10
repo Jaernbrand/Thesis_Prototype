@@ -160,7 +160,7 @@ canvas{
 
 /*VIEW SINGLE CONTRIBUTION START*/
 #viewSingleContribution{
-    visibility: hidden;
+    visibility: visible;
 }
 
 
