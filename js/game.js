@@ -50,6 +50,12 @@ var music;
 */
 var wall;
 
+/**
+* @property {Phaser.Sprite} friendMap
+* Map the player is tasked to find.
+*/
+var friendMap;
+
 // *****************************************************
 // *****************************************************
 
@@ -62,6 +68,7 @@ function preload() {
 				'assets/tile/map_no_objects.csv', 
 				null, 
 				Phaser.Tilemap.CSV);
+
     //  Load the tileset. This is just an image, 
     // loaded in via the normal way we load images:
     game.load.image('tiles', 'assets/tile/simples_pimples.png');
@@ -75,9 +82,10 @@ function preload() {
     game.load.spritesheet('player', 'assets/tile/feminist_sheet.png', 20, 20);
     // game.load.audio('money', 'assets/audio/money.mp3');
     game.load.image('wall', 'assets/tile/wall.png');
-    game.load.audio('coinSound', 'assets/audio/money.mp3');
+    game.load.audio('collectSound', 'assets/audio/money.mp3');
     game.load.audio('music', 'assets/audio/mathgrant_-_Sober_Lullaby.mp3');
 
+    game.load.image('map', 'assets/tile/map_14.png');
 }
 
 /**
@@ -85,7 +93,7 @@ function preload() {
 */
 function create() {
     map = game.add.tilemap('map', 16, 16);
-    //  The first parameter is the tileset name, 
+    // The first parameter is the tileset name, 
     // as specified in the Tiled map editor (and in the tilemap json file)
     // The second parameter maps this name to the Phaser.Cache key 'tiles'
     map.addTilesetImage('simples_pimples', 'tiles');
@@ -95,15 +103,15 @@ function create() {
     map.setCollisionBetween(3000, 4000); 
     cursors = game.input.keyboard.createCursorKeys();
 
-    coinSound = game.add.audio('coinSound');
+    collectSound = game.add.audio('collectSound');
     music = game.add.audio('music');
 
-    var star_coords_x = [180, 180, 180, 205, 205];
-    var star_coords_y = [210, 230, 250, 450, 430];
+    var coin_coords_x = [180, 180, 180, 205, 205, 51*16, 51*16];
+    var coin_coords_y = [210, 230, 250, 450, 430, 13*16, 14*16];
     coins = game.add.group();
     coins.enableBody = true;
-    for(var i = 0; i < star_coords_x.length; i++){
-        coins.create(star_coords_x[i], star_coords_y[i], 'coin');
+    for(var i = 0; i < coin_coords_x.length; i++){
+        coins.create(coin_coords_x[i], coin_coords_y[i], 'coin');
     }
    
     player = game.add.sprite(80, game.world.height - 90, 'player');
@@ -123,6 +131,11 @@ function create() {
     wall.body.immovable = true;
       
     // music.play();
+
+	friendMap = game.add.sprite(game.world.width - 128, game.world.height - 64, 'map');
+	friendMap.scale.setTo(0.5, 0.5);
+	friendMap.isCollected = false;
+    game.physics.enable(friendMap);
 }
 
 
@@ -130,11 +143,28 @@ function create() {
 * Updates the gamestate one tick.
 */
 function update() {
+	console.log(player);
     game.physics.arcade.collide(player, layer);
-    game.physics.arcade.overlap(player, coins, collectCoin, null, this);
-    if(game.physics.arcade.collide(player, friend) && !player.hasTalked){
-        talkWithFriend();
-    }
+    game.physics.arcade.overlap(player, coins, collectItem, null, this);
+    game.physics.arcade.overlap(player, 
+								friendMap, 
+								function(player, friendMap) { 
+									friendMap.isCollected = true;
+									collectItem(player, friendMap);
+								}, 
+								null, 
+								this);
+
+
+	if(game.physics.arcade.collide(player, friend)){
+		if (!friendMap.isCollected && !player.hasTalked){
+        	talkWithFriend();
+		} else if (friendMap.isCollected){
+			// TODO Should get a new talk/quest.
+			document.getElementById("simpleTextStart").style.visibility = "visible";
+		}
+	}
+
     game.physics.arcade.collide(player, wall);
 
 
@@ -173,9 +203,9 @@ function update() {
 * @param {Phaser.Sprite} coin
 * The coin to collect.
 */
-function collectCoin(player, coin) {
-    coin.kill();
-    coinSound.play();
+function collectItem(player, item) {
+    item.kill();
+    collectSound.play();
 }
 
 /**
