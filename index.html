@@ -1,28 +1,29 @@
-<!doctype html> 
-<html lang="en"> 
-  <head> 
+<!doctype html>
+<html lang="en">
+  <head>
   	<meta charset="UTF-8" />
   	<title>Phazer Prototype</title>
   	<link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
 
   	<script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
   	<script type="text/javascript" src="js/phaser.js"></script>
-	<script type="text/javascript" src="js/game.js"></script>
-	<script type="text/javascript" src="js/EventConfig.js"></script>
-	<script type="text/javascript" src="js/SimpleText.js"></script>
-	<script type="text/javascript" src="js/Database.js"></script>
-	<!-- // <script type="text/javascript" src="js/Setup.js"></script> -->
+	  <script type="text/javascript" src="js/game.js"></script>
+  	<script type="text/javascript" src="js/EventConfig.js"></script>
+  	<script type="text/javascript" src="js/SimpleText.js"></script>
+  	<script type="text/javascript" src="js/Database.js"></script>
+  	<!-- // <script type="text/javascript" src="js/Setup.js"></script> -->
 
-	<!-- fancyBox START -->
-	<link rel="stylesheet" href="assets/fancybox/jquery.fancybox.css" type="text/css"/>
-	<script type="text/javascript" src="assets/fancybox/jquery.fancybox.pack.js"></script>
-	<link rel="stylesheet" href="assets/fancybox/jquery.fancybox-buttons.css" type="text/css">
-	<script type="text/javascript" src="assets/fancybox/jquery.fancybox-buttons.js"></script>
-	<script type="text/javascript" src="assets/fancybox/jquery.fancybox-media.js"></script>
-	<link rel="stylesheet" href="assets/fancybox/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
-	<script type="text/javascript" src="assets/fancybox/jquery.fancybox-thumbs.css"></script>
-	<!-- fancyBox END -->
-    
+  	<!-- fancyBox START -->
+  	<link rel="stylesheet" href="assets/fancybox/jquery.fancybox.css" type="text/css"/>
+  	<script type="text/javascript" src="assets/fancybox/jquery.fancybox.pack.js"></script>
+  	<link rel="stylesheet" href="assets/fancybox/jquery.fancybox-buttons.css" type="text/css">
+  	<script type="text/javascript" src="assets/fancybox/jquery.fancybox-buttons.js"></script>
+  	<script type="text/javascript" src="assets/fancybox/jquery.fancybox-media.js"></script>
+  	<link rel="stylesheet" href="assets/fancybox/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
+  	<script type="text/javascript" src="assets/fancybox/jquery.fancybox-thumbs.css"></script>
+  	<!-- fancyBox END -->
   </head>
 <body>
 
@@ -33,16 +34,21 @@
 <!-- SIMPLE TEXT START -->
 <div id="simpleTextStart" class="mainWindow">
 	<div class="content">
-	 	<h1>Quest: 1/10</h1>
+	 	<h1>Quest:1/10</h1>
 		<p hidden id="questID">quest1</p>
 		<textarea name="test" readonly>
 Please, traveler. I need a helping hand.
 
-I think I'm lost. No, I know I'm lost. Nothing looks familiar here and I mean at all. Oh I should've never left our camp. I know our camp is near a lake and we came into the forest from the North, but I have no idea where North is, I have no idea where anything is. I used to have a map, but I lost it somewhere. Please, you've got to help me, help me find my map so that I may find my way back to camp. I don't want to be in this forest anymore, I want to go home.
+I think I'm lost. No, I know I'm lost. Nothing looks familiar here and I mean at all. Oh I should've never left our camp...
+
+I know our camp is near a lake and we came into the forest from the North, but I have no idea where North is, I have no idea where anything is. I used to have a map, but I lost it somewhere.
+
+Please, you've got to help me, help me find my map so that I may find my way back to camp.
+I don't want to be in this forest anymore, I want to go home.
 		</textarea>
 
-		<button type="button" id="flagButton">Flag</button>
-		<button type="button" id="simpleTextButton">Simple Text</button>
+		<img src="assets/web/flag.png" id="flagButton" data-toggle="tooltip" title="Mark as complex text"/>
+		<button type="button" id="simpleTextButton" data-toggle="tooltip" title="View or create simple text">SIMPLE TEXT</button>
 		<button type="button" id="okButton">OK</button>
 	</div>
 </div>
@@ -54,12 +60,12 @@ I think I'm lost. No, I know I'm lost. Nothing looks familiar here and I mean at
 	<div class="likesAndAuthorWrapper">
 		<div class="likesWrapper">
 			<p class="numberLikes">300</p>
-			<img src="assets/web/like.png" alt="likes"> 
+			<img src="assets/web/like.png" alt="likes">
 		</div>
 
 		<div class="authorWrapper">
 			<p class="by">BY: </p>
-			<p id="author">John</p>	
+			<p id="author">John</p>
 		</div>
 	</div>
 </div>
@@ -67,9 +73,9 @@ I think I'm lost. No, I know I'm lost. Nothing looks familiar here and I mean at
 <!-- CONTRIBUTIONS START -->
 <div id="contributions" class="mainWindow">
 	<div class="content">
-		<h1>Quest: 1/10</h1>
-		<p class="subheading">Simple text versions:</p>
-		
+		<h1>Quest:1/10</h1>
+		<p class="subheading">Simple text versions of this quest:</p>
+
 		<select id="sortContributions">
   			<option value="highest">highest rating</option>
   			<option value="newest">newest first</option>
@@ -95,18 +101,15 @@ I think I'm lost. No, I know I'm lost. Nothing looks familiar here and I mean at
 <!-- VIEW SINGLE CONTRIBUTION START -->
 <div id="viewSingleContribution" class="mainWindow">
 	<div class="content">
-		<h1>Quest: 1/10</h1>
+		<h1>Quest:1/10</h1>
 		<textarea name="contText" readonly>
 Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
 		</textarea>
 
 		<div class="imagesWrapper">
 			<a class="fancybox" rel="group" href="assets/web/wow1.jpg"><img src="assets/web/wow1.jpg" class="contributionImgOne"/></a>
-		
 			<a class="fancybox" rel="group" href="assets/web/wow2.jpg"><img src="assets/web/wow2.jpg" class="contributionImgTwo"/></a>
-
 			<a class="fancybox" rel="group" href="assets/web/wow3.jpg"><img src="assets/web/wow3.jpg" class="contributionImgThree"/></a>
-
 		</div>
 
 		<div class="bottomAreaWrapper">
@@ -115,24 +118,21 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
 				This browser doesn't support the audio element.
 			</audio>
 
-
 			<div id="authorNameAndAddAuthorBtn">
 				<p>BY: <span id="singleContributionAuthor">John</span></p>
-				<img src="assets/web/add.png" id="favouriteAuthor">
+				<img src="assets/web/add.png" id="favouriteAuthor" data-toggle="tooltip" title="Add author as favourite">
 			</div>
-			
+
 			<p hidden id="singleContributionQuestID" ></p>
 			<p hidden id="singleContributionContID" ></p>
 
 			<div id="contributionBtnGroup">
-				<img src="assets/web/comment.png" id="commentContribution">
-				<img src="assets/web/flag.png" id="flagSingleContribution">
-				<img src="assets/web/like.png" id="likeContribution">
-			</div>
-
-
-			<button type="button" id="viewContributionBack">BACK</button>
+				<img src="assets/web/comment.png" id="commentContribution" data-toggle="tooltip" title="Comment">
+				<img src="assets/web/flag.png" id="flagSingleContribution" data-toggle="tooltip" title="Mark as inappropriate">
+				<img src="assets/web/like.png" id="likeContribution" data-toggle="tooltip" title="Like contribution">
+			</div
 		</div>
+    <button type="button" id="viewContributionBack">BACK</button>
 	</div>
 </div>
 <!-- VIEW SINGLE CONTRIBUTION END -->
@@ -150,9 +150,9 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
 <!-- CREATE SIMPLE TEXT START -->
 <div id="createContribution" class="mainWindow">
 	<div class="content">
-		<h1>Quest: 1/10</h1>
+		<h1>Quest:1/10</h1>
 		<p class="subheading">Create simple text</p>
-		
+
 		<p class="textAreaHeading">Original</p>
 		<textarea name="original" readonly></textarea>
 
@@ -169,10 +169,10 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
 		<br>
 		<p></p>
 		<p class="textAreaHeading">Your version</p>
-		<textarea name="new" placeholder="..."></textarea>
+		<textarea id="newTextArea" name="new" placeholder="..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
 
 		<div class="fill"></div>
-		
+
 		<button type="button" id="guidelines">GUIDELINES</button>
 		<div class="navigationButtonsWrapper">
 			<button type="button" id="cancelCreateText">CANCEL</button>
@@ -187,31 +187,47 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
 <!-- SHOW GUIDELINES START -->
 <div id="guidelinesWrapper">
 	<img src="assets/web/close.png" id="closeGuidelines"/>
-	<h1>Guidelines</h1>
-	<h2>How to write simple text</h2>
-	<p>Lättläst text skapas genom en översättning av en befintlig text till en mer lättläst variant. Den nya texten ska fortfarande innehålla samma information och budskap men den ska vara skriven och formaterad på ett sådant sätt att den blir lättare att läsa (Saggion, Gómez-Martínez, Etayo, Anula & Bourg, 2011). Syftet med den förenklade texten är att göra innehållet tillgängligt för människor med lässvårigheter, detta berör bl.a. personer med kognitiv nedsättning. Svårigheterna med införandet av dessa förenklingar är att behålla textens innebörd och  flyt.</p>
+	<h1>GUIDELINES</h1>
+  <h2>HOW TO CREATE SIMPLE TEXT</h2>
+  <p>Simple text is a text that is rewritten from its original version to a more comprehensible rendition.</p>
+  <p>By for example removing ambiguous meanings and words, rewriting and making sentences shorter the text can be made easier to understand.</p>
+  <p>Persons that are in need of simple text may have different preferences when it comes to simple text. This is because the difficulties vary from person to person.</p>
+  <p>Here are some guidelines that will help you when creating a simple text. Remember that these tips shouldn't be followed to strictly,
+    use common sense and make changes as you see fit.</p>
+  <ul>
+    <li>Change complex words to more common synonyms.</li>
+    <li>Change words with more than 6 letters to shorter synonyms if possible.</li>
+    <li>Write simple and unambiguous sentences.</li>
+    <li>Try to make the context as clear and simple as possible.</li>
+    <li>Create a simple layout.</li>
+  </ul>
 
-	<h3>Lexikal förenkling</h3>
-	<p>Lexikal förenkling berör ordens komplexitet. Detta hanteras bl.a. genom att byta ut komplexa ord i en text till mer lättförståeliga synonymer eller förenklade förklaringar.</p>
-	
-	<h3>Syntaktisk förenkling</h3>
-	<p>Syntaktisk förenkling har inverkan på textens struktur och grammatik. Ett exempel på detta är relativsatser som kan vara lättare att förstå om de separeras till två huvudsatser.</p>
 </div>
 <!-- SHOW GUIDELINES END -->
 
 
 <!-- COMMENTS START -->
-<!-- <div id="createComment" class="mainWindow">
+<div id="createComment" class="mainWindow">
 	<div class="content">
-		<h1>Quest: 1/10</h1>
-		<p class="subheading">by: <span id="commentAuthorName"></span></p>
+		<h1>Quest:1/10</h1>
+		<p class="subheading">by: <span id="commentAuthorName">John</span></p>
 
-		<div id="commentsWrapper"></div>
-		<textarea placeholder="Write a comment..."></textarea>
-
+		<div id="commentsWrapper">
+      <div class="singleCommentWrapper">
+        <p class="commenter">Coco</p>
+        <p class="comment">This was the best translation ever! I löve u män!</p>
+      </div>
+    </div>
+		<textarea id="createCommentArea" placeholder="..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+    <div id="commentButtonsWrapper">
+      <button type="button" id="cancelComment">BACK</button>
+      <button type="button" id="submitCommment">SUBMIT</button>
+    </div>
 	</div>
-</div> -->
+</div>
 <!-- COMMENTS END -->
+
+
 
 </body>
 </html>
