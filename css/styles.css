@@ -1,3 +1,14 @@
+@font-face {
+    font-family: VCR;
+    src: url(../assets/font/VCR-OSD-Mono.ttf);
+}
+
+@font-face {
+    font-family: bit8;
+    src: url(../assets/font/8-bit-pusab.ttf);
+}
+
+
 body{
 	margin: 0;
 	background-image: url("../assets/web/brick.png");
@@ -16,10 +27,19 @@ canvas{
     z-index: 1;
 }
 
+h1{
+	font-family: VCR;
+}
+
 h2, h3{
     margin-bottom: -15px;
     margin-left: 10px;
 }
+
+p{
+	font-family: courier;
+}
+
 
 /* MAIN WINDOW START */
 .mainWindow{
@@ -30,9 +50,10 @@ h2, h3{
     width:890px;
     margin-top: -350px;      /* height/2 */
     margin-left: -450px;     /* width/2 */
-   
-    border: 10px solid black;
-    background-color: white;
+
+		border: 10px double #73793C;
+		border-radius: 5px;
+    background-color: #D9DEA2;
     z-index: 2;
 }
 
@@ -51,12 +72,28 @@ h2, h3{
     display: inline;
 }
 
-.mainWindow button{
-    font-size: 1.2em;   
+
+
+.mainWindow button {
+	-webkit-border-radius: 2;
+  -moz-border-radius: 2;
+  border-radius: 2px;
+  font-family: bit8;
+  color: #ffffff;
+  font-size: 15px;
+  background: #465e1e;
+  padding: 2px 7px 2px 7px;
+  text-decoration: none;
 }
+
+.mainWindow button:hover {
+	background: #638238;
+
+  text-decoration: none;
+
+}
+
 /* MAIN WINDOW END */
-
-
 
 
 
@@ -65,30 +102,30 @@ h2, h3{
     visibility: hidden;
 }
 
-
 #simpleTextStart .content textarea{
     resize: none;
-    width:860px;
-    height:250px;
+    width:853px;
+    height:540px;
     font-size: 1.5em;
 }
 
 #simpleTextStart .content #flagButton{
-    margin: 30px 10px 10px 0px;
+    margin-top: 10px;
 
 }
 
 #simpleTextStart .content #simpleTextButton{
-    margin: 10px;
+		position:relative;
+		bottom: 1px;
+		left: 10px;
 }
 
 #simpleTextStart .content #okButton{
-    margin: 30px 10px 10px 0px;
-    float: right;
+	position: relative;
+	bottom: 2px;
+	left: 557px;
 }
 /*SIMPLE TEXT END*/
-
-
 
 
 
@@ -98,18 +135,24 @@ h2, h3{
 }
 
 #contributions #sortContributions{
-    float:right;
+	float: right;
+	height: 30px;
+	font-family: courier;
+	font-size: 1.1em;
+	margin-bottom: 5px;
 }
 
 #contributions #contributionsList{
-    width: 865px;
-    height: 250px;
-    border: 2px solid black;
+    width: 857px;
+    height: 510px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
     overflow-y: scroll;
+		background-color: white;
 }
 
 #contributions #contributionsBtnsWrapper{
     float: right;
+		margin-top: -5px;
 }
 
 #contributions #contributeBack{
@@ -127,7 +170,7 @@ h2, h3{
 
 #contributions #contributionsList .itemWrapper .textExcerpt{
     margin:0;
-    width: 700px; 
+    width: 700px;
     float: left;
     font-size: 1.1em;
     padding: 5px;
@@ -139,7 +182,6 @@ h2, h3{
     margin: 0;
 
 }
-
 
 #contributions #contributionsList .itemWrapper .likesAndAuthorWrapper{
     float:right;
@@ -159,12 +201,7 @@ h2, h3{
 #contributions #contributionsList .itemWrapper .likesAndAuthorWrapper .authorWrapper{
     font-size: 1.2em;
 }
-
-
-
 /*CONTRIBUTIONS END*/
-
-
 
 
 /*VIEW SINGLE CONTRIBUTION START*/
@@ -172,45 +209,43 @@ h2, h3{
     visibility: hidden;
 }
 
-
-
 #viewSingleContribution .content textarea{
     resize: none;
-    width:650px;
-    height:250px;
+		width: 570px;
+		height: 480px;
     font-size: 1.5em;
     float: left;
 }
 
 #viewSingleContribution .content .imagesWrapper{
-    float: right;
-    width:200px;
-    height:250px;
-    text-align: center;
+	position: absolute;
+	width: 270px;
+	height: 480px;
+	text-align: center;
+	right: 16px;
+	top: 63px;
 }
 
-
 #viewSingleContribution .content .bottomAreaWrapper{
-    width:655px;
+    width:605px;
 }
 
 #viewSingleContribution .content .imagesWrapper img{
-    width:180px;
+    width:275px;
     height: auto;
-    margin-bottom: 10px;
+    margin-bottom: 11px;
 
 }
 
 #viewSingleContribution .content .bottomAreaWrapper  audio{
-    width: 656px;
-    display: block;
+		width: 576px;
+		display: block;
+		background-color: black;
 }
-
-
 
 #viewSingleContribution .content #authorNameAndAddAuthorBtn{
     padding-top: 5px;
-    width: 550px;
+    width: 479px;
     float:left;
 }
 
@@ -230,7 +265,7 @@ h2, h3{
 
 #viewSingleContribution .content #contributionBtnGroup{
     padding-top: 5px;
-    float: right;
+    float: left;
 }
 
 #viewSingleContribution .content #contributionBtnGroup img{
@@ -245,27 +280,31 @@ h2, h3{
 /*VIEW SINGLE CONTRIBUTION END*/
 
 
-
-
 /*INFO BOX START*/
 #infoBox{
     position: absolute;
     left: 50%;
     top: 50%;
-    height: 55px;
-    width: 250px;
+    height: 80px;
+    width: 350px;
     margin-top: -50px;
     margin-left: -125px;
 
     text-align: center;
-    border: 2px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.7);
+		border-radius: 10px;
+		box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
     background-color: white;
     z-index: 3;
+		font-size: 1em;
+		text-align: center;
+		vertical-align: middle;
+		line-height: 80px;       /* the same as div height */
 }
 
-
 #infoBox #infoMessage{
-    padding: 0px 5px 0px 5px;
+    margin:0;
+		padding:0;
 }
 /*INFO BOX END*/
 
@@ -290,7 +329,7 @@ h2, h3{
 #createContribution .content .uploadArea{
     float:right;
     width: 210px;
-    height:210px;
+    height: 230px;
 }
 
 #createContribution .content .uploadArea p{
@@ -309,18 +348,19 @@ h2, h3{
 #createContribution .content .fill{
     float:right;
     width:210px;
-    height:210px;
+    height:220px;
 }
 
 #createContribution .content #guidelines{
-    margin-top: 8px;
-    float:left;
+		position:relative;
+		top: 35px;
 }
 
 
 #createContribution .content .navigationButtonsWrapper{
-    padding-top: 8px;
-    float:right;
+	position: relative;
+	left: 610px;
+	top: -5px;
 }
 /*CREATE SIMPLE TEXT END*/
 
@@ -331,16 +371,18 @@ h2, h3{
     position: absolute;
     left: 50%;
     top: 50%;
-    width: 500px;
-    height:500px;
-    margin-top: -250px;
+    width: 550px;
+    height:620px;
+    margin-top: -310px;
     margin-left: -250px;
+		padding:15px;
 
-    border: 2px solid black;
+		font-size: 1.2em;
+		border: 1px solid rgba(0, 0, 0, 0.5);
+		border-radius: 10px;
+		box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
     background-color: white;
     z-index: 3;
-    /*overflow-y: scroll;*/
-    box-shadow: 5px 5px 5px #888888;
 }
 
 #guidelinesWrapper p{
@@ -348,19 +390,82 @@ h2, h3{
     margin-right: 10px;
 }
 
+#guidelinesWrapper ul{
+	font-family: courier;
+}
 
 #guidelinesWrapper h1{
-    margin: -30px 0px -10px 5px;
-    padding: 0px; 
+		font-size:30px;
+		text-align: center;
+    margin: -30px 0px 0px 5px;
+    padding: 0px;
+		font-family: bit8;
+}
+
+#guidelinesWrapper h2{
+		text-align: center;
+    margin: 0px 0px -10px 0px;
+    padding: 0px;
+		font-style: italic;
+		font-size:20px;
 }
 
 #guidelinesWrapper #closeGuidelines{
-    width:30px;
-    height: auto;
-    position: relative;
-    left: 485px;
-    bottom: 12px;
+	width: 27px;
+	height: auto;
+	position: relative;
+	left: 548px;
+	bottom: 25px;
+}
+/*GUIDELINES END*/
+
+
+/*COMMENT START*/
+#createComment{
+	visibility: hidden;
+	z-index: 3;
 }
 
+#createComment .content #commentsWrapper{
+	width: 855px;
+	height: 420px;
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	margin: 10px 0 10px 0;
+	background-color: white;
+	overflow-y: scroll;
+}
 
-/*GUIDELINES END*/
+#createComment .content #commentsWrapper .singleCommentWrapper{
+	border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+	padding: 10px;
+}
+
+#createComment .content #commentsWrapper .singleCommentWrapper .commenter{
+	font-weight: bold;
+}
+
+#createComment .content #commentsWrapper .singleCommentWrapper p{
+	font-size: 1.1em;
+	margin:0;
+	padding: 0;
+}
+
+#createComment .content #commentsWrapper .singleCommentWrapper .comment{
+	padding-top: 3px;
+}
+
+#createComment .content textarea{
+	width: 853px;
+	height: 70px;
+	font-size: 1.3em;
+}
+
+#createComment .content #commentButtonsWrapper{
+	margin-top: 10px;
+	float:right;
+}
+
+#createComment .content #commentButtonsWrapper #cancelComment{
+	margin-right: 10px;
+}
+/*COMMENT END*/

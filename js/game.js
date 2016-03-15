@@ -64,12 +64,12 @@ var friendMap;
 */
 function preload() {
     //  Load tilemap
-    game.load.tilemap('map', 
-				'assets/tile/map_no_objects.csv', 
-				null, 
+    game.load.tilemap('map',
+				'assets/tile/map_no_objects.csv',
+				null,
 				Phaser.Tilemap.CSV);
 
-    //  Load the tileset. This is just an image, 
+    //  Load the tileset. This is just an image,
     // loaded in via the normal way we load images:
     game.load.image('tiles', 'assets/tile/simples_pimples.png');
     // game.load.image('bat', 'assets/tile/bat.png');
@@ -93,28 +93,30 @@ function preload() {
 */
 function create() {
     map = game.add.tilemap('map', 16, 16);
-    // The first parameter is the tileset name, 
+    // The first parameter is the tileset name,
     // as specified in the Tiled map editor (and in the tilemap json file)
     // The second parameter maps this name to the Phaser.Cache key 'tiles'
     map.addTilesetImage('simples_pimples', 'tiles');
     //  Creates a layer from the layers in the map data.
     layer = map.createLayer(0);
     layer.resizeWorld();
-    map.setCollisionBetween(3000, 4000); 
+    map.setCollisionBetween(3000, 4000);
     cursors = game.input.keyboard.createCursorKeys();
 
     collectSound = game.add.audio('collectSound');
     music = game.add.audio('music');
 
-    var coin_coords_x = [180, 180, 180, 205, 205, 51*16, 51*16];
-    var coin_coords_y = [210, 230, 250, 450, 430, 13*16, 14*16];
+    var coin_coords_x = [180, 180, 180, 205, 205, 51*16, 51*16, 300, 275];
+    var coin_coords_y = [210, 230, 250, 450, 430, 13*16, 14*16, 100, 100];
     coins = game.add.group();
     coins.enableBody = true;
     for(var i = 0; i < coin_coords_x.length; i++){
         coins.create(coin_coords_x[i], coin_coords_y[i], 'coin');
     }
-   
-    player = game.add.sprite(80, game.world.height - 90, 'player');
+
+    //Old coords
+    //player = game.add.sprite(80, game.world.height - 90, 'player');
+    player = game.add.sprite(520, game.world.height - 285, 'player');
     player.animations.add('left', [0, 1, 2], 12, true);
     player.animations.add('up', [3, 4, 5], 12, true);
     player.animations.add('right', [6, 7, 8], 12, true);
@@ -122,15 +124,15 @@ function create() {
     player.hasTalked = false;
     game.physics.enable(player);
 
-    friend = game.add.sprite(313, game.world.height - 380, 'friend');
+    friend = game.add.sprite(480, game.world.height - 285, 'friend');
     game.physics.enable(friend);
     friend.body.immovable = true;
-      
-    wall = game.add.sprite(224, game.world.height - 400, 'wall')
+
+    wall = game.add.sprite(478, game.world.height - 241, 'wall')
     game.physics.enable(wall);
     wall.body.immovable = true;
-      
-    // music.play();
+
+    //music.play();
 
 	friendMap = game.add.sprite(game.world.width - 128, game.world.height - 64, 'map');
 	friendMap.scale.setTo(0.5, 0.5);
@@ -145,13 +147,13 @@ function create() {
 function update() {
     game.physics.arcade.collide(player, layer);
     game.physics.arcade.overlap(player, coins, collectItem, null, this);
-    game.physics.arcade.overlap(player, 
-								friendMap, 
-								function(player, friendMap) { 
+    game.physics.arcade.overlap(player,
+								friendMap,
+								function(player, friendMap) {
 									friendMap.isCollected = true;
 									collectItem(player, friendMap);
-								}, 
-								null, 
+								},
+								null,
 								this);
 
 
@@ -215,5 +217,3 @@ function talkWithFriend(){
     player.hasTalked = true;
     wall.kill();
 }
-
-
