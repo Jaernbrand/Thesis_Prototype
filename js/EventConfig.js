@@ -20,7 +20,6 @@ $(document).ready(function(){
 	//Show tooltip on mouse over icons
 	$('[data-toggle="tooltip"]').tooltip();
 
-	document.getElementById("recordedAudio").disabled = true;
 
 	// Close simpleTextStart window
 	document.getElementById("okButton").onclick = function () {
