@@ -10,7 +10,7 @@ $(document).ready(function(){
 	// If visibility is set with css, jQuery function fadeIn() & fadeOut() can't
 	// be used.
 	$("#infoBox").hide();
-
+	$("#blackBox").hide();
 	//Load fancybox
 	$(".fancybox").fancybox();
 
@@ -25,6 +25,13 @@ $(document).ready(function(){
 	*/
 	document.getElementById("okButton").onclick = function () {
 		document.getElementById("simpleTextStart").style.visibility = "hidden";
+		if(friendMap.isCollected){
+			musicVolumeAndRestart(0.6, true);
+			$("#blackBox").delay(750).fadeIn(2250);
+			$("#blackHeading").delay(5500).fadeOut(1500);
+		}else{
+			musicVolumeAndRestart(0.6, false);	
+		}
 	};
 
 	// Open contribution list

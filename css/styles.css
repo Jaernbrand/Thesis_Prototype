@@ -514,7 +514,26 @@ p{
 /*COMMENT END*/
 
 
+/*BLACK BOX START (used to fade out game)*/
+#blackBox{
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+    z-index: 5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
 
-/*UPLOAD BTN START*/
+#blackBox h1{
+    font-size: 4em;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 80vh;
+    color: white;
+    overflow: hidden;
+}
 
-/*UPLOAD BTN END*/
+
+/*BLACK BOX END*/
