@@ -55,14 +55,14 @@ $(document).ready(function(){
 
 	};
 
-	// go to comment quest contribution
+	// Go to comment quest contribution
 	document.getElementById("commentContribution").onclick = function () {
 		document.getElementById("viewSingleContribution").style.visibility = "hidden";
 		document.getElementById("createComment").style.visibility = "visible";
 		document.getElementById("createCommentArea").focus();
 	};
 
-	// submit written comment
+	// Submit written comment
 	document.getElementById("submitCommment").onclick = function () {
 		//TODO - sort comments and show the user the newely added comment
 		//stay on page, user sees its own comment and chooses to go back
@@ -71,10 +71,12 @@ $(document).ready(function(){
 		//Forces user to go back after viewing the cubmitted comment
 		document.getElementById("createCommentArea").disabled = true;
 		document.getElementById("submitCommment").disabled = true;
+
+		document.getElementById("createCommentArea").value = "";
 	};
 
 
-	// cancel comment
+	// Cancel comment
 	document.getElementById("cancelComment").onclick = function () {
 		document.getElementById("createComment").style.visibility = "hidden";
 		//TODO - must show the right contribution when going back
@@ -83,6 +85,8 @@ $(document).ready(function(){
 		//enable submit button & comment textarea if they have been disabled
 		document.getElementById("submitCommment").disabled = false;
 		document.getElementById("createCommentArea").disabled = false;
+
+		document.getElementById("createCommentArea").value = "";
 	};
 
 
@@ -300,10 +304,14 @@ $(document).ready(function(){
 
 /**
 * View a single contribution. Reached by clicking a contribution from the contributions list.
+*
+* @param {Contribution} contributon
+* The contribution to view.
 */
 function viewSingleContribution(contribution){
 	var questID = document.getElementById("questID").innerHTML;
 
+	document.getElementById("commentAuthorName").innerHTML = contribution.author;
 	document.getElementById("singleContributionAuthor").innerHTML = contribution.author;
 	document.getElementById("singleContributionQuestID").innerHTML = questID;
 	document.getElementById("singleContributionContID").innerHTML = contribution.contID;
@@ -314,7 +322,15 @@ function viewSingleContribution(contribution){
 	// Load data into viewSingleContribution before showing it.
 	document.getElementById("contributions").style.visibility = "hidden";
 	document.getElementById("viewSingleContribution").style.visibility = "visible";
-}
+
+	// Adjust the submit comment function.
+	document.getElementById("commentContribution").onclick = (function(oldFunc){
+		return function(){
+			oldFunc();
+			listComments(questID, contribution.contID);
+		};
+	})(document.getElementById("commentContribution").onclick);
+} // viewSingleContribution
 
 /**
 * Lists all SimpleText contributions for the current quest.
@@ -325,6 +341,7 @@ function listContributions(){
 	var questID = document.getElementById("questID").innerHTML;
 	var contributions = SimpleText.database.fetchContributions(questID);
 
+	// Filter contributions if author is selected.
 	if (document.getElementById("sortContributions").value === "author"){
 		var FavAuthors = SimpleText.database.fetchFavouriteAuthors(SimpleText.username);
 		contributions = contributions.filter(function(elem){
@@ -335,6 +352,7 @@ function listContributions(){
 			return false;
 		}); 
 	}
+	// Sort the contributions.
 	contributions.sort(contributionsSortFunction());
 
 	// Template for each contribution.
@@ -359,7 +377,7 @@ function listContributions(){
 		currItem.getElementsByClassName("numberLikes")[0].innerHTML = contributions[i].votes;
 		currItem.getElementsByClassName("authorWrapper")[0].childNodes[1].innerHTML = contributions[i].author;
 
-		// To avoid that all onclicks point to the last contribution reference.
+		// To avoid that all onclick-functionss point to the last contribution reference.
 		(function (contribution){
 			currItem.onclick = function(){
 				viewSingleContribution(contribution);
@@ -368,7 +386,7 @@ function listContributions(){
 
 		document.getElementById("contributionsList").appendChild(currItem);
 	} // for-loop
-}
+} // listContributions
 
 /**
 * Checks which sort function that should be used to sort the contributions
@@ -419,5 +437,46 @@ function removeAllChildren(parent){
 	}
 }
 
+/**
+* Lists all comments for the contribution of the specified quest.
+*
+* @param {string} questID
+* Id of the quest in question.
+*
+* @param {string} contID
+* Id of the contribution.
+*/
+function listComments(questID, contID){
+	removeAllChildren(document.getElementById("commentsWrapper"));
 
+	var comments = SimpleText.database.fetchComments(questID, contID);
+
+	// Template for each comment.
+	var template = document.getElementById("singleCommentTemplate");
+	var currItem;
+	for (var i=0; i < comments.length; ++i){
+		currItem = template.cloneNode(true);
+
+		// Takes the beginning of the comment as excerpt.
+		currItem.getElementsByClassName("comment")[0].innerHTML = comments[i].text;
+		currItem.getElementsByClassName("commenter")[0].innerHTML = comments[i].author;
+
+		document.getElementById("commentsWrapper").appendChild(currItem);
+	} // for-loop
+
+	// Adjust the submit comment function.
+	document.getElementById("submitCommment").onclick = (function(oldFunc){
+		return function(){
+			var text = document.getElementById("createCommentArea").value.trim();
+			if (text.length > 0) {
+				SimpleText.database.addComment(questID, 
+											contID, 
+											SimpleText.username,
+											text);
+				oldFunc();
+				listComments(questID, contID);
+			}
+		};
+	})(document.getElementById("submitCommment").onclick);
+} // listComments
 
