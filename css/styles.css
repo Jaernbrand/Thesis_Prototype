@@ -217,8 +217,8 @@ p{
 
 #viewSingleContribution .content textarea{
     resize: none;
-		width: 570px;
-		height: 480px;
+	width: 570px;
+	height: 480px;
     font-size: 1.5em;
     float: left;
 }
@@ -244,9 +244,9 @@ p{
 }
 
 #viewSingleContribution .content .bottomAreaWrapper  audio{
-		width: 576px;
-		display: block;
-		background-color: black;
+	width: 576px;
+	display: block;
+	background-color: black;
 }
 
 #viewSingleContribution .content #authorNameAndAddAuthorBtn{
@@ -320,19 +320,19 @@ p{
 
     text-align: center;
     border: 1px solid rgba(0, 0, 0, 0.7);
-		border-radius: 10px;
-		box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
     background-color: white;
     z-index: 3;
-		font-size: 1em;
-		text-align: center;
-		vertical-align: middle;
-		line-height: 80px;       /* the same as div height */
+	font-size: 1em;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 80px;       /* the same as div height */
 }
 
 #infoBox #infoMessage{
     margin:0;
-		padding:0;
+	padding:0;
 }
 /*INFO BOX END*/
 
@@ -380,8 +380,8 @@ p{
 }
 
 #createContribution .content #guidelines{
-		position:relative;
-		top: 35px;
+    position:relative;
+    top: 35px;
 }
 
 
@@ -433,11 +433,11 @@ p{
 }
 
 #guidelinesWrapper h2{
-		text-align: center;
+    text-align: center;
     margin: 0px 0px -10px 0px;
     padding: 0px;
-		font-style: italic;
-		font-size:20px;
+    font-style: italic;
+    font-size:20px;
 }
 
 #guidelinesWrapper #closeGuidelines{
@@ -452,7 +452,7 @@ p{
 
 /*COMMENT START*/
 #createComment{
-	visibility: visible;
+	visibility: hidden;
 	z-index: 3;
 }
 
