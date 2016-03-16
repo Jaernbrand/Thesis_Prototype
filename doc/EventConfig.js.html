@@ -31,57 +31,137 @@
 */
 
 // Run when the DOM is loaded and ready
-/**
-* Run when the DOM is loaded and ready
-*/
 $(document).ready(function(){
-	
-	//Needed to be able to fade-in/fade-out infoBox when user clicks any icon 
-	//when viewing a single contribution.
-	//If visibility is set with css, jQuery function fadeIn() &amp; fadeOut() can't
-	//be used
+
+	// Needed to be able to fade-in/fade-out infoBox when user clicks any icon
+	// when viewing a single contribution.
+	// If visibility is set with css, jQuery function fadeIn() &amp; fadeOut() can't
+	// be used.
 	$("#infoBox").hide();
 
+	//Load fancybox
+	$(".fancybox").fancybox();
 
+	//Hide guidelines so they can be shown later using jquery
+	$("#guidelinesWrapper").hide();
 
-	/** 
-	*Close simpleTextStart window
+	//Show tooltip on mouse over icons
+	$('[data-toggle="tooltip"]').tooltip();
+
+	/**	
+	* Close simpleTextStart window.
+	*
 	*/
-	document.getElementById("okButton").onclick = function () { 
+	document.getElementById("okButton").onclick = function () {
 		document.getElementById("simpleTextStart").style.visibility = "hidden";
 	};
 
 	// Open contribution list
-	document.getElementById("simpleTextButton").onclick = function () { 
+	document.getElementById("simpleTextButton").onclick = function () {
 		document.getElementById("simpleTextStart").style.visibility = "hidden";
 		document.getElementById("contributions").style.visibility = "visible";
+		listContributions();
 	};
 
 	// Go back to simpleTextStart from contribution list
-	document.getElementById("contributeBack").onclick = function () { 
+	document.getElementById("contributeBack").onclick = function () {
 		document.getElementById("contributions").style.visibility = "hidden";
 		document.getElementById("simpleTextStart").style.visibility = "visible";
-		
+
 	};
 
 	// Go back to simpleTextStart from contribution list
-	document.getElementById("viewContributionBack").onclick = function () { 
+	document.getElementById("viewContributionBack").onclick = function () {
 		document.getElementById("viewSingleContribution").style.visibility = "hidden";
 		document.getElementById("contributions").style.visibility = "visible";
-		
-	};
-
-
-	// comment quest contribution
-	document.getElementById("commentContribution").onclick = function () { 
-		//document.getElementById("viewSingleContribution").style.visibility = "hidden";
-		// show comments on contribution
 
 	};
 
+	// go to comment quest contribution
+	document.getElementById("commentContribution").onclick = function () {
+		document.getElementById("viewSingleContribution").style.visibility = "hidden";
+		document.getElementById("createComment").style.visibility = "visible";
+		document.getElementById("createCommentArea").focus();
+	};
 
-	// Util function to display and hide infoBox - a popup message when
-	// the user interacts with buttons "add, flag, like"
+	// submit written comment
+	document.getElementById("submitCommment").onclick = function () {
+		//TODO - sort comments and show the user the newely added comment
+		//stay on page, user sees its own comment and chooses to go back
+
+		//Disabeling textarea &amp; submit button after submitting comment.
+		//Forces user to go back after viewing the cubmitted comment
+		document.getElementById("createCommentArea").disabled = true;
+		document.getElementById("submitCommment").disabled = true;
+	};
+
+
+	// cancel comment
+	document.getElementById("cancelComment").onclick = function () {
+		document.getElementById("createComment").style.visibility = "hidden";
+		//TODO - must show the right contribution when going back
+		document.getElementById("viewSingleContribution").style.visibility = "visible";
+
+		//enable submit button &amp; comment textarea if they have been disabled
+		document.getElementById("submitCommment").disabled = false;
+		document.getElementById("createCommentArea").disabled = false;
+	};
+
+
+	// Show create simple text / contribution
+	document.getElementById("contributeCreate").onclick = function () {
+		document.getElementById("contributions").style.visibility = "hidden";
+		document.getElementById("createContribution").style.visibility = "visible";
+		document.getElementById("newTextArea").focus();
+	};
+
+
+	// Go back to contributions list from create simple text
+	document.getElementById("cancelCreateText").onclick = function () {
+		document.getElementById("createContribution").style.visibility = "hidden";
+		document.getElementById("contributions").style.visibility = "visible";
+
+	};
+
+	// show guidelines
+	document.getElementById("guidelines").onclick = function () {
+		$("#closeGuidelines").fadeIn(350);
+		$("#guidelinesWrapper").fadeIn(400);
+
+	};
+
+	// Submit simple text contribution
+	document.getElementById("submitCreateText").onclick = function () {
+		document.getElementById("createContribution").style.visibility = "hidden";
+
+		//Database
+		//	- add new contribution
+		//	- update contributions list before making it visible
+
+		document.getElementById("contributions").style.visibility = "visible";
+		var infoBox = $("#infoBox").fadeIn(300);
+		var message = document.getElementById("infoMessage").innerHTML = "Thank you, your contribution has been added!";
+
+		infoBox.delay(3000).fadeOut(500);
+	};
+
+
+	//Close guidelines
+	$("#closeGuidelines").click(function() {
+		$("#guidelinesWrapper").fadeOut(300);
+		$(this).fadeOut(350);
+	});
+
+
+	/**
+	* Utility function to display and hide infoBox - a popup message when
+	* the user interacts with buttons "add", "flag" and "like".
+	*
+	* @param {string} imgClicked
+	* @param {string} message
+	* @param {boolean} filled
+	* @param {string} imgPath
+	*/
 	function displayInfoBox(imgClicked, message, filled, imgPath){
 		var infoBox = $("#infoBox").stop();
 		infoBox.hide();
@@ -95,7 +175,7 @@ $(document).ready(function(){
 			$(imgClicked).attr('src', imgPath);
 			messageTag.innerHTML = message;
 			infoBox.stop(true).hide().fadeIn(300);
-			infoBox.delay(2000).fadeOut(500); 
+			infoBox.delay(2000).fadeOut(500);
 		}
 	}
 
@@ -105,16 +185,21 @@ $(document).ready(function(){
 	$("#favouriteAuthor").click(function() {
 		if(!filled){
 			filled = true;
-			var message = "Added as favourite author.";
+			var message = "Added as favourite author";
 			var path = "assets/web/addFilled.png";
 			displayInfoBox(this, message, filled, path);
-			//Database stuff...
+
+			var authorName = document.getElementById("singleContributionAuthor").innerHTML;
+			SimpleText.database.favouriteAuthor(authorName);
+
 		}else{
 			filled = false;
-			var message = "Removed author from favourites.";
+			var message = "Removed author from favourites";
 			var path = "assets/web/add.png";
 			displayInfoBox(this, message, filled, path);
-			//Database stuff...
+
+			var authorName = document.getElementById("singleContributionAuthor").innerHTML;
+			SimpleText.database.defavouriteAuthor(authorName);
 		}
 
 	});
@@ -125,16 +210,23 @@ $(document).ready(function(){
 	$("#flagSingleContribution").click(function() {
 		if(!flagged){
 			flagged = true;
-			var message = "Marked content as inappropriate.";
+			var message = "Marked content as inappropriate";
 			var path = "assets/web/flagFilled.png";
 			displayInfoBox(this, message, flagged, path);
-			//Database stuff...
+
+			var questID = document.getElementById("singleContributionQuestID").innerHTML;
+			var contID = document.getElementById("singleContributionContID").innerHTML;
+			SimpleText.database.addFlag(questID, contID);
+
 		}else{
 			flagged = false;
-			var message = "Removed inappropriate marking.";
+			var message = "Removed inappropriate marking";
 			var path = "assets/web/flag.png";
 			displayInfoBox(this, message, flagged, path);
-			//Database stuff...
+
+			var questID = document.getElementById("singleContributionQuestID").innerHTML;
+			var contID = document.getElementById("singleContributionContID").innerHTML;
+			SimpleText.database.removeFlag(questID, contID);
 		}
 
 	});
@@ -145,16 +237,47 @@ $(document).ready(function(){
 	$("#likeContribution").click(function() {
 		if(!likesAuthor){
 			likesAuthor = true;
-			var message = "You like this contribution.";
+			var message = "You like this contribution";
 			var path = "assets/web/likeFilled.png";
 			displayInfoBox(this, message, likesAuthor, path);
-			//Database stuff...
+
+			var questID = document.getElementById("singleContributionQuestID").innerHTML;
+			var contID = document.getElementById("singleContributionContID").innerHTML;
+			SimpleText.database.addVote(questID, contID);
+
 		}else{
 			likesAuthor = false;
-			var message = "Like removed.";
+			var message = "Like removed";
 			var path = "assets/web/like.png";
 			displayInfoBox(this, message, likesAuthor, path);
-			//Database stuff...
+
+			var questID = document.getElementById("singleContributionQuestID").innerHTML;
+			var contID = document.getElementById("singleContributionContID").innerHTML;
+			SimpleText.database.removeVote(questID, contID);
+		}
+
+	});
+
+
+	// Flag that simple text is needed on original quest text
+	var stNeeded = false;
+	$("#flagButton").click(function() {
+		var infoBox = $("#infoBox").stop();
+		infoBox.hide();
+		var messageTag = document.getElementById("infoMessage");
+
+		if(!stNeeded){
+			stNeeded = true;
+			$(this).attr('src', "assets/web/flagFilled.png");
+			/*messageTag.innerHTML = "Marked text as complex";
+			infoBox.stop(true).hide().fadeIn(300);
+			infoBox.delay(2000).fadeOut(500);*/
+		}else{
+			stNeeded = false;
+			$(this).attr('src', "assets/web/flag.png");
+			/*messageTag.innerHTML = "Removed marking";
+			infoBox.stop(true).hide().fadeIn(300);
+			infoBox.delay(2000).fadeOut(500);*/
 		}
 
 	});
@@ -183,25 +306,141 @@ $(document).ready(function(){
         $(this).css('cursor','pointer');
     });
 
+    // Makes cursor into hand when hovering over guidelines close window image
+    $('#closeGuidelines').hover(function() {
+        $(this).css('cursor','pointer');
+    });
 
+		// Makes cursor into hand when hovering over flag at first quest text window
+		$('#flagButton').hover(function() {
+				$(this).css('cursor','pointer');
+		});
 
-});//document has finished loading
+}); // Document has finished loading.
 
 
 
 /**
-* View a single contribution. Reached by clicking a contribution from the contributions list
+* View a single contribution. Reached by clicking a contribution from the contributions list.
 */
-function viewSingleContribution(){
-	var author = document.getElementById("author");
-	//database stuff...
-	//load data into viewSingleContribution before showing it
+function viewSingleContribution(contribution){
+	var questID = document.getElementById("questID").innerHTML;
 
-	//just for now
+	document.getElementById("singleContributionAuthor").innerHTML = contribution.author;
+	document.getElementById("singleContributionQuestID").innerHTML = questID;
+	document.getElementById("singleContributionContID").innerHTML = contribution.contID;
+
+	var singCont = document.getElementById("viewSingleContribution");
+	singCont.getElementsByTagName("textarea")[0].innerHTML = contribution.text;
+
+	// Load data into viewSingleContribution before showing it.
 	document.getElementById("contributions").style.visibility = "hidden";
 	document.getElementById("viewSingleContribution").style.visibility = "visible";
-
 }
+
+/**
+* Lists all SimpleText contributions for the current quest.
+*/
+function listContributions(){
+	removeAllChildren(document.getElementById("contributionsList"));
+
+	var questID = document.getElementById("questID").innerHTML;
+	var contributions = SimpleText.database.fetchContributions(questID);
+
+	if (document.getElementById("sortContributions").value === "author"){
+		var FavAuthors = SimpleText.database.fetchFavouriteAuthors(SimpleText.username);
+		contributions = contributions.filter(function(elem){
+			var author = elem.author;
+			if (FavAuthors.indexOf(author) >= 0){
+				return true;
+			}
+			return false;
+		}); 
+	}
+	contributions.sort(contributionsSortFunction());
+
+	// Template for each contribution.
+	var template = document.getElementById("contWrapper");
+	var currItem;
+	for (var i=0; i &lt; contributions.length; ++i){
+		currItem = template.cloneNode(true);
+
+		// Takes the beginning of the comment as excerpt.
+		currItem.getElementsByClassName("textExcerpt")[0].innerHTML = (function(){
+			var intro;
+			var maxLength = 30;
+			if (contributions[i].text.length > maxLength){
+				var endIdx = contributions[i].text.lastIndexOf(" ", maxLength);
+				intro = contributions[i].text.substr(0, endIdx) + " [...]";
+			} else {
+				intro = contributions[i].text;
+			}
+			return intro;
+		})();
+
+		currItem.getElementsByClassName("numberLikes")[0].innerHTML = contributions[i].votes;
+		currItem.getElementsByClassName("authorWrapper")[0].childNodes[1].innerHTML = contributions[i].author;
+
+		// To avoid that all onclicks point to the last contribution reference.
+		(function (contribution){
+			currItem.onclick = function(){
+				viewSingleContribution(contribution);
+			};
+		})(contributions[i]);
+
+		document.getElementById("contributionsList").appendChild(currItem);
+	} // for-loop
+}
+
+/**
+* Checks which sort function that should be used to sort the contributions
+* and returns it.
+*
+* @return {function}
+* The sort function to be used for contribution sorting.
+*/
+function contributionsSortFunction(){
+	var sortFunc;
+	var sortOn = document.getElementById("sortContributions").value;
+	switch (sortOn){
+  		case "highest":
+			sortFunc = function(rhs, lhs){
+				return lhs.votes - rhs.votes;
+			};
+			break;
+  		case "newest":
+			sortFunc = function(rhs, lhs){
+				return rhs.timestamp - lhs.timestamp;
+			};
+			break;
+  		case "oldest":
+			sortFunc = function(rhs, lhs){
+				return lhs.timestamp - rhs.timestamp;
+			};
+			break;
+  		case "author":
+			sortFunc = function(rhs, lhs){
+				return lhs.votes - rhs.votes;
+			};
+			break;
+		default:
+			throw "Invalid attribute to sort by.";
+	}
+	return sortFunc;
+}
+
+/**
+* Removes all children from the given parent node.
+*
+* @param {HTMLElement} parent
+* The parent to free from children
+*/
+function removeAllChildren(parent){
+	while (parent.hasChildNodes()){
+		parent.removeChild(parent.firstChild);
+	}
+}
+
 
 
 </code></pre>
@@ -214,13 +453,13 @@ function viewSingleContribution(){
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-EventConfig.html">EventConfig</a></li><li><a href="module-Setup.html">Setup</a></li></ul><h3>Classes</h3><ul><li><a href="SimpleText.Database.html">Database</a></li></ul><h3>Namespaces</h3><ul><li><a href="SimpleText.html">SimpleText</a></li></ul><h3>Global</h3><ul><li><a href="global.html#coins">coins</a></li><li><a href="global.html#collectItem">collectItem</a></li><li><a href="global.html#create">create</a></li><li><a href="global.html#cursors">cursors</a></li><li><a href="global.html#friend">friend</a></li><li><a href="global.html#friendMap">friendMap</a></li><li><a href="global.html#game">game</a></li><li><a href="global.html#map">map</a></li><li><a href="global.html#music">music</a></li><li><a href="global.html#player">player</a></li><li><a href="global.html#preload">preload</a></li><li><a href="global.html#talkWithFriend">talkWithFriend</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#wall">wall</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-EventConfig.html">EventConfig</a></li><li><a href="module-UserTestSetup.html">UserTestSetup</a></li></ul><h3>Classes</h3><ul><li><a href="SimpleText.Database.html">Database</a></li></ul><h3>Namespaces</h3><ul><li><a href="SimpleText.html">SimpleText</a></li></ul><h3>Global</h3><ul><li><a href="global.html#coins">coins</a></li><li><a href="global.html#collectItem">collectItem</a></li><li><a href="global.html#create">create</a></li><li><a href="global.html#cursors">cursors</a></li><li><a href="global.html#friend">friend</a></li><li><a href="global.html#friendMap">friendMap</a></li><li><a href="global.html#game">game</a></li><li><a href="global.html#map">map</a></li><li><a href="global.html#music">music</a></li><li><a href="global.html#player">player</a></li><li><a href="global.html#preload">preload</a></li><li><a href="global.html#talkWithFriend">talkWithFriend</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#wall">wall</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Mar 10 2016 14:20:23 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Wed Mar 16 2016 14:13:02 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>

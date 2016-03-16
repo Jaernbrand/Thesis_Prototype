@@ -20,7 +20,7 @@ SimpleText.Database = function(){
 	this.contributions = {};
 
 	/**
-	* @property {object.<string, array.<string>} favourites
+	* @property {object.<string, array.<string>>} favourites
 	* Map of author names with usernames as the key
 	*/
 	this.favourites = {};

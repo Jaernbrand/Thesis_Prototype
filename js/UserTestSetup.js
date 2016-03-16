@@ -2,7 +2,7 @@
 * Setup for the user tests of the prototype.
 * Should be run before each user test.
 *
-* @module Setup
+* @module UserTestSetup
 */
 
 SimpleText.username = "TestUser";

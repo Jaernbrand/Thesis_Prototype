@@ -5,10 +5,10 @@
 // Run when the DOM is loaded and ready
 $(document).ready(function(){
 
-	//Needed to be able to fade-in/fade-out infoBox when user clicks any icon
-	//when viewing a single contribution.
-	//If visibility is set with css, jQuery function fadeIn() & fadeOut() can't
-	//be used
+	// Needed to be able to fade-in/fade-out infoBox when user clicks any icon
+	// when viewing a single contribution.
+	// If visibility is set with css, jQuery function fadeIn() & fadeOut() can't
+	// be used.
 	$("#infoBox").hide();
 
 	//Load fancybox
@@ -20,9 +20,9 @@ $(document).ready(function(){
 	//Show tooltip on mouse over icons
 	$('[data-toggle="tooltip"]').tooltip();
 
-	document.getElementById("recordedAudio").disabled = true;
-
-	// Close simpleTextStart window
+	/**	
+	* Close simpleTextStart window.
+	*/
 	document.getElementById("okButton").onclick = function () {
 		document.getElementById("simpleTextStart").style.visibility = "hidden";
 	};
@@ -156,14 +156,18 @@ $(document).ready(function(){
 	$("#favouriteAuthor").click(function() {
 		if(!filled){
 			filled = true;
-			$(this).attr('src', "assets/web/addFilled.png");
+			var message = "Added as favourite author";
+			var path = "assets/web/addFilled.png";
+			displayInfoBox(this, message, filled, path);
 
 			var authorName = document.getElementById("singleContributionAuthor").innerHTML;
 			SimpleText.database.favouriteAuthor(authorName);
 
 		}else{
 			filled = false;
-			$(this).attr('src', "assets/web/add.png");
+			var message = "Removed author from favourites";
+			var path = "assets/web/add.png";
+			displayInfoBox(this, message, filled, path);
 
 			var authorName = document.getElementById("singleContributionAuthor").innerHTML;
 			SimpleText.database.defavouriteAuthor(authorName);
@@ -177,7 +181,9 @@ $(document).ready(function(){
 	$("#flagSingleContribution").click(function() {
 		if(!flagged){
 			flagged = true;
-			$(this).attr('src', "assets/web/flagFilled.png");
+			var message = "Marked content as inappropriate";
+			var path = "assets/web/flagFilled.png";
+			displayInfoBox(this, message, flagged, path);
 
 			var questID = document.getElementById("singleContributionQuestID").innerHTML;
 			var contID = document.getElementById("singleContributionContID").innerHTML;
@@ -185,7 +191,9 @@ $(document).ready(function(){
 
 		}else{
 			flagged = false;
-			$(this).attr('src', "assets/web/flag.png");
+			var message = "Removed inappropriate marking";
+			var path = "assets/web/flag.png";
+			displayInfoBox(this, message, flagged, path);
 
 			var questID = document.getElementById("singleContributionQuestID").innerHTML;
 			var contID = document.getElementById("singleContributionContID").innerHTML;
@@ -200,19 +208,25 @@ $(document).ready(function(){
 	$("#likeContribution").click(function() {
 		if(!likesAuthor){
 			likesAuthor = true;
-			$(this).attr('src', "assets/web/likeFilled.png");
+			var message = "You like this contribution";
+			var path = "assets/web/likeFilled.png";
+			displayInfoBox(this, message, likesAuthor, path);
 
 			var questID = document.getElementById("singleContributionQuestID").innerHTML;
 			var contID = document.getElementById("singleContributionContID").innerHTML;
 			SimpleText.database.addVote(questID, contID);
+
 		}else{
 			likesAuthor = false;
-			$(this).attr('src', "assets/web/like.png");
+			var message = "Like removed";
+			var path = "assets/web/like.png";
+			displayInfoBox(this, message, likesAuthor, path);
 
 			var questID = document.getElementById("singleContributionQuestID").innerHTML;
 			var contID = document.getElementById("singleContributionContID").innerHTML;
 			SimpleText.database.removeVote(questID, contID);
 		}
+
 	});
 
 
@@ -258,6 +272,11 @@ $(document).ready(function(){
         $(this).css('cursor','pointer');
     });
 
+    // Makes cursor into hand when hovering over items in the contributions list
+    $('.itemWrapper').hover(function() {
+        $(this).css('cursor','pointer');
+    });
+
     // Makes cursor into hand when hovering over guidelines close window image
     $('#closeGuidelines').hover(function() {
         $(this).css('cursor','pointer');
@@ -268,13 +287,7 @@ $(document).ready(function(){
 				$(this).css('cursor','pointer');
 		});
 
-
-
-
-
-
-
-});//document has finished loading
+}); // Document has finished loading.
 
 
 
@@ -296,6 +309,9 @@ function viewSingleContribution(contribution){
 	document.getElementById("viewSingleContribution").style.visibility = "visible";
 }
 
+/**
+* Lists all SimpleText contributions for the current quest.
+*/
 function listContributions(){
 	removeAllChildren(document.getElementById("contributionsList"));
 
@@ -347,6 +363,13 @@ function listContributions(){
 	} // for-loop
 }
 
+/**
+* Checks which sort function that should be used to sort the contributions
+* and returns it.
+*
+* @return {function}
+* The sort function to be used for contribution sorting.
+*/
 function contributionsSortFunction(){
 	var sortFunc;
 	var sortOn = document.getElementById("sortContributions").value;
@@ -377,6 +400,12 @@ function contributionsSortFunction(){
 	return sortFunc;
 }
 
+/**
+* Removes all children from the given parent node.
+*
+* @param {HTMLElement} parent
+* The parent to free from children
+*/
 function removeAllChildren(parent){
 	while (parent.hasChildNodes()){
 		parent.removeChild(parent.firstChild);
