@@ -296,9 +296,24 @@ function viewSingleContribution(contribution){
 }
 
 function listContributions(){
+	removeAllChildren(document.getElementById("contributionsList"));
+
 	var questID = document.getElementById("questID").innerHTML;
 	var contributions = SimpleText.database.fetchContributions(questID);
 
+	if (document.getElementById("sortContributions").value === "author"){
+		var FavAuthors = SimpleText.database.fetchFavouriteAuthors(SimpleText.username);
+		contributions = contributions.filter(function(elem){
+			var author = elem.author;
+			if (FavAuthors.indexOf(author) >= 0){
+				return true;
+			}
+			return false;
+		}); 
+	}
+	contributions.sort(contributionsSortFunction());
+
+	// Template for each contribution.
 	var template = document.getElementById("contWrapper");
 	var currItem;
 	for (var i=0; i < contributions.length; ++i){
@@ -318,7 +333,7 @@ function listContributions(){
 		})();
 
 		currItem.getElementsByClassName("numberLikes")[0].innerHTML = contributions[i].votes;
-		currItem.getElementsByClassName("authorWrapper")[0].childNodes[1].innerHTML = contributions[i].votes;
+		currItem.getElementsByClassName("authorWrapper")[0].childNodes[1].innerHTML = contributions[i].author;
 
 		// To avoid that all onclicks point to the last contribution reference.
 		(function (contribution){
@@ -330,4 +345,42 @@ function listContributions(){
 		document.getElementById("contributionsList").appendChild(currItem);
 	} // for-loop
 }
+
+function contributionsSortFunction(){
+	var sortFunc;
+	var sortOn = document.getElementById("sortContributions").value;
+	switch (sortOn){
+  		case "highest":
+			sortFunc = function(rhs, lhs){
+				return lhs.votes - rhs.votes;
+			};
+			break;
+  		case "newest":
+			sortFunc = function(rhs, lhs){
+				return rhs.timestamp - lhs.timestamp;
+			};
+			break;
+  		case "oldest":
+			sortFunc = function(rhs, lhs){
+				return lhs.timestamp - rhs.timestamp;
+			};
+			break;
+  		case "author":
+			sortFunc = function(rhs, lhs){
+				return lhs.votes - rhs.votes;
+			};
+			break;
+		default:
+			throw "Invalid attribute to sort by.";
+	}
+	return sortFunc;
+}
+
+function removeAllChildren(parent){
+	while (parent.hasChildNodes()){
+		parent.removeChild(parent.firstChild);
+	}
+}
+
+
 

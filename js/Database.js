@@ -11,13 +11,19 @@ SimpleText.Database = function(){
 	* @property {object.<string, Author>} authors
 	* Map of Author objects with Author.name as the key
 	*/
-	this.authors = {}
+	this.authors = {};
 
 	/**
 	* @property {object.<string, Contribution>} contributions
 	* Map of Contribution objects with questID as the key
 	*/
 	this.contributions = {};
+
+	/**
+	* @property {object.<string, array.<string>} favourites
+	* Map of author names with usernames as the key
+	*/
+	this.favourites = {};
 };
 
 /**
@@ -436,6 +442,71 @@ SimpleText.Database.prototype.fetchComments = function(questID, contID){
 	return this.contributions[questID][contID] || [];
 };
 
+/**
+* Adds the author with the specified name as one of the user's
+* favourite authors.
+*
+* @param {string} username
+* Name of the user.
+*
+* @param {string} authorName
+* Name of the author.
+*/
+SimpleText.Database.prototype.removeFavouriteAuthor = function(username, authorName){
+	if (typeof username !== "string"){
+		throw "username: Invalid type " + (typeof username) +
+				" Expected string.";
+	}
+	if (typeof authorName !== "string"){
+		throw "authorName: Invalid type " + (typeof authorName) +
+				" Expected string.";
+	}
+
+	this.favourites[username].push(authorName);
+};
+
+/**
+* Fetches the favourite authors of the user with the given username.
+*
+* @param {string} username
+* Name of the user.
+*
+* @return {array.<string>}
+* Array containing the names of the user's favourite authors.
+*/
+SimpleText.Database.prototype.fetchFavouriteAuthors = function(username){
+	if (typeof username !== "string"){
+		throw "username: Invalid type " + (typeof username) +
+				" Expected string.";
+	}
+
+	return this.favourites[username] || [];
+};
+
+/**
+* Removes the author with the specified name from the user's
+* favourite authors.
+*
+* @param {string} username
+* Name of the user.
+*
+* @param {string} authorName
+* Name of the author.
+*/
+SimpleText.Database.prototype.removeFavouriteAuthor = function(username, authorName){
+	if (typeof username !== "string"){
+		throw "username: Invalid type " + (typeof username) +
+				" Expected string.";
+	}
+	if (typeof authorName !== "string"){
+		throw "authorName: Invalid type " + (typeof authorName) +
+				" Expected string.";
+	}
+
+	this.favourites[username] = this.favorites[username].filter(function(elem){
+		return elem !== authorName;
+	});
+};
 
 
 SimpleText.database = new SimpleText.Database();

@@ -65,7 +65,7 @@ I don't want to be in this forest anymore, I want to go home.
 
 		<div class="authorWrapper">
 			<p class="by">BY: </p>
-			<p id="author">John</p>
+			<p></p>
 		</div>
 	</div>
 </div>
@@ -76,8 +76,8 @@ I don't want to be in this forest anymore, I want to go home.
 		<h1>Quest:1/10</h1>
 		<p class="subheading">Simple text versions of this quest:</p>
 
-		<select id="sortContributions">
-  			<option value="highest">highest rating</option>
+		<select id="sortContributions" onchange="listContributions();">
+  			<option value="highest" selected>highest rating</option>
   			<option value="newest">newest first</option>
   			<option value="oldest">oldest first</option>
   			<option value="author">favourite author(s)</option>
