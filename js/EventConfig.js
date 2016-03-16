@@ -29,6 +29,7 @@ $(document).ready(function(){
 	document.getElementById("simpleTextButton").onclick = function () {
 		document.getElementById("simpleTextStart").style.visibility = "hidden";
 		document.getElementById("contributions").style.visibility = "visible";
+		listContributions();
 	};
 
 	// Go back to simpleTextStart from contribution list
@@ -297,26 +298,17 @@ $(document).ready(function(){
 /**
 * View a single contribution. Reached by clicking a contribution from the contributions list.
 */
-function viewSingleContribution(contributions, contID){
+function viewSingleContribution(contribution){
 	var questID = document.getElementById("questID").innerHTML;
 
-	var currCont;
-	for (var i=0; i < contributions.length; ++i){
-		if (contributions[i].contID === contID){
-			currCont = contributions[i].contID;
-			break;
-		}
-	}
-
-	document.getElementById("singleContributionAuthor").innerHTML = currCont.author;
+	document.getElementById("singleContributionAuthor").innerHTML = contribution.author;
 	document.getElementById("singleContributionQuestID").innerHTML = questID;
-	document.getElementById("singleContributionContID").innerHTML = contID;
+	document.getElementById("singleContributionContID").innerHTML = contribution.contID;
 
 	var singCont = document.getElementById("viewSingleContribution");
-	singCont.getElementsByTagName("textarea")[0] = currCont.text;
+	singCont.getElementsByTagName("textarea")[0].innerHTML = contribution.text;
 
-	//load data into viewSingleContribution before showing it
-	//just for now
+	// Load data into viewSingleContribution before showing it.
 	document.getElementById("contributions").style.visibility = "hidden";
 	document.getElementById("viewSingleContribution").style.visibility = "visible";
 }
@@ -330,24 +322,30 @@ function listContributions(){
 	for (var i=0; i < contributions.length; ++i){
 		currItem = template.cloneNode(true);
 
+		// Takes the beginning of the comment as excerpt.
 		currItem.getElementsByClassName("textExcerpt")[0].innerHTML = (function(){
 			var intro;
-			var maxLength = 20;
-			if (contributions > maxLength){
+			var maxLength = 30;
+			if (contributions[i].text.length > maxLength){
 				var endIdx = contributions[i].text.lastIndexOf(" ", maxLength);
-				contributions[i].text.substr(0, endIdx) + "[...]";
+				intro = contributions[i].text.substr(0, endIdx) + " [...]";
 			} else {
 				intro = contributions[i].text;
 			}
 			return intro;
 		})();
+
 		currItem.getElementsByClassName("numberLikes")[0].innerHTML = contributions[i].votes;
 		currItem.getElementsByClassName("authorWrapper")[0].childNodes[1].innerHTML = contributions[i].votes;
 
-		currItem.onclick = function(){
-			viewSingleContribution(contributions, currItem.contID);
-		};
+		// To avoid that all onclicks point to the last contribution reference.
+		(function (contribution){
+			currItem.onclick = function(){
+				viewSingleContribution(contribution);
+			};
+		})(contributions[i]);
 
 		document.getElementById("contributionsList").appendChild(currItem);
-	}
+	} // for-loop
 }
+
