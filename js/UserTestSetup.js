@@ -43,15 +43,17 @@ function fillDatabase(){
 														"Fred", 
 						"I'm lost. Please find my map.");
 
-		var fComNames = ["Nisse", "Hugo", "óle"];
+		var fComNames = ["Nisse", "Hugo", "óle", "NissElenius"];
 		var fComTexts = ["You ignored a lot of information.",
 						"Straight to the point!",
-						"Try jumping."];
+						"Try jumping.",
+						"That wasn't everything he said. You "+
+						"forgot some of the story relevant the parts."];
 		for (var j=0; j < 4; ++j){
-			if (j % 2){
+			if (j % 2 === 0){
 				SimpleText.database.addVote(questID, fredContId);
 			}
-			SimpleText.database.addComment(questID, fredContId, fComNames[i], fComTexts[i]);
+			SimpleText.database.addComment(questID, fredContId, fComNames[j], fComTexts[j]);
 		}
 	 } // populateQuest1
 

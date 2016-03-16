@@ -297,10 +297,14 @@ $(document).ready(function(){
 
 /**
 * View a single contribution. Reached by clicking a contribution from the contributions list.
+*
+* @param {Contribution} contributon
+* The contribution to view.
 */
 function viewSingleContribution(contribution){
 	var questID = document.getElementById("questID").innerHTML;
 
+	document.getElementById("commentAuthorName").innerHTML = contribution.author;
 	document.getElementById("singleContributionAuthor").innerHTML = contribution.author;
 	document.getElementById("singleContributionQuestID").innerHTML = questID;
 	document.getElementById("singleContributionContID").innerHTML = contribution.contID;
@@ -319,7 +323,7 @@ function viewSingleContribution(contribution){
 			listComments(questID, contribution.contID);
 		};
 	})(document.getElementById("commentContribution").onclick);
-}
+} // viewSingleContribution
 
 /**
 * Lists all SimpleText contributions for the current quest.
@@ -366,7 +370,7 @@ function listContributions(){
 		currItem.getElementsByClassName("numberLikes")[0].innerHTML = contributions[i].votes;
 		currItem.getElementsByClassName("authorWrapper")[0].childNodes[1].innerHTML = contributions[i].author;
 
-		// To avoid that all onclicks point to the last contribution reference.
+		// To avoid that all onclick-functionss point to the last contribution reference.
 		(function (contribution){
 			currItem.onclick = function(){
 				viewSingleContribution(contribution);
@@ -375,7 +379,7 @@ function listContributions(){
 
 		document.getElementById("contributionsList").appendChild(currItem);
 	} // for-loop
-}
+} // listContributions
 
 /**
 * Checks which sort function that should be used to sort the contributions
@@ -428,6 +432,12 @@ function removeAllChildren(parent){
 
 /**
 * Lists all comments for the contribution of the specified quest.
+*
+* @param {string} questID
+* Id of the quest in question.
+*
+* @param {string} contID
+* Id of the contribution.
 */
 function listComments(questID, contID){
 	removeAllChildren(document.getElementById("commentsWrapper"));
@@ -461,5 +471,5 @@ function listComments(questID, contID){
 			}
 		};
 	})(document.getElementById("submitCommment").onclick);
-}
+} // listComments
 
