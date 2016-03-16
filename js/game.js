@@ -131,6 +131,7 @@ function create() {
     player.animations.add('right', [6, 7, 8], 12, true);
     player.animations.add('down', [9, 10, 11], 12, true);
     player.hasTalked = false;
+    player.inMenu = false
     game.physics.enable(player);
 
     friend = game.add.sprite(480, game.world.height - 285, 'friend');
@@ -172,7 +173,7 @@ function update() {
     game.physics.arcade.collide(player, wall);
     player.body.velocity.set(0);
 
-    if(!friendMap.isCollected){
+    if(!player.inMenu){
         if (cursors.left.isDown){
             player.body.velocity.x = -100;
             player.play('left');
@@ -189,8 +190,10 @@ function update() {
             player.animations.stop();
             player.frame = 10;
         }
+    }else{
+        player.animations.stop();
+        player.frame = 10;
     }
-    
 }
 
 
@@ -215,24 +218,28 @@ function collectItem(player, item) {
     collectSound.play();
 }
 
-/*Sound is played when user collects map*/
+/*Sound is played when user collects map.
+  User movement is disabled and the volume is lowered*/
 function collectMap(player, item) {
     document.getElementById("simpleTextStart").style.visibility = "visible";
     foundMapSound.play();
     item.kill();
     music.volume = 0.15;
-    player.animations.stop();
-    player.frame = 10;
+    player.inMenu = true;
 }
 
 /**
-* Shows a quest description on screen.
+* Shows a quest description on screen if the player hasn't talked with friend.
+* Disables player movement and turns down background music.
 */
 function talkWithFriend(){
-    document.getElementById("simpleTextStart").style.visibility = "visible";
-    player.hasTalked = true;
-    wall.kill();
-    music.volume = 0.15;
+    if(!player.hasTalked){
+        document.getElementById("simpleTextStart").style.visibility = "visible";
+        player.inMenu = true;
+        player.hasTalked = true;
+        wall.kill();
+        music.volume = 0.15;    
+    }   
 }
 
 /*Change volume with first argument. Restart music with the second argument set to true

@@ -25,12 +25,14 @@ $(document).ready(function(){
 	*/
 	document.getElementById("okButton").onclick = function () {
 		document.getElementById("simpleTextStart").style.visibility = "hidden";
+
 		if(friendMap.isCollected){
 			musicVolumeAndRestart(0.6, true);
 			$("#blackBox").delay(750).fadeIn(2250);
 			$("#blackHeading").delay(5500).fadeOut(1500);
 		}else{
-			musicVolumeAndRestart(0.6, false);	
+			musicVolumeAndRestart(0.6, false);
+			player.inMenu = false; /*Enables player to move again*/
 		}
 	};
 
