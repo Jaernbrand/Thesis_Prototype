@@ -56,6 +56,12 @@ var wall;
 */
 var friendMap;
 
+/*The players collected score - increased as coins are collected*/
+var score = 0;
+
+/*The score that is displayed to the user*/
+var scoreText;
+
 // *****************************************************
 // *****************************************************
 
@@ -72,20 +78,15 @@ function preload() {
     //  Load the tileset. This is just an image,
     // loaded in via the normal way we load images:
     game.load.image('tiles', 'assets/tile/simples_pimples.png');
-    // game.load.image('bat', 'assets/tile/bat.png');
     game.load.image('coin', 'assets/tile/coin.png');
-    // game.load.image('door', 'assets/tile/door.png');
     game.load.image('friend', 'assets/tile/friend.png');
-    // game.load.image('key', 'assets/tile/key.png');
-    // game.load.image('skeletonLeft', 'assets/tile/skeletonLeft.png');
-    // game.load.image('skeletonRight', 'assets/tile/skeletonRight.png');
     game.load.spritesheet('player', 'assets/tile/feminist_sheet.png', 20, 20);
-    // game.load.audio('money', 'assets/audio/money.mp3');
     game.load.image('wall', 'assets/tile/wall.png');
     game.load.audio('collectSound', 'assets/audio/money.mp3');
+    game.load.audio('foundMap', 'assets/audio/foundItemSound.mp3');
     game.load.audio('music', 'assets/audio/mathgrant_-_Sober_Lullaby.mp3');
-
     game.load.image('map', 'assets/tile/map_14.png');
+
 }
 
 /**
@@ -104,10 +105,13 @@ function create() {
     cursors = game.input.keyboard.createCursorKeys();
 
     collectSound = game.add.audio('collectSound');
+    foundMapSound = game.add.audio('foundMap');
     music = game.add.audio('music');
+    scoreText = game.add.text(30, 16, 'SCORE: 0', { font: '20px VCR', fill: '#ccac00' });
 
-    var coin_coords_x = [180, 180, 180, 205, 205, 51*16, 51*16, 300, 275];
-    var coin_coords_y = [210, 230, 250, 450, 430, 13*16, 14*16, 100, 100];
+
+    var coin_coords_x = [165, 165, 165, 165, 180, 180, 180, 205, 205, 51*16, 51*16, 300, 275, 547, 547, 547, 547, 547, 816, 550, 570, 590, 950, 950, 950, 950, 970, 970, 970, 970, 1180, 1180, 1180, 1180, 950, 970, 990, 1010, 1030, 1050  ];
+    var coin_coords_y = [490, 510, 530, 550, 210, 230, 250, 450, 430, 13*16, 14*16, 100, 100, 420, 400, 380, 360, 340, 190, 590, 590, 590, 240, 220, 200, 180, 240, 220, 200, 180,  300,  320,  340,  360, 490, 490, 490,  490,  490,  490  ];
     coins = game.add.group();
     coins.enableBody = true;
     for(var i = 0; i < coin_coords_x.length; i++){
@@ -134,7 +138,7 @@ function create() {
 
     //music.play();
 
-	friendMap = game.add.sprite(game.world.width - 128, game.world.height - 64, 'map');
+	friendMap = game.add.sprite(950, game.world.height - 330, 'map');
 	friendMap.scale.setTo(0.5, 0.5);
 	friendMap.isCollected = false;
     game.physics.enable(friendMap);
@@ -151,7 +155,7 @@ function update() {
 								friendMap,
 								function(player, friendMap) {
 									friendMap.isCollected = true;
-									collectItem(player, friendMap);
+									collectMap(player, friendMap);
 								},
 								null,
 								this);
@@ -205,8 +209,18 @@ function update() {
 * The coin to collect.
 */
 function collectItem(player, item) {
+
+    score += 1;
+    scoreText.text = 'Score: ' + score;
+
     item.kill();
     collectSound.play();
+}
+
+/*Sound is played when user collects map*/
+function collectMap(player, item) {
+    item.kill();
+    foundMapSound.play();
 }
 
 /**
