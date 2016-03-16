@@ -351,9 +351,6 @@ SimpleText.Database.prototype.addComment = function(questID, contID, author, tex
 
 	var id; 
 
-	console.log(this.contributions[questID]);
-	console.log(this.contributions[questID].length);
-
 	for(var i=0; i < this.contributions[questID].length; ++i){
 		if (this.contributions[questID][i].contID === contID){
 			id = this.contributions[questID][i].comments.length.toString();

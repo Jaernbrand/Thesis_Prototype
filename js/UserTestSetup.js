@@ -18,8 +18,8 @@ function fillDatabase(){
 	}
 
 	function populateQuest1(questID){
-		nisseContId = SimpleText.database.addContribution(questID, "Nisse", "Please, traveler. I need a help.\n" + 
-											" I'm lost. Oh, I should've never left our camp. I used " +
+		nisseContId = SimpleText.database.addContribution(questID, "Nisse", "Please, traveler. I need help.\n\n" + 
+											"I'm lost. Oh, I should've never left our camp. I used " +
 											"to have a map, but I lost it somewhere. Please, help me " + 
 											"find my map.");
 
