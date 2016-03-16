@@ -51,8 +51,8 @@ p{
     margin-top: -350px;      /* height/2 */
     margin-left: -450px;     /* width/2 */
 
-		border: 10px double #73793C;
-		border-radius: 5px;
+	border: 10px double #73793C;
+	border-radius: 5px;
     background-color: #D9DEA2;
     z-index: 2;
 }
@@ -75,15 +75,15 @@ p{
 
 
 .mainWindow button {
-	-webkit-border-radius: 2;
-  -moz-border-radius: 2;
-  border-radius: 2px;
-  font-family: bit8;
-  color: #ffffff;
-  font-size: 15px;
-  background: #465e1e;
-  padding: 2px 7px 2px 7px;
-  text-decoration: none;
+    -webkit-border-radius: 2;
+    -moz-border-radius: 2;
+    border-radius: 2px;
+    font-family: bit8;
+    color: #ffffff;
+    font-size: 15px;
+    background: #465e1e;
+    padding: 2px 7px 2px 7px;
+    text-decoration: none;
 }
 
 .mainWindow button:hover {
@@ -110,19 +110,25 @@ p{
 }
 
 #simpleTextStart .content #flagButton{
-    margin-top: 10px;
+    margin-top: 12px;
+    width: auto;
+    height: 30px;
+    opacity: 0.45;
+}
 
+#simpleTextStart .content #flagButton:hover{
+    opacity: 0.7;
 }
 
 #simpleTextStart .content #simpleTextButton{
-		position:relative;
-		bottom: 1px;
-		left: 10px;
+	position:relative;
+	bottom: 4px;
+	left: 10px;
 }
 
 #simpleTextStart .content #okButton{
 	position: relative;
-	bottom: 2px;
+	bottom: 4px;
 	left: 557px;
 }
 /*SIMPLE TEXT END*/
@@ -147,7 +153,7 @@ p{
     height: 510px;
     border: 1px solid rgba(0, 0, 0, 0.3);
     overflow-y: scroll;
-		background-color: white;
+	background-color: white;
 }
 
 #contributions #contributionsBtnsWrapper{
@@ -168,6 +174,10 @@ p{
     border-bottom: 1px solid black;
 }
 
+#contributions #contributionsList .itemWrapper:hover{
+    cursor: pointer;
+}
+
 #contributions #contributionsList .itemWrapper .textExcerpt{
     margin:0;
     width: 700px;
@@ -186,6 +196,15 @@ p{
 #contributions #contributionsList .itemWrapper .likesAndAuthorWrapper{
     float:right;
     padding: 10px;
+}
+
+#contributions #contributionsList .itemWrapper .likesAndAuthorWrapper img{
+    width: 30px;
+    height:auto;
+    opacity: 0.45;
+    position: relative;
+    top: 3px;
+    left: 5px;
 }
 
 #contributions #contributionsList .itemWrapper .likesAndAuthorWrapper p{
@@ -211,8 +230,8 @@ p{
 
 #viewSingleContribution .content textarea{
     resize: none;
-		width: 570px;
-		height: 480px;
+	width: 570px;
+	height: 480px;
     font-size: 1.5em;
     float: left;
 }
@@ -223,7 +242,7 @@ p{
 	height: 480px;
 	text-align: center;
 	right: 16px;
-	top: 63px;
+	top: 60px;
 }
 
 #viewSingleContribution .content .bottomAreaWrapper{
@@ -238,14 +257,14 @@ p{
 }
 
 #viewSingleContribution .content .bottomAreaWrapper  audio{
-		width: 576px;
-		display: block;
-		background-color: black;
+	width: 576px;
+	display: block;
+	background-color: black;
 }
 
 #viewSingleContribution .content #authorNameAndAddAuthorBtn{
     padding-top: 5px;
-    width: 479px;
+    width: 467px;
     float:left;
 }
 
@@ -253,7 +272,14 @@ p{
     width:25px;
     height: auto;
     padding-left:5px;
+    margin-top: -1px;
+    opacity: 0.45;
 }
+
+#viewSingleContribution .content #authorNameAndAddAuthorBtn img:hover{
+    opacity: 0.7;
+}
+
 
 #viewSingleContribution .content #authorNameAndAddAuthorBtn p{
     font-size: 1.2em;
@@ -268,14 +294,29 @@ p{
     float: left;
 }
 
+
+
 #viewSingleContribution .content #contributionBtnGroup img{
-    width:25px;
+    width:23px;
     height: auto;
-    padding-left:5px;
+    padding-left:10px;
+    opacity: 0.45;
+}
+
+#viewSingleContribution .content #contributionBtnGroup img:hover{
+    opacity: 0.7;
+}
+
+/*Like button*/
+#viewSingleContribution .content #contributionBtnGroup img:nth-child(3){
+    position: relative;
+    bottom: 1px;
 }
 
 #viewSingleContribution .content #viewContributionBack{
     margin-top: 5px;
+    position: relative;
+    right: 469px;
 }
 /*VIEW SINGLE CONTRIBUTION END*/
 
@@ -292,19 +333,19 @@ p{
 
     text-align: center;
     border: 1px solid rgba(0, 0, 0, 0.7);
-		border-radius: 10px;
-		box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
     background-color: white;
     z-index: 3;
-		font-size: 1em;
-		text-align: center;
-		vertical-align: middle;
-		line-height: 80px;       /* the same as div height */
+	font-size: 1em;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 80px;       /* the same as div height */
 }
 
 #infoBox #infoMessage{
     margin:0;
-		padding:0;
+	padding:0;
 }
 /*INFO BOX END*/
 
@@ -352,8 +393,8 @@ p{
 }
 
 #createContribution .content #guidelines{
-		position:relative;
-		top: 35px;
+    position:relative;
+    top: 35px;
 }
 
 
@@ -372,15 +413,17 @@ p{
     left: 50%;
     top: 50%;
     width: 550px;
-    height:620px;
-    margin-top: -310px;
+    height:720px;
+    margin-top: -360px;
     margin-left: -250px;
-		padding:15px;
+	padding:15px;
 
-		font-size: 1.2em;
-		border: 1px solid rgba(0, 0, 0, 0.5);
-		border-radius: 10px;
-		box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
+	font-size: 1.2em;
+	
+    border: 10px double rgb(0,0,0);
+    border-radius: 5px;
+
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
     background-color: white;
     z-index: 3;
 }
@@ -395,26 +438,26 @@ p{
 }
 
 #guidelinesWrapper h1{
-		font-size:30px;
-		text-align: center;
-    margin: -30px 0px 0px 5px;
+	font-size:30px;
+	text-align: center;
+    margin: -50px 0px 5px 5px;
     padding: 0px;
-		font-family: bit8;
+	font-family: bit8;
 }
 
 #guidelinesWrapper h2{
-		text-align: center;
+    text-align: center;
     margin: 0px 0px -10px 0px;
     padding: 0px;
-		font-style: italic;
-		font-size:20px;
+    font-style: italic;
+    font-size:20px;
 }
 
 #guidelinesWrapper #closeGuidelines{
-	width: 27px;
+	width: 45px;
 	height: auto;
 	position: relative;
-	left: 548px;
+	left: 530px;
 	bottom: 25px;
 }
 /*GUIDELINES END*/

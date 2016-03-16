@@ -113,10 +113,12 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
 		</div>
 
 		<div class="bottomAreaWrapper">
-			<audio controls>
+			<audio controls id="recordedAudio">
 				<source src="assets/audio/Dr.Alban-Hello_Africa_(fast_blast_club_mix).mp3" type="audio/mpeg">
 				This browser doesn't support the audio element.
 			</audio>
+			<!-- Audio player to show when there is no sound -->
+			<img hidden id="playerNoSound" src="assets/web/playerNoSound.png" alt=""/>
 
 			<div id="authorNameAndAddAuthorBtn">
 				<p>BY: <span id="singleContributionAuthor">John</span></p>
@@ -136,8 +138,6 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
 	</div>
 </div>
 <!-- VIEW SINGLE CONTRIBUTION END -->
-
-
 
 
 <!-- INFO BOX START -->
@@ -190,7 +190,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
 	<h1>GUIDELINES</h1>
   <h2>HOW TO CREATE SIMPLE TEXT</h2>
   <p>Simple text is a text that is rewritten from its original version to a more comprehensible rendition.</p>
-  <p>By for example removing ambiguous meanings and words, rewriting and making sentences shorter the text can be made easier to understand.</p>
+  <p>By for example removing ambiguous sentences and words, rewriting and making sentences shorter, the text can be made easier to understand.</p>
   <p>Persons that are in need of simple text may have different preferences when it comes to simple text. This is because the difficulties vary from person to person.</p>
   <p>Here are some guidelines that will help you when creating a simple text. Remember that these tips shouldn't be followed to strictly,
     use common sense and make changes as you see fit.</p>
