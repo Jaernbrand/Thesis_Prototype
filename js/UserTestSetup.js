@@ -23,11 +23,13 @@ function fillDatabase(){
 											"to have a map, but I lost it somewhere. Please, help me " + 
 											"find my map.");
 
-		var comNames = ["óle", "Fred", "Hugo"];
+		var comNames = ["óle", "Fred", "Hugo", "Ms Ellenius", "Bobby Tables"];
 		var comTexts = ["Where can I find the map?",
 					"Some of those words seems a little advanced...",
-					"Great simplification!"];
-		for (var i=0; i < 3; ++i){
+					"Great simplification!",
+					"THANKS!",
+					"This was the best translation ever! I löve u män!"];
+		for (var i=0; i < 5; ++i){
 			SimpleText.database.addVote(questID, nisseContId);
 			SimpleText.database.addComment(questID, nisseContId, comNames[i], comTexts[i]);
 		}
@@ -49,7 +51,7 @@ function fillDatabase(){
 			if (j % 2){
 				SimpleText.database.addVote(questID, fredContId);
 			}
-			SimpleText.database.addComment(questID, nisseContId, fComNames[i], fComTexts[i]);
+			SimpleText.database.addComment(questID, fredContId, fComNames[i], fComTexts[i]);
 		}
 	 } // populateQuest1
 

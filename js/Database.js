@@ -334,7 +334,7 @@ SimpleText.Database.prototype.removeVote = function(questID, contID){
 * The ID of the quest to which the contribution belongs.
 *
 * @param {string} contID
-* The ID of teh contribution for which to add the comment.
+* The ID of the contribution for which to add the comment.
 *
 * @param {string} author
 * The author of the comment.
@@ -439,7 +439,14 @@ SimpleText.Database.prototype.fetchComments = function(questID, contID){
 				" Expected string.";
 	}
 
-	return this.contributions[questID][contID] || [];
+	var comments = [];
+	for (var i=0; i < this.contributions[questID].length; ++i){
+		if (this.contributions[questID][i].contID === contID){
+			comments = this.contributions[questID][i].comments;
+			break;
+		}
+	}
+	return comments;
 };
 
 /**
