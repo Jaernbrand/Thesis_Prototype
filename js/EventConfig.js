@@ -20,6 +20,8 @@ $(document).ready(function(){
 	//Show tooltip on mouse over icons
 	$('[data-toggle="tooltip"]').tooltip();
 
+	document.getElementById("recordedAudio").disabled = true;
+
 	// Close simpleTextStart window
 	document.getElementById("okButton").onclick = function () {
 		document.getElementById("simpleTextStart").style.visibility = "hidden";
@@ -154,18 +156,14 @@ $(document).ready(function(){
 	$("#favouriteAuthor").click(function() {
 		if(!filled){
 			filled = true;
-			var message = "Added as favourite author";
-			var path = "assets/web/addFilled.png";
-			displayInfoBox(this, message, filled, path);
+			$(this).attr('src', "assets/web/addFilled.png");
 
 			var authorName = document.getElementById("singleContributionAuthor").innerHTML;
 			SimpleText.database.favouriteAuthor(authorName);
 
 		}else{
 			filled = false;
-			var message = "Removed author from favourites";
-			var path = "assets/web/add.png";
-			displayInfoBox(this, message, filled, path);
+			$(this).attr('src', "assets/web/add.png");
 
 			var authorName = document.getElementById("singleContributionAuthor").innerHTML;
 			SimpleText.database.defavouriteAuthor(authorName);
@@ -179,9 +177,7 @@ $(document).ready(function(){
 	$("#flagSingleContribution").click(function() {
 		if(!flagged){
 			flagged = true;
-			var message = "Marked content as inappropriate";
-			var path = "assets/web/flagFilled.png";
-			displayInfoBox(this, message, flagged, path);
+			$(this).attr('src', "assets/web/flagFilled.png");
 
 			var questID = document.getElementById("singleContributionQuestID").innerHTML;
 			var contID = document.getElementById("singleContributionContID").innerHTML;
@@ -189,9 +185,7 @@ $(document).ready(function(){
 
 		}else{
 			flagged = false;
-			var message = "Removed inappropriate marking";
-			var path = "assets/web/flag.png";
-			displayInfoBox(this, message, flagged, path);
+			$(this).attr('src', "assets/web/flag.png");
 
 			var questID = document.getElementById("singleContributionQuestID").innerHTML;
 			var contID = document.getElementById("singleContributionContID").innerHTML;
@@ -206,25 +200,19 @@ $(document).ready(function(){
 	$("#likeContribution").click(function() {
 		if(!likesAuthor){
 			likesAuthor = true;
-			var message = "You like this contribution";
-			var path = "assets/web/likeFilled.png";
-			displayInfoBox(this, message, likesAuthor, path);
+			$(this).attr('src', "assets/web/likeFilled.png");
 
 			var questID = document.getElementById("singleContributionQuestID").innerHTML;
 			var contID = document.getElementById("singleContributionContID").innerHTML;
 			SimpleText.database.addVote(questID, contID);
-
 		}else{
 			likesAuthor = false;
-			var message = "Like removed";
-			var path = "assets/web/like.png";
-			displayInfoBox(this, message, likesAuthor, path);
+			$(this).attr('src', "assets/web/like.png");
 
 			var questID = document.getElementById("singleContributionQuestID").innerHTML;
 			var contID = document.getElementById("singleContributionContID").innerHTML;
 			SimpleText.database.removeVote(questID, contID);
 		}
-
 	});
 
 

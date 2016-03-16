@@ -113,10 +113,12 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
 		</div>
 
 		<div class="bottomAreaWrapper">
-			<audio controls>
+			<audio controls id="recordedAudio">
 				<source src="assets/audio/Dr.Alban-Hello_Africa_(fast_blast_club_mix).mp3" type="audio/mpeg">
 				This browser doesn't support the audio element.
 			</audio>
+			<!-- Audio player to show when there is no sound -->
+			<img hidden id="playerNoSound" src="assets/web/playerNoSound.png" alt=""/>
 
 			<div id="authorNameAndAddAuthorBtn">
 				<p>BY: <span id="singleContributionAuthor">John</span></p>
@@ -136,8 +138,6 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
 	</div>
 </div>
 <!-- VIEW SINGLE CONTRIBUTION END -->
-
-
 
 
 <!-- INFO BOX START -->
