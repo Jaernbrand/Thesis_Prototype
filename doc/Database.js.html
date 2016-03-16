@@ -39,13 +39,19 @@ SimpleText.Database = function(){
 	* @property {object.&lt;string, Author>} authors
 	* Map of Author objects with Author.name as the key
 	*/
-	this.authors = {}
+	this.authors = {};
 
 	/**
 	* @property {object.&lt;string, Contribution>} contributions
 	* Map of Contribution objects with questID as the key
 	*/
 	this.contributions = {};
+
+	/**
+	* @property {object.&lt;string, array.&lt;string>>} favourites
+	* Map of author names with usernames as the key
+	*/
+	this.favourites = {};
 };
 
 /**
@@ -137,7 +143,7 @@ SimpleText.Database.prototype.addContribution = function(questID, author, text){
 	* @property {number} timestamp
 	* @property {array} comments
 	* @property {string} text
-	* @property {array} pictures,
+	* @property {array} pictures
 	* @property {array} sounds
 	*/
 	this.contributions[questID].push({
@@ -222,6 +228,66 @@ SimpleText.Database.prototype.addSound = function(questID, contID, sound){
 	for(var i=0; i &lt; this.contributions[questID].length; ++i){
 		if (this.contributions[questID][i].contID === contID){
 			this.contributions[questID][i].sounds.push(sound);
+			break;
+		}
+	}
+}
+
+/**
+* Increments the number of flags by one for the contribution with 
+* the specified contribution ID for the quest with
+* the specified quest ID.
+*
+* @param {string} questID
+* The ID of the quest to which the contribution belongs.
+*
+* @param {string} contID
+* The ID of the contribution for which to increment the
+* number of flags.
+*/
+SimpleText.Database.prototype.addFlag = function(questID, contID){
+	if (typeof questID !== "string"){
+		throw "questID: Invalid type " + (typeof questID) +
+				" Expected string.";
+	}
+	if (typeof contID !== "string"){
+		throw "contID: Invalid type " + (typeof contID) +
+				" Expected string.";
+	}
+
+	for(var i=0; i &lt; this.contributions[questID].length; ++i){
+		if (this.contributions[questID][i].contID === contID){
+			this.contributions[questID][i].flags++;
+			break;
+		}
+	}
+}
+
+/**
+* Decrements the number of flags by one for the contribution with 
+* the specified contribution ID for the quest with
+* the specified quest ID.
+*
+* @param {string} questID
+* The ID of the quest to which the contribution belongs.
+*
+* @param {string} contID
+* The ID of the contribution for which to decrement the
+* number of flags.
+*/
+SimpleText.Database.prototype.removeFlag = function(questID, contID){
+	if (typeof questID !== "string"){
+		throw "questID: Invalid type " + (typeof questID) +
+				" Expected string.";
+	}
+	if (typeof contID !== "string"){
+		throw "contID: Invalid type " + (typeof contID) +
+				" Expected string.";
+	}
+
+	for(var i=0; i &lt; this.contributions[questID].length; ++i){
+		if (this.contributions[questID][i].contID === contID){
+			this.contributions[questID][i].flags--;
 			break;
 		}
 	}
@@ -319,9 +385,6 @@ SimpleText.Database.prototype.addComment = function(questID, contID, author, tex
 
 	var id; 
 
-	console.log(this.contributions[questID]);
-	console.log(this.contributions[questID].length);
-
 	for(var i=0; i &lt; this.contributions[questID].length; ++i){
 		if (this.contributions[questID][i].contID === contID){
 			id = this.contributions[questID][i].comments.length.toString();
@@ -407,6 +470,71 @@ SimpleText.Database.prototype.fetchComments = function(questID, contID){
 	return this.contributions[questID][contID] || [];
 };
 
+/**
+* Adds the author with the specified name as one of the user's
+* favourite authors.
+*
+* @param {string} username
+* Name of the user.
+*
+* @param {string} authorName
+* Name of the author.
+*/
+SimpleText.Database.prototype.removeFavouriteAuthor = function(username, authorName){
+	if (typeof username !== "string"){
+		throw "username: Invalid type " + (typeof username) +
+				" Expected string.";
+	}
+	if (typeof authorName !== "string"){
+		throw "authorName: Invalid type " + (typeof authorName) +
+				" Expected string.";
+	}
+
+	this.favourites[username].push(authorName);
+};
+
+/**
+* Fetches the favourite authors of the user with the given username.
+*
+* @param {string} username
+* Name of the user.
+*
+* @return {array.&lt;string>}
+* Array containing the names of the user's favourite authors.
+*/
+SimpleText.Database.prototype.fetchFavouriteAuthors = function(username){
+	if (typeof username !== "string"){
+		throw "username: Invalid type " + (typeof username) +
+				" Expected string.";
+	}
+
+	return this.favourites[username] || [];
+};
+
+/**
+* Removes the author with the specified name from the user's
+* favourite authors.
+*
+* @param {string} username
+* Name of the user.
+*
+* @param {string} authorName
+* Name of the author.
+*/
+SimpleText.Database.prototype.removeFavouriteAuthor = function(username, authorName){
+	if (typeof username !== "string"){
+		throw "username: Invalid type " + (typeof username) +
+				" Expected string.";
+	}
+	if (typeof authorName !== "string"){
+		throw "authorName: Invalid type " + (typeof authorName) +
+				" Expected string.";
+	}
+
+	this.favourites[username] = this.favorites[username].filter(function(elem){
+		return elem !== authorName;
+	});
+};
 
 
 SimpleText.database = new SimpleText.Database();
@@ -423,13 +551,13 @@ SimpleText.database = new SimpleText.Database();
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-EventConfig.html">EventConfig</a></li><li><a href="module-Setup.html">Setup</a></li></ul><h3>Classes</h3><ul><li><a href="SimpleText.Database.html">Database</a></li></ul><h3>Namespaces</h3><ul><li><a href="SimpleText.html">SimpleText</a></li></ul><h3>Global</h3><ul><li><a href="global.html#coins">coins</a></li><li><a href="global.html#collectItem">collectItem</a></li><li><a href="global.html#create">create</a></li><li><a href="global.html#cursors">cursors</a></li><li><a href="global.html#friend">friend</a></li><li><a href="global.html#friendMap">friendMap</a></li><li><a href="global.html#game">game</a></li><li><a href="global.html#map">map</a></li><li><a href="global.html#music">music</a></li><li><a href="global.html#player">player</a></li><li><a href="global.html#preload">preload</a></li><li><a href="global.html#talkWithFriend">talkWithFriend</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#wall">wall</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-EventConfig.html">EventConfig</a></li><li><a href="module-UserTestSetup.html">UserTestSetup</a></li></ul><h3>Classes</h3><ul><li><a href="SimpleText.Database.html">Database</a></li></ul><h3>Namespaces</h3><ul><li><a href="SimpleText.html">SimpleText</a></li></ul><h3>Global</h3><ul><li><a href="global.html#coins">coins</a></li><li><a href="global.html#collectItem">collectItem</a></li><li><a href="global.html#create">create</a></li><li><a href="global.html#cursors">cursors</a></li><li><a href="global.html#friend">friend</a></li><li><a href="global.html#friendMap">friendMap</a></li><li><a href="global.html#game">game</a></li><li><a href="global.html#map">map</a></li><li><a href="global.html#music">music</a></li><li><a href="global.html#player">player</a></li><li><a href="global.html#preload">preload</a></li><li><a href="global.html#talkWithFriend">talkWithFriend</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#wall">wall</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Mar 10 2016 14:20:23 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Wed Mar 16 2016 14:13:02 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>
