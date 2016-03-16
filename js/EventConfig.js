@@ -270,11 +270,6 @@ $(document).ready(function(){
         $(this).css('cursor','pointer');
     });
 
-    // Makes cursor into hand when hovering over items in the contributions list
-    $('.itemWrapper').hover(function() {
-        $(this).css('cursor','pointer');
-    });
-
     // Makes cursor into hand when hovering over guidelines close window image
     $('#closeGuidelines').hover(function() {
         $(this).css('cursor','pointer');
