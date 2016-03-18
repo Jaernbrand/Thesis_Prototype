@@ -87,6 +87,9 @@ function fillDatabase(){
 											"I want to go home.");
 		for (var j=0; j < 4; ++j){
 			SimpleText.database.addVote(questID, currContId);
+
+			// Note! Same comments as on Fred's contribution.
+			SimpleText.database.addComment(questID, currContId, fComNames[j], fComTexts[j]);
 		}
 
 		// ======= //
@@ -99,6 +102,9 @@ function fillDatabase(){
 											"Please help me find my map.");
 		for (var j=0; j < 3; ++j){
 			SimpleText.database.addVote(questID, currContId);
+
+			// Note! Same comments as on Fred's contribution.
+			SimpleText.database.addComment(questID, currContId, fComNames[j], fComTexts[j]);
 		}
 		
 		// ========= //
@@ -113,6 +119,9 @@ function fillDatabase(){
 
 		for (var j=0; j < 3; ++j){
 			SimpleText.database.addVote(questID, currContId);
+
+			// Note! Same comments as on Fred's contribution.
+			SimpleText.database.addComment(questID, currContId, fComNames[j], fComTexts[j]);
 		}
 
 		// ========== //
@@ -127,6 +136,9 @@ function fillDatabase(){
 
 		for (var j=0; j < 2; ++j){
 			SimpleText.database.addVote(questID, currContId);
+
+			// Note! Same comments as on Fred's contribution.
+			SimpleText.database.addComment(questID, currContId, fComNames[j], fComTexts[j]);
 		}
 
 		// ========== //
@@ -140,6 +152,9 @@ function fillDatabase(){
 											"Please help me find my map!");
 		for (var j=0; j < 1; ++j){
 			SimpleText.database.addVote(questID, currContId);
+
+			// Note! Same comments as on Fred's contribution.
+			SimpleText.database.addComment(questID, currContId, fComNames[j], fComTexts[j]);
 		}
 	 } // populateQuest1
 
