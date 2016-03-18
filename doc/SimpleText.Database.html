@@ -2606,6 +2606,161 @@ and with the given contribution ID.
 
     
 
+    <h4 class="name" id="fetchPictures"><span class="type-signature"></span>fetchPictures<span class="signature">(questID, contID)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Get a picture array containing hard-coded paths to img files from the specified 
+contribution ID and for the quest with the specified quest ID.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>questID</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The ID of the quest to which the contribution belongs.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>contID</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The ID of the contribution for which to get the img file.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line569">line 569</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
     <h4 class="name" id="fetchSound"><span class="type-signature"></span>fetchSound<span class="signature">(questID, contID)</span><span class="type-signature"></span></h4>
 
     
@@ -2768,161 +2923,6 @@ contribution ID and for the quest with the specified quest ID.
 
 
 <div class="description">
-    Removes the author with the specified name from the user's
-favourite authors.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>username</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Name of the user.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>authorName</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Name of the author.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line513">line 513</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="removeFavouriteAuthor"><span class="type-signature"></span>removeFavouriteAuthor<span class="signature">(username, authorName)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
     Adds the author with the specified name as one of the user's
 favourite authors.
 </div>
@@ -3041,6 +3041,161 @@ favourite authors.
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line472">line 472</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="removeFavouriteAuthor"><span class="type-signature"></span>removeFavouriteAuthor<span class="signature">(username, authorName)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Removes the author with the specified name from the user's
+favourite authors.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>username</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Name of the user.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>authorName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Name of the author.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line513">line 513</a>
     </li></ul></dd>
     
 
@@ -3402,7 +3557,7 @@ number of votes.</td>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Fri Mar 18 2016 15:08:37 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Fri Mar 18 2016 16:54:07 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>

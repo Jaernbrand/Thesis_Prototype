@@ -51,6 +51,15 @@ $(document).ready(function(){
 	//Show tooltip on mouse over icons
 	$('[data-toggle="tooltip"]').tooltip();
 
+
+	//Old file selections are visible, remove when leaving create page
+	function removeOldFileSelections(){
+		var filenames = document.getElementsByClassName("choose-file");
+		for (var i = 0; i &lt; filenames.length; ++i){
+			filenames[i].value = "";	
+		}	
+	}
+
 	/**	
 	* Close simpleTextStart window, i.e. the quest text window.
 	*/
@@ -86,6 +95,9 @@ $(document).ready(function(){
 		document.getElementById("viewSingleContribution").style.visibility = "hidden";
 		document.getElementById("contributions").style.visibility = "visible";
 
+		//Hide loaded images
+		hideAndResetContributionImages();
+
 		//Hide 'no-sound-audioplayer' image
 		var noSoundPlayer = document.getElementById("audioplayerNoSound").setAttribute("hidden", true);
 
@@ -93,7 +105,6 @@ $(document).ready(function(){
 		var element = document.getElementById("audioplayerHasSound");
 		if(element !== null){
 			element.outerHTML = "";
-			//delete element;	
 			delete document.getElementById("audioplayerHasSound");
 		}
 	};
@@ -107,11 +118,9 @@ $(document).ready(function(){
 
 	// Submit written comment
 	document.getElementById("submitCommment").onclick = function () {
-		//TODO - sort comments and show the user the newely added comment
-		//stay on page, user sees its own comment and chooses to go back
-
-		//Disabeling textarea &amp; submit button after submitting comment.
-		//Forces user to go back after viewing the cubmitted comment
+		// Stay on page, user sees its own comment and chooses to go back.
+		// Disabeling textarea &amp; submit button after submitting comment.
+		// Forces user to go back after viewing the cubmitted comment.
 		document.getElementById("createCommentArea").disabled = true;
 		document.getElementById("submitCommment").disabled = true;
 
@@ -122,10 +131,9 @@ $(document).ready(function(){
 	// Cancel comment
 	document.getElementById("cancelComment").onclick = function () {
 		document.getElementById("createComment").style.visibility = "hidden";
-		//TODO - must show the right contribution when going back
 		document.getElementById("viewSingleContribution").style.visibility = "visible";
 
-		//enable submit button &amp; comment textarea if they have been disabled
+		// Eenable submit button &amp; comment textarea if they have been disabled
 		document.getElementById("submitCommment").disabled = false;
 		document.getElementById("createCommentArea").disabled = false;
 
@@ -145,10 +153,10 @@ $(document).ready(function(){
 	document.getElementById("cancelCreateText").onclick = function () {
 		document.getElementById("createContribution").style.visibility = "hidden";
 		document.getElementById("contributions").style.visibility = "visible";
-
+		removeOldFileSelections();
 	};
 
-	// show guidelines
+	// Show guidelines
 	document.getElementById("guidelines").onclick = function () {
 		$("#closeGuidelines").fadeIn(350);
 		$("#guidelinesWrapper").fadeIn(400);
@@ -159,15 +167,36 @@ $(document).ready(function(){
 	document.getElementById("submitCreateText").onclick = function () {
 		document.getElementById("createContribution").style.visibility = "hidden";
 
-		//Database
+		// Database
 		//	- add new contribution
 		//	- update contributions list before making it visible
 
+		// Check if a file has been choosen
+		var filenames = document.getElementsByClassName("choose-file");
+		var selectionMade = false;
+		for (var i = 0; i &lt; filenames.length; ++i){
+			if(filenames[i].value !== ""){	
+				selectionMade = true;
+			}
+		}
+		// Add contribution. Img also if one has been choosen
+		var textByUser = document.getElementById("newTextArea").value;
+		var questID = document.getElementById("questID").innerHTML;
+		var contrID = SimpleText.database.addContribution(questID, SimpleText.username, textByUser);
+		if(selectionMade){
+			var imgPath = "assets/web/printScreen02.png"; //OBS HARDCODED FILE PATH 
+			SimpleText.database.addPicture(questID, contrID, picture);  
+		}
+
+		listContributions();
+
 		document.getElementById("contributions").style.visibility = "visible";
 		var infoBox = $("#infoBox").fadeIn(300);
-		var message = document.getElementById("infoMessage").innerHTML = "Thank you, your contribution has been added!";
-
+		/*var message =*/ document.getElementById("infoMessage").innerHTML = "Thank you, your contribution has been added!";
 		infoBox.delay(3000).fadeOut(500);
+		
+		// Remove old file selections
+		removeOldFileSelections();
 	};
 
 
@@ -363,24 +392,11 @@ function viewSingleContribution(contribution){
 	singCont.getElementsByTagName("textarea")[0].innerHTML = contribution.text;
 
 	// Load data into viewSingleContribution before showing it.
-
-	//Check if there is audio, load placeholder image if there is none.
-	//Create and insert audioplayer if audio exists.
-	//Audioplayers are removed when going back to contributions list
-	var soundArray = SimpleText.database.fetchSound(questID, contribution.contID);
-	if(soundArray.length &lt; 1){
-		document.getElementById("audioplayerNoSound").removeAttribute("hidden");
-	}else{
-		var soundSrc = soundArray[0];
-		var audioContainer = document.getElementsByClassName("bottomAreaWrapper")[0];
-		var auidoTag = "&lt;audio controls id=\"audioplayerHasSound\">&lt;source src=" + "\"" + soundSrc + "\" type=\"audio/mpeg\">&lt;/audio>";
-		audioContainer.insertAdjacentHTML('afterbegin', auidoTag);
-	}
+	loadAudio(questID, contribution.contID);
+	loadImages(questID, contribution.contID);
 
 	document.getElementById("contributions").style.visibility = "hidden";
 	document.getElementById("viewSingleContribution").style.visibility = "visible";
-
-	
 
 	// Adjust the submit comment function.
 	document.getElementById("commentContribution").onclick = (function(oldFunc){
@@ -390,6 +406,71 @@ function viewSingleContribution(contribution){
 		};
 	})(document.getElementById("commentContribution").onclick);
 } // viewSingleContribution
+
+
+
+/**
+* Check if the contribution has images, load if there are some. 
+* If there are none, do nothing.
+*
+* @param {string} questID
+* The ID of the quest to which the contribution belongs.
+*
+* @param {string} contID
+* The ID of the contribution for which to add the img.
+*/
+function loadImages(questID, contID){
+	var images = SimpleText.database.fetchPictures(questID, contID);
+	//Both fancyBox wrapper and the img tag needs the source to the actual image
+	var fancyBoxWrappers = document.getElementsByClassName("fancybox");
+	var documentImages = document.getElementsByClassName("user-image");
+	console.log(fancyBoxWrappers);
+	for(var i = 0; i &lt; images.length; ++i){
+		var imgPath = images[i];
+		fancyBoxWrappers[i].removeAttribute("hidden");
+		fancyBoxWrappers[i].setAttribute("href", imgPath);
+		documentImages[i].setAttribute("src", imgPath);
+	}
+}
+
+/**
+* Hide images that have been made visible when changing single contribution.
+* Used when going back from viewing single contribution.
+*/
+function hideAndResetContributionImages(){
+	var fancyBoxWrappers = document.getElementsByClassName("fancybox");
+	var documentImages = document.getElementsByClassName("user-image");
+	for(var i = 0; i &lt; 3; ++i){
+		fancyBoxWrappers[i].setAttribute("hidden", true);
+		fancyBoxWrappers[i].setAttribute("href", "");
+		documentImages[i].setAttribute("src", "");
+	}
+}
+
+/**
+* Check if there is audio, load placeholder image if there is none.
+* Create and insert audioplayer if audio exists.
+* Audioplayers are removed when going back to contributions list
+*
+* @param {string} questID
+* The ID of the quest to which the contribution belongs.
+*
+* @param {string} contID
+* The ID of the contribution for which to add the sound file.
+*/
+function loadAudio(questID, contID){
+	
+	var soundArray = SimpleText.database.fetchSound(questID, contID);
+	if(soundArray.length &lt; 1){
+		document.getElementById("audioplayerNoSound").removeAttribute("hidden");
+	}else{
+		var soundSrc = soundArray[0];
+		var audioContainer = document.getElementsByClassName("bottomAreaWrapper")[0];
+		var auidoTag = "&lt;audio controls id=\"audioplayerHasSound\">&lt;source src=" + "\"" + soundSrc + "\" type=\"audio/mpeg\">&lt;/audio>";
+		audioContainer.insertAdjacentHTML('afterbegin', auidoTag);
+	}
+}
+
 
 /**
 * Lists all SimpleText contributions for the current quest.
@@ -556,7 +637,7 @@ function listComments(questID, contID){
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Fri Mar 18 2016 15:08:37 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Fri Mar 18 2016 16:54:07 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>

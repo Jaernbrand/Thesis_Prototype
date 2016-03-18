@@ -90,11 +90,9 @@ $(document).ready(function(){
 
 	// Submit written comment
 	document.getElementById("submitCommment").onclick = function () {
-		//TODO - sort comments and show the user the newely added comment
-		//stay on page, user sees its own comment and chooses to go back
-
-		//Disabeling textarea & submit button after submitting comment.
-		//Forces user to go back after viewing the cubmitted comment
+		// Stay on page, user sees its own comment and chooses to go back.
+		// Disabeling textarea & submit button after submitting comment.
+		// Forces user to go back after viewing the cubmitted comment.
 		document.getElementById("createCommentArea").disabled = true;
 		document.getElementById("submitCommment").disabled = true;
 
@@ -105,10 +103,9 @@ $(document).ready(function(){
 	// Cancel comment
 	document.getElementById("cancelComment").onclick = function () {
 		document.getElementById("createComment").style.visibility = "hidden";
-		//TODO - must show the right contribution when going back
 		document.getElementById("viewSingleContribution").style.visibility = "visible";
 
-		//enable submit button & comment textarea if they have been disabled
+		// Eenable submit button & comment textarea if they have been disabled
 		document.getElementById("submitCommment").disabled = false;
 		document.getElementById("createCommentArea").disabled = false;
 
@@ -131,7 +128,7 @@ $(document).ready(function(){
 		removeOldFileSelections();
 	};
 
-	// show guidelines
+	// Show guidelines
 	document.getElementById("guidelines").onclick = function () {
 		$("#closeGuidelines").fadeIn(350);
 		$("#guidelinesWrapper").fadeIn(400);
@@ -167,7 +164,7 @@ $(document).ready(function(){
 
 		document.getElementById("contributions").style.visibility = "visible";
 		var infoBox = $("#infoBox").fadeIn(300);
-		var message = document.getElementById("infoMessage").innerHTML = "Thank you, your contribution has been added!";
+		/*var message =*/ document.getElementById("infoMessage").innerHTML = "Thank you, your contribution has been added!";
 		infoBox.delay(3000).fadeOut(500);
 		
 		// Remove old file selections
