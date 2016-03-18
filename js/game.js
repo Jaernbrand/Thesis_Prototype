@@ -304,7 +304,6 @@ function showQuestWindow(){
 				.value = questTexts[questID];
 
 		document.getElementById("questID").innerHTML = questID;
-		console.log(questID);
 	})(currQuest);
 }
 

@@ -365,6 +365,7 @@ function listContributions(){
 	var currItem;
 	for (var i=0; i < contributions.length; ++i){
 		currItem = template.cloneNode(true);
+		currItem.getElementsByTagName("img")[0].removeAttribute("hidden");
 
 		// Takes the beginning of the comment as excerpt.
 		currItem.getElementsByClassName("textExcerpt")[0].innerHTML = (function(){
