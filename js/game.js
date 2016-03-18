@@ -56,11 +56,51 @@ var wall;
 */
 var friendMap;
 
-/*The players collected score - increased as coins are collected*/
+/**
+* @property {number} score
+* The players collected score - increased as coins are collected.
+*/
 var score = 0;
 
-/*The score that is displayed to the user*/
+/**
+* @property {string} scoreText
+* The score that is displayed to the user.
+*/
 var scoreText;
+
+/**
+* @property {string} currQuest
+* The current game quest.
+*/
+var currQuest = "quest1";
+
+/**
+* @property {object.<string, string>} questTexts
+* Dictionary containing questID:s as keys and questTexts as values.
+*/
+var questTexts = {
+	"quest1": "Please, traveler. I need a helping hand.\n\n" + 
+			"I think I'm lost. No, I know I'm lost. Nothing "  + 
+			"looks familiar here and I mean at all. Oh I " + 
+			"should've never left our camp...\n\n" +
+			"I know our camp is near a lake and we came into " +
+			"the forest from the North, but I have no idea where " +
+			"North is, I have no idea where anything is. I used to " +
+			"have a map, but I lost it somewhere.\n\n" +
+			"Please, you've got to help me, help me find my map so " +
+			"that I may find my way back to camp. I don't want to be "+ 
+			"in this forest anymore, I want to go home.",
+
+	"quest2": "You see a map placed under a rock the size of a head. "+
+			"Someone has clearly placed it there, but no one seems to "+
+			"be in the proximity. You can’t find any traces of a camp "+
+			"either, and you can’t help but think that someone might "+
+			"have hidden the map at this place. You cautiously move "+
+			"the stone. The map, although a little dirty, is in good "+
+			"condition and someone has circled a handful of seemingly "+
+			"random coordinates. The lost man from earlier could be the "+
+			"owner of this map, but how did it end up at this place?"
+};
 
 // *****************************************************
 // *****************************************************
@@ -165,8 +205,9 @@ function update() {
 								    null,
 								    this);
 
-	if(game.physics.arcade.collide(player, friend)){
+	if(game.physics.arcade.collide(player, friend) && !player.hasTalked){
         talkWithFriend();
+		incrementCurrentQuest();
 	}
 
     game.physics.arcade.collide(player, wall);
@@ -215,10 +256,21 @@ function collectItem(player, item) {
     collectSound.play();
 }
 
-/*Sound is played when user collects map*/
+/**
+* Collects the map.
+*
+* @param {Phaser.Sprite} player
+* The current player.
+*
+* @param {Phaser.Sprite} item
+* The map to collect.
+*/
 function collectMap(player, item) {
-    document.getElementById("simpleTextStart").style.visibility = "visible";
+	showQuestWindow();
+
+	// Sound is played when user collects map
     foundMapSound.play();
+
     item.kill();
     music.volume = 0.15;
     player.animations.stop();
@@ -226,20 +278,63 @@ function collectMap(player, item) {
 }
 
 /**
-* Shows a quest description on screen.
+* Shows quest 1 for the user and allows the player to progress
+* beyond the wall.
 */
 function talkWithFriend(){
-    document.getElementById("simpleTextStart").style.visibility = "visible";
+	showQuestWindow();
     player.hasTalked = true;
     wall.kill();
     music.volume = 0.15;
 }
 
-/*Change volume with first argument. Restart music with the second argument set to true
-  This function is called in EventConfig when leaving simple text and going back to game*/
+/**
+* Shows the quest window containing the current quest text.
+*/
+function showQuestWindow(){
+	(function(questID){
+		document.getElementById("simpleTextStart").style.visibility = "visible";
+		document.getElementById("simpleTextStart")
+				.getElementsByTagName("textarea")[0]
+				.value = questTexts[questID];
+
+		document.getElementById("questID").innerHTML = questID;
+		console.log(questID);
+	})(currQuest);
+}
+
+/**
+* Change volume with first argument. Restart music with the 
+* second argument set to true. This function is called in 
+* EventConfig when leaving simple text and going back to game.
+*
+* @param {number} vol
+* The volumn of the music.
+*
+* @param {boolean} restart
+* Whether the music is to restart or not.
+*/
 function musicVolumeAndRestart(vol, restart){
     music.volume = vol;
     if(restart){
         music.restart();
     }
 }
+
+/**
+* Increments the current quest ID to the next quest ID and
+* sets the new string as the current quest..
+*
+* Assumes the format <body><number>.
+*/
+function incrementCurrentQuest(){
+	var digits = currQuest.match(/\d+/ig);
+	var newNumber = parseInt(digits[digits.length-1]) + 1;
+
+	var tailStart = currQuest.length - newNumber.toString().length;
+	var body = currQuest.substring(0, tailStart);
+
+	currQuest = body + newNumber;
+}
+
+

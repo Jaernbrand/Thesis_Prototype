@@ -1,4 +1,7 @@
 /**
+* Defines actions taken during events involving HTML elements, 
+* mainly onclick events.
+*
 * @module EventConfig
 */
 
@@ -21,7 +24,7 @@ $(document).ready(function(){
 	$('[data-toggle="tooltip"]').tooltip();
 
 	/**	
-	* Close simpleTextStart window.
+	* Close simpleTextStart window, i.e. the quest text window.
 	*/
 	document.getElementById("okButton").onclick = function () {
 		document.getElementById("simpleTextStart").style.visibility = "hidden";
@@ -34,7 +37,7 @@ $(document).ready(function(){
 		}
 	};
 
-	// Open contribution list
+	// Open contribution list.
 	document.getElementById("simpleTextButton").onclick = function () {
 		document.getElementById("simpleTextStart").style.visibility = "hidden";
 		document.getElementById("contributions").style.visibility = "visible";
