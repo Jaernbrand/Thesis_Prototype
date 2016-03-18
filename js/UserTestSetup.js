@@ -42,6 +42,7 @@ function fillDatabase(){
 			SimpleText.database.addVote(questID, nisseContId);
 			SimpleText.database.addComment(questID, nisseContId, comNames[i], comTexts[i]);
 		}
+		SimpleText.database.addPicture(questID, nisseContId, "assets/web/printScreen01.png");
 
 		// === //
 		// óle //
@@ -51,6 +52,9 @@ function fillDatabase(){
 		SimpleText.database.addComment(questID, oleContId, "Hugo", "This has nothing to do with the quest.");
 
 		SimpleText.database.addSound(questID, oleContId, "assets/audio/audio_quest1_01.mp3");
+		SimpleText.database.addPicture(questID, oleContId, "assets/web/printScreen03.png");
+		SimpleText.database.addPicture(questID, oleContId, "assets/web/printScreen04.png");
+		SimpleText.database.addPicture(questID, oleContId, "assets/web/printScreen05.png");
 
 		// ==== //
 		// Fred //
