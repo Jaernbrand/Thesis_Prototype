@@ -171,6 +171,7 @@ function create() {
     player.animations.add('right', [6, 7, 8], 12, true);
     player.animations.add('down', [9, 10, 11], 12, true);
     player.hasTalked = false;
+    player.inMenu = false
     game.physics.enable(player);
 
     friend = game.add.sprite(480, game.world.height - 285, 'friend');
@@ -213,7 +214,7 @@ function update() {
     game.physics.arcade.collide(player, wall);
     player.body.velocity.set(0);
 
-    if(!friendMap.isCollected){
+    if(!player.inMenu){
         if (cursors.left.isDown){
             player.body.velocity.x = -100;
             player.play('left');
@@ -230,8 +231,10 @@ function update() {
             player.animations.stop();
             player.frame = 10;
         }
+    }else{
+        player.animations.stop();
+        player.frame = 10;
     }
-    
 }
 
 
@@ -273,19 +276,21 @@ function collectMap(player, item) {
 
     item.kill();
     music.volume = 0.15;
-    player.animations.stop();
-    player.frame = 10;
+    player.inMenu = true;
 }
 
 /**
 * Shows quest 1 for the user and allows the player to progress
-* beyond the wall.
+* beyond the wall. The quest description is only shown if the 
+* player hasn't talked with the friend sprite. Also disables 
+* player movement and turns down background music.
 */
 function talkWithFriend(){
 	showQuestWindow();
     player.hasTalked = true;
     wall.kill();
     music.volume = 0.15;
+	player.inMenu = true;
 }
 
 /**
