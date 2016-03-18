@@ -65,7 +65,7 @@ $(document).ready(function(){
 		var element = document.getElementById("audioplayerHasSound");
 		if(element !== null){
 			element.outerHTML = "";
-			delete element;	
+			delete document.getElementById("audioplayerHasSound");
 		}
 	};
 
