@@ -50,11 +50,20 @@ $(document).ready(function(){
 
 	};
 
-	// Go back to simpleTextStart from contribution list
+	// Go back to contributions list from view single contribution
 	document.getElementById("viewContributionBack").onclick = function () {
 		document.getElementById("viewSingleContribution").style.visibility = "hidden";
 		document.getElementById("contributions").style.visibility = "visible";
 
+		//Hide 'no-sound-audioplayer' image
+		var noSoundPlayer = document.getElementById("audioplayerNoSound").setAttribute("hidden", true);
+
+		//Remove real audioplayer if its been added to the document
+		var element = document.getElementById("audioplayerHasSound");
+		if(element !== null){
+			element.outerHTML = "";
+			delete element;	
+		}
 	};
 
 	// Go to comment quest contribution
@@ -322,8 +331,24 @@ function viewSingleContribution(contribution){
 	singCont.getElementsByTagName("textarea")[0].innerHTML = contribution.text;
 
 	// Load data into viewSingleContribution before showing it.
+
+	//Check if there is audio, load placeholder image if there is none.
+	//Create and insert audioplayer if audio exists.
+	//Audioplayers are removed when going back to contributions list
+	var soundArray = SimpleText.database.fetchSound(questID, contribution.contID);
+	if(soundArray.length < 1){
+		document.getElementById("audioplayerNoSound").removeAttribute("hidden");
+	}else{
+		var soundSrc = soundArray[0];
+		var audioContainer = document.getElementsByClassName("bottomAreaWrapper")[0];
+		var auidoTag = "<audio controls id=\"audioplayerHasSound\"><source src=" + "\"" + soundSrc + "\" type=\"audio/mpeg\"></audio>";
+		audioContainer.insertAdjacentHTML('afterbegin', auidoTag);
+	}
+
 	document.getElementById("contributions").style.visibility = "hidden";
 	document.getElementById("viewSingleContribution").style.visibility = "visible";
+
+	
 
 	// Adjust the submit comment function.
 	document.getElementById("commentContribution").onclick = (function(oldFunc){

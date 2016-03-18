@@ -515,8 +515,37 @@ SimpleText.Database.prototype.removeFavouriteAuthor = function(username, authorN
 	});
 };
 
+/**
+* Get a sound array containing hard-coded paths to audio files from the specified 
+* contribution ID and for the quest with the specified quest ID.
+*
+* @param {string} questID
+* The ID of the quest to which the contribution belongs.
+*
+* @param {string} contID
+* The ID of the contribution for which to get the sound file.
+*/
+SimpleText.Database.prototype.fetchSound = function(questID, contID){
+	if (typeof questID !== "string"){
+		throw "questID: Invalid type " + (typeof questID) +
+				" Expected string.";
+	}
+	if (typeof contID !== "string"){
+		throw "contID: Invalid type " + (typeof contID) +
+				" Expected string.";
+	}
+
+	var sound;
+	for(var i=0; i < this.contributions[questID].length; ++i){
+		if (this.contributions[questID][i].contID === contID){
+			sound = this.contributions[questID][i].sounds;
+			break;
+		}
+	}
+	return sound || null;
+};
+
+
 
 SimpleText.database = new SimpleText.Database();
-
-
 
