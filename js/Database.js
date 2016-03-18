@@ -109,7 +109,7 @@ SimpleText.Database.prototype.addContribution = function(questID, author, text){
 		this.contributions[questID] = []
 	}	
 
-	if (!authors[author]){
+	if (!this.authors[author]){
 		this.addAuthor(author);
 	}
 
