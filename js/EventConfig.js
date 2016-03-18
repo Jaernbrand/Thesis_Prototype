@@ -67,6 +67,9 @@ $(document).ready(function(){
 		document.getElementById("viewSingleContribution").style.visibility = "hidden";
 		document.getElementById("contributions").style.visibility = "visible";
 
+		//Hide loaded images
+		hideAndResetContributionImages();
+
 		//Hide 'no-sound-audioplayer' image
 		var noSoundPlayer = document.getElementById("audioplayerNoSound").setAttribute("hidden", true);
 
@@ -364,24 +367,11 @@ function viewSingleContribution(contribution){
 	singCont.getElementsByTagName("textarea")[0].innerHTML = contribution.text;
 
 	// Load data into viewSingleContribution before showing it.
-
-	//Check if there is audio, load placeholder image if there is none.
-	//Create and insert audioplayer if audio exists.
-	//Audioplayers are removed when going back to contributions list
-	var soundArray = SimpleText.database.fetchSound(questID, contribution.contID);
-	if(soundArray.length < 1){
-		document.getElementById("audioplayerNoSound").removeAttribute("hidden");
-	}else{
-		var soundSrc = soundArray[0];
-		var audioContainer = document.getElementsByClassName("bottomAreaWrapper")[0];
-		var auidoTag = "<audio controls id=\"audioplayerHasSound\"><source src=" + "\"" + soundSrc + "\" type=\"audio/mpeg\"></audio>";
-		audioContainer.insertAdjacentHTML('afterbegin', auidoTag);
-	}
+	loadAudio(questID, contribution.contID);
+	loadImages(questID, contribution.contID);
 
 	document.getElementById("contributions").style.visibility = "hidden";
 	document.getElementById("viewSingleContribution").style.visibility = "visible";
-
-	
 
 	// Adjust the submit comment function.
 	document.getElementById("commentContribution").onclick = (function(oldFunc){
@@ -391,6 +381,71 @@ function viewSingleContribution(contribution){
 		};
 	})(document.getElementById("commentContribution").onclick);
 } // viewSingleContribution
+
+
+
+/**
+* Check if the contribution has images, load if there are some. 
+* If there are none, do nothing.
+*
+* @param {string} questID
+* The ID of the quest to which the contribution belongs.
+*
+* @param {string} contID
+* The ID of the contribution for which to add the img.
+*/
+function loadImages(questID, contID){
+	var images = SimpleText.database.fetchPictures(questID, contID);
+	//Both fancyBox wrapper and the img tag needs the source to the actual image
+	var fancyBoxWrappers = document.getElementsByClassName("fancybox");
+	var documentImages = document.getElementsByClassName("user-image");
+	console.log(fancyBoxWrappers);
+	for(var i = 0; i < images.length; ++i){
+		var imgPath = images[i];
+		fancyBoxWrappers[i].removeAttribute("hidden");
+		fancyBoxWrappers[i].setAttribute("href", imgPath);
+		documentImages[i].setAttribute("src", imgPath);
+	}
+}
+
+/**
+* Hide images that have been made visible when changing single contribution.
+* Used when going back from viewing single contribution.
+*/
+function hideAndResetContributionImages(){
+	var fancyBoxWrappers = document.getElementsByClassName("fancybox");
+	var documentImages = document.getElementsByClassName("user-image");
+	for(var i = 0; i < 3; ++i){
+		fancyBoxWrappers[i].setAttribute("hidden", true);
+		fancyBoxWrappers[i].setAttribute("href", "");
+		documentImages[i].setAttribute("src", "");
+	}
+}
+
+/**
+* Check if there is audio, load placeholder image if there is none.
+* Create and insert audioplayer if audio exists.
+* Audioplayers are removed when going back to contributions list
+*
+* @param {string} questID
+* The ID of the quest to which the contribution belongs.
+*
+* @param {string} contID
+* The ID of the contribution for which to add the sound file.
+*/
+function loadAudio(questID, contID){
+	
+	var soundArray = SimpleText.database.fetchSound(questID, contID);
+	if(soundArray.length < 1){
+		document.getElementById("audioplayerNoSound").removeAttribute("hidden");
+	}else{
+		var soundSrc = soundArray[0];
+		var audioContainer = document.getElementsByClassName("bottomAreaWrapper")[0];
+		var auidoTag = "<audio controls id=\"audioplayerHasSound\"><source src=" + "\"" + soundSrc + "\" type=\"audio/mpeg\"></audio>";
+		audioContainer.insertAdjacentHTML('afterbegin', auidoTag);
+	}
+}
+
 
 /**
 * Lists all SimpleText contributions for the current quest.

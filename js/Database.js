@@ -556,6 +556,38 @@ SimpleText.Database.prototype.fetchSound = function(questID, contID){
 };
 
 
+/**
+* Get a picture array containing hard-coded paths to img files from the specified 
+* contribution ID and for the quest with the specified quest ID.
+*
+* @param {string} questID
+* The ID of the quest to which the contribution belongs.
+*
+* @param {string} contID
+* The ID of the contribution for which to get the img file.
+*/
+SimpleText.Database.prototype.fetchPictures = function(questID, contID){
+	if (typeof questID !== "string"){
+		throw "questID: Invalid type " + (typeof questID) +
+				" Expected string.";
+	}
+	if (typeof contID !== "string"){
+		throw "contID: Invalid type " + (typeof contID) +
+				" Expected string.";
+	}
+
+	var pics;
+	for(var i=0; i < this.contributions[questID].length; ++i){
+		if (this.contributions[questID][i].contID === contID){
+			pics = this.contributions[questID][i].pictures;
+			break;
+		}
+	}
+	return pics || null;
+};
+
+
+
 
 SimpleText.database = new SimpleText.Database();
 
