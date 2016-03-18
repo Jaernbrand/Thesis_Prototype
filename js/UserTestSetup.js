@@ -76,7 +76,7 @@ function fillDatabase(){
 					"Thanks again!",
 					"This was even better than the previous one! I löve u män!"];
 		for (var i=0; i < 5; ++i){
-			if (j < 3){
+			if (i < 3){
 				SimpleText.database.addVote(questID, nisseContId);
 			}
 			SimpleText.database.addComment(questID, nisseContId, comNames[i], comTexts[i]);
