@@ -58,8 +58,57 @@ function fillDatabase(){
 		}
 	 } // populateQuest1
 
+	function populateQuest2(questID){
+		nisseContId = SimpleText.database.addContribution(questID, 
+														"Nisse", 
+				"You see a map under a rock. Someone has placed it there. " + 
+				"You can't see anyone. You can’t find any traces of a camp either." +
+				" You think that someone might have hidden the map. You move the stone." +
+				" The map is a little dirty, but it is in good condition. " +
+				"Someone has circled a handful of places. The lost man from " +
+				" earlier could be the owner of this map, but how did it end up "+
+				"at this place?"	
+			);
+		
+		var comNames = ["óle", "Fred", "Hugo", "Ms Ellenius", "Bobby Tables"];
+		var comTexts = ["I found the map!",
+					"Is this really simplified? Seems very similar to theoriginal.",
+					"Great as always!",
+					"Thanks again!",
+					"This was even better than the previous one! I löve u män!"];
+		for (var i=0; i < 5; ++i){
+			if (i < 3){
+				SimpleText.database.addVote(questID, nisseContId);
+			}
+			SimpleText.database.addComment(questID, nisseContId, comNames[i], comTexts[i]);
+		}
+
+		oleContId = SimpleText.database.addContribution(questID, 
+														"óle", 
+														"Run in circles.");
+		SimpleText.database.addComment(questID, oleContId, "Fred", "No, don't listen to him!");
+		SimpleText.database.addComment(questID, oleContId, "Hugo", "That isn't what the text said.");
+
+		fredContId = SimpleText.database.addContribution(questID, 
+														"Fred", 
+										"You found a dirty map. " +
+										"Go back to the lost man.");
+
+		var fComNames = ["Nisse", "Hugo", "óle", "NissElenius"];
+		var fComTexts = ["You ignored a lot of information.",
+						"Straight to the point!",
+						"Try jumping.",
+						"That wasn't everything he said. You "+
+						"forgot some of the story relevant the parts."];
+		for (var j=0; j < 4; ++j){
+			SimpleText.database.addVote(questID, fredContId);
+			SimpleText.database.addComment(questID, fredContId, fComNames[j], fComTexts[j]);
+		}
+	} // populateQuest2
+
 	populateAuthors();
 	populateQuest1("quest1");
+	populateQuest2("quest2");
 
 	// TODO
 	/*

@@ -51,23 +51,98 @@ function fillDatabase(){
 											"to have a map, but I lost it somewhere. Please, help me " + 
 											"find my map.");
 
-		for (var i=0; i &lt; 3; ++i){
+		var comNames = ["óle", "Fred", "Hugo", "Ms Ellenius", "Bobby Tables"];
+		var comTexts = ["Where can I find the map?",
+					"Some of those words seems a little advanced...",
+					"Great simplification!",
+					"THANKS!",
+					"This was the best translation ever! I löve u män!"];
+		for (var i=0; i &lt; 5; ++i){
 			SimpleText.database.addVote(questID, nisseContId);
+			SimpleText.database.addComment(questID, nisseContId, comNames[i], comTexts[i]);
 		}
 
 		var oleContId = SimpleText.database.addContribution(questID, "óle", "Try jumping.");
 		SimpleText.database.addComment(questID, oleContId, "Fred", "You can't jump in this game.");
-	}
+		SimpleText.database.addComment(questID, oleContId, "Hugo", "This has nothing to do with the quest.");
+
+
+		fredContId = SimpleText.database.addContribution(questID, 
+														"Fred", 
+						"I'm lost. Please find my map.");
+
+		var fComNames = ["Nisse", "Hugo", "óle", "NissElenius"];
+		var fComTexts = ["You ignored a lot of information.",
+						"Straight to the point!",
+						"Try jumping.",
+						"That wasn't everything he said. You "+
+						"forgot some of the story relevant the parts."];
+		for (var j=0; j &lt; 4; ++j){
+			if (j % 2 === 0){
+				SimpleText.database.addVote(questID, fredContId);
+			}
+			SimpleText.database.addComment(questID, fredContId, fComNames[j], fComTexts[j]);
+		}
+	 } // populateQuest1
+
+	function populateQuest2(questID){
+		nisseContId = SimpleText.database.addContribution(questID, 
+														"Nisse", 
+				"You see a map under a rock. Someone has placed it there. " + 
+				"You can't see anyone. You can’t find any traces of a camp either." +
+				" You think that someone might have hidden the map. You move the stone." +
+				" The map is a little dirty, but it is in good condition. " +
+				"Someone has circled a handful of places. The lost man from " +
+				" earlier could be the owner of this map, but how did it end up "+
+				"at this place?"	
+			);
+		
+		var comNames = ["óle", "Fred", "Hugo", "Ms Ellenius", "Bobby Tables"];
+		var comTexts = ["I found the map!",
+					"Is this really simplified? Seems very similar to theoriginal.",
+					"Great as always!",
+					"Thanks again!",
+					"This was even better than the previous one! I löve u män!"];
+		for (var i=0; i &lt; 5; ++i){
+			if (i &lt; 3){
+				SimpleText.database.addVote(questID, nisseContId);
+			}
+			SimpleText.database.addComment(questID, nisseContId, comNames[i], comTexts[i]);
+		}
+
+		oleContId = SimpleText.database.addContribution(questID, 
+														"óle", 
+														"Run in circles.");
+		SimpleText.database.addComment(questID, oleContId, "Fred", "No, don't listen to him!");
+		SimpleText.database.addComment(questID, oleContId, "Hugo", "That isn't what the text said.");
+
+		fredContId = SimpleText.database.addContribution(questID, 
+														"Fred", 
+										"You found a dirty map. " +
+										"Go back to the lost man.");
+
+		var fComNames = ["Nisse", "Hugo", "óle", "NissElenius"];
+		var fComTexts = ["You ignored a lot of information.",
+						"Straight to the point!",
+						"Try jumping.",
+						"That wasn't everything he said. You "+
+						"forgot some of the story relevant the parts."];
+		for (var j=0; j &lt; 4; ++j){
+			SimpleText.database.addVote(questID, fredContId);
+			SimpleText.database.addComment(questID, fredContId, fComNames[j], fComTexts[j]);
+		}
+	} // populateQuest2
 
 	populateAuthors();
 	populateQuest1("quest1");
+	populateQuest2("quest2");
 
 	// TODO
 	/*
 	SimpleText.database.addPicture(quest1, contId, "path/picture");
 	SimpleText.database.addSound(quest1, contId, "path/picture");
 	*/
-};
+}; // fillDatabase
 
 fillDatabase();
 
@@ -81,13 +156,13 @@ fillDatabase();
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-EventConfig.html">EventConfig</a></li><li><a href="module-UserTestSetup.html">UserTestSetup</a></li></ul><h3>Classes</h3><ul><li><a href="SimpleText.Database.html">Database</a></li></ul><h3>Namespaces</h3><ul><li><a href="SimpleText.html">SimpleText</a></li></ul><h3>Global</h3><ul><li><a href="global.html#coins">coins</a></li><li><a href="global.html#collectItem">collectItem</a></li><li><a href="global.html#create">create</a></li><li><a href="global.html#cursors">cursors</a></li><li><a href="global.html#friend">friend</a></li><li><a href="global.html#friendMap">friendMap</a></li><li><a href="global.html#game">game</a></li><li><a href="global.html#map">map</a></li><li><a href="global.html#music">music</a></li><li><a href="global.html#player">player</a></li><li><a href="global.html#preload">preload</a></li><li><a href="global.html#talkWithFriend">talkWithFriend</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#wall">wall</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-EventConfig.html">EventConfig</a></li><li><a href="module-UserTestSetup.html">UserTestSetup</a></li></ul><h3>Classes</h3><ul><li><a href="SimpleText.Database.html">Database</a></li></ul><h3>Namespaces</h3><ul><li><a href="SimpleText.html">SimpleText</a></li></ul><h3>Global</h3><ul><li><a href="global.html#coins">coins</a></li><li><a href="global.html#collectItem">collectItem</a></li><li><a href="global.html#collectMap">collectMap</a></li><li><a href="global.html#create">create</a></li><li><a href="global.html#currQuest">currQuest</a></li><li><a href="global.html#cursors">cursors</a></li><li><a href="global.html#friend">friend</a></li><li><a href="global.html#friendMap">friendMap</a></li><li><a href="global.html#game">game</a></li><li><a href="global.html#incrementCurrentQuest">incrementCurrentQuest</a></li><li><a href="global.html#map">map</a></li><li><a href="global.html#music">music</a></li><li><a href="global.html#musicVolumeAndRestart">musicVolumeAndRestart</a></li><li><a href="global.html#player">player</a></li><li><a href="global.html#preload">preload</a></li><li><a href="global.html#questTexts">questTexts</a></li><li><a href="global.html#score">score</a></li><li><a href="global.html#scoreText">scoreText</a></li><li><a href="global.html#showQuestWindow">showQuestWindow</a></li><li><a href="global.html#talkWithFriend">talkWithFriend</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#wall">wall</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Wed Mar 16 2016 14:13:02 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Fri Mar 18 2016 11:25:21 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>
