@@ -23,6 +23,15 @@ $(document).ready(function(){
 	//Show tooltip on mouse over icons
 	$('[data-toggle="tooltip"]').tooltip();
 
+
+	//Old file selections are visible, remove when leaving create page
+	function removeOldFileSelections(){
+		var filenames = document.getElementsByClassName("choose-file");
+		for (var i = 0; i < filenames.length; ++i){
+			filenames[i].value = "";	
+		}	
+	}
+
 	/**	
 	* Close simpleTextStart window, i.e. the quest text window.
 	*/
@@ -116,7 +125,7 @@ $(document).ready(function(){
 	document.getElementById("cancelCreateText").onclick = function () {
 		document.getElementById("createContribution").style.visibility = "hidden";
 		document.getElementById("contributions").style.visibility = "visible";
-
+		removeOldFileSelections();
 	};
 
 	// show guidelines
@@ -130,15 +139,36 @@ $(document).ready(function(){
 	document.getElementById("submitCreateText").onclick = function () {
 		document.getElementById("createContribution").style.visibility = "hidden";
 
-		//Database
+		// Database
 		//	- add new contribution
 		//	- update contributions list before making it visible
+
+		// Check if a file has been choosen
+		var filenames = document.getElementsByClassName("choose-file");
+		var selectionMade = false;
+		for (var i = 0; i < filenames.length; ++i){
+			if(filenames[i].value !== ""){	
+				selectionMade = true;
+			}
+		}
+		// Add contribution. Img also if one has been choosen
+		var textByUser = document.getElementById("newTextArea").value;
+		var questID = document.getElementById("questID").innerHTML;
+		var contrID = SimpleText.database.addContribution(questID, SimpleText.username, textByUser);
+		if(selectionMade){
+			var imgPath = "assets/web/printScreen02.png"; //OBS HARDCODED FILE PATH 
+			SimpleText.database.addPicture(questID, contrID, picture);  
+		}
+
+		listContributions();
 
 		document.getElementById("contributions").style.visibility = "visible";
 		var infoBox = $("#infoBox").fadeIn(300);
 		var message = document.getElementById("infoMessage").innerHTML = "Thank you, your contribution has been added!";
-
 		infoBox.delay(3000).fadeOut(500);
+		
+		// Remove old file selections
+		removeOldFileSelections();
 	};
 
 

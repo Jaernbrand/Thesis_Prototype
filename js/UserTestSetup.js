@@ -38,7 +38,7 @@ function fillDatabase(){
 		SimpleText.database.addComment(questID, oleContId, "Fred", "You can't jump in this game.");
 		SimpleText.database.addComment(questID, oleContId, "Hugo", "This has nothing to do with the quest.");
 
-		SimpleText.database.addSound(questID, oleContId, "assets/audio/Dr.Alban-Hello_Africa_(fast_blast_club_mix).mp3");
+		SimpleText.database.addSound(questID, oleContId, "assets/audio/audio_quest1_01.mp3");
 
 		fredContId = SimpleText.database.addContribution(questID, 
 														"Fred", 
