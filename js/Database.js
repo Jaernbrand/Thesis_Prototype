@@ -90,6 +90,12 @@ SimpleText.Database.prototype.favouriteAuthor = function(name){
 * @param {string} questID
 * The id of the quest for which to add a contribution.
 *
+* @param {string} author
+* The author name of the contribution.
+*
+* @param {string} text
+* The contribution text.
+*
 * @return {string}
 * ID of the newly added contribution.
 */
@@ -102,6 +108,10 @@ SimpleText.Database.prototype.addContribution = function(questID, author, text){
 	if (!this.contributions[questID]){
 		this.contributions[questID] = []
 	}	
+
+	if (!authors[author]){
+		this.addAuthor(author);
+	}
 
 	var id = this.contributions[questID].length.toString();
 
