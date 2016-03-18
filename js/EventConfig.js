@@ -115,7 +115,13 @@ $(document).ready(function(){
 
 	// Show create simple text / contribution
 	document.getElementById("contributeCreate").onclick = function () {
+
+		var questID = document.getElementById("questID").innerHTML;
+		var questText = questTexts[questID];
+
 		document.getElementById("contributions").style.visibility = "hidden";
+
+		document.getElementById("originalTextOnCreate").value = questText;
 		document.getElementById("createContribution").style.visibility = "visible";
 		document.getElementById("newTextArea").focus();
 	};
@@ -157,7 +163,7 @@ $(document).ready(function(){
 		var contrID = SimpleText.database.addContribution(questID, SimpleText.username, textByUser);
 		if(selectionMade){
 			var imgPath = "assets/web/printScreen02.png"; //OBS HARDCODED FILE PATH 
-			SimpleText.database.addPicture(questID, contrID, picture);  
+			SimpleText.database.addPicture(questID, contrID, imgPath);  
 		}
 
 		listContributions();
@@ -396,7 +402,6 @@ function loadImages(questID, contID){
 	//Both fancyBox wrapper and the img tag needs the source to the actual image
 	var fancyBoxWrappers = document.getElementsByClassName("fancybox");
 	var documentImages = document.getElementsByClassName("user-image");
-	console.log(fancyBoxWrappers);
 	for(var i = 0; i < images.length; ++i){
 		var imgPath = images[i];
 		fancyBoxWrappers[i].removeAttribute("hidden");
