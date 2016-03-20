@@ -1,5 +1,5 @@
 /**
-* Defines actions taken during events involving HTML elements, 
+* Defines actions taken during events involving HTML elements,
 * mainly onclick events.
 *
 * @module EventConfig
@@ -15,7 +15,10 @@ $(document).ready(function(){
 	$("#infoBox").hide();
 	$("#blackBox").hide();
 	//Load fancybox
-	$(".fancybox").fancybox();
+	//$(".fancybox").fancybox();
+	$(".fancybox").fancybox({
+  	arrows : false
+	});
 
 	//Hide guidelines so they can be shown later using jquery
 	$("#guidelinesWrapper").hide();
@@ -28,11 +31,11 @@ $(document).ready(function(){
 	function removeOldFileSelections(){
 		var filenames = document.getElementsByClassName("choose-file");
 		for (var i = 0; i < filenames.length; ++i){
-			filenames[i].value = "";	
-		}	
+			filenames[i].value = "";
+		}
 	}
 
-	/**	
+	/**
 	* Close simpleTextStart window, i.e. the quest text window.
 	*/
 	document.getElementById("okButton").onclick = function () {
@@ -131,6 +134,7 @@ $(document).ready(function(){
 	document.getElementById("cancelCreateText").onclick = function () {
 		document.getElementById("createContribution").style.visibility = "hidden";
 		document.getElementById("contributions").style.visibility = "visible";
+		document.getElementById("newTextArea").value="";
 		removeOldFileSelections();
 	};
 
@@ -153,17 +157,18 @@ $(document).ready(function(){
 		var filenames = document.getElementsByClassName("choose-file");
 		var selectionMade = false;
 		for (var i = 0; i < filenames.length; ++i){
-			if(filenames[i].value !== ""){	
+			if(filenames[i].value !== ""){
 				selectionMade = true;
 			}
 		}
 		// Add contribution. Img also if one has been choosen
 		var textByUser = document.getElementById("newTextArea").value;
+		document.getElementById("newTextArea").value="";
 		var questID = document.getElementById("questID").innerHTML;
 		var contrID = SimpleText.database.addContribution(questID, SimpleText.username, textByUser);
 		if(selectionMade){
-			var imgPath = "assets/web/printScreen02.png"; //OBS HARDCODED FILE PATH 
-			SimpleText.database.addPicture(questID, contrID, imgPath);  
+			var imgPath = "assets/web/printScreen02.png"; //OBS HARDCODED FILE PATH
+			SimpleText.database.addPicture(questID, contrID, imgPath);
 		}
 
 		listContributions();
@@ -172,7 +177,7 @@ $(document).ready(function(){
 		var infoBox = $("#infoBox").fadeIn(300);
 		/*var message =*/ document.getElementById("infoMessage").innerHTML = "Thank you, your contribution has been added!";
 		infoBox.delay(3000).fadeOut(500);
-		
+
 		// Remove old file selections
 		removeOldFileSelections();
 	};
@@ -388,7 +393,7 @@ function viewSingleContribution(contribution){
 
 
 /**
-* Check if the contribution has images, load if there are some. 
+* Check if the contribution has images, load if there are some.
 * If there are none, do nothing.
 *
 * @param {string} questID
@@ -436,7 +441,7 @@ function hideAndResetContributionImages(){
 * The ID of the contribution for which to add the sound file.
 */
 function loadAudio(questID, contID){
-	
+
 	var soundArray = SimpleText.database.fetchSound(questID, contID);
 	if(soundArray.length < 1){
 		document.getElementById("audioplayerNoSound").removeAttribute("hidden");
@@ -467,7 +472,7 @@ function listContributions(){
 				return true;
 			}
 			return false;
-		}); 
+		});
 	}
 	// Sort the contributions.
 	contributions.sort(contributionsSortFunction());
@@ -587,8 +592,8 @@ function listComments(questID, contID){
 		return function(){
 			var text = document.getElementById("createCommentArea").value.trim();
 			if (text.length > 0) {
-				SimpleText.database.addComment(questID, 
-											contID, 
+				SimpleText.database.addComment(questID,
+											contID,
 											SimpleText.username,
 											text);
 				oldFunc();
@@ -597,4 +602,3 @@ function listComments(questID, contID){
 		};
 	})(document.getElementById("submitCommment").onclick);
 } // listComments
-

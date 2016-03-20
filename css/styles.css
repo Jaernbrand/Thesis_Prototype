@@ -168,7 +168,7 @@ p{
 #contributions #contributionsList .itemWrapper{
     height: 84px;
     width: 100%;
-    background-color: grey;
+    background-color: lightgrey;
     margin: 0;
     overflow-y: hidden;
     border-bottom: 1px solid black;
@@ -179,12 +179,12 @@ p{
 }
 
 #contributions #contributionsList .itemWrapper .textExcerpt{
-    margin:0;
+    margin: 0;
     width: 700px;
     float: left;
     font-size: 1.1em;
-    padding: 5px;
-    line-height: 140%;
+    padding-left: 5px;
+    line-height: 84px;
 }
 
 #contributions #contributionsList .itemWrapper .textExcerpt p{
@@ -194,23 +194,26 @@ p{
 }
 
 #contributions #contributionsList .itemWrapper .likesAndAuthorWrapper{
-    float:right;
-    padding: 10px;
+  float: right;
+  position: relative;
+  top: 20px;
+  right: 10px;
 }
 
 #contributions #contributionsList .itemWrapper .likesAndAuthorWrapper img{
     width: 30px;
-    height:auto;
+    height: auto;
     opacity: 0.45;
+    float: right;
     position: relative;
-    top: 3px;
-    left: 5px;
+    bottom: 8px;
+    right: 10px;
 }
 
 #contributions #contributionsList .itemWrapper .likesAndAuthorWrapper p{
     padding: 0;
     margin:0;
-    display:inline;
+    float: right;
 }
 
 #contributions #contributionsList .itemWrapper .likesAndAuthorWrapper .numberLikes{
@@ -413,13 +416,13 @@ p{
     left: 50%;
     top: 50%;
     width: 550px;
-    height:720px;
-    margin-top: -360px;
+    height: 630px;
+    margin-top: -315px;
     margin-left: -250px;
-	padding:15px;
+	  padding:15px;
 
-	font-size: 1.2em;
-	
+	  font-size: 1.2em;
+
     border: 10px double rgb(0,0,0);
     border-radius: 5px;
 
