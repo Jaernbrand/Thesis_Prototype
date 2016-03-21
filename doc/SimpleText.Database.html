@@ -468,6 +468,226 @@ SimpleText.</div>
 
 
         
+            
+<h4 class="name" id="flagged"><span class="type-signature"></span>flagged<span class="type-signature"></span></h4>
+
+
+
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>flagged</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object.&lt;string, <a href="global.html#UserContFlag">UserContFlag</a>></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Map of the contributions flagged by the users.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line38">line 38</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="liked"><span class="type-signature"></span>liked<span class="type-signature"></span></h4>
+
+
+
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>liked</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object.&lt;string, <a href="global.html#UserContLike">UserContLike</a>></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Map of the contributions liked by the users.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line32">line 32</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
     
 
     
@@ -578,7 +798,7 @@ SimpleText.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line35">line 35</a>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line47">line 47</a>
     </li></ul></dd>
     
 
@@ -780,7 +1000,7 @@ contribution ID.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line358">line 358</a>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line370">line 370</a>
     </li></ul></dd>
     
 
@@ -981,7 +1201,7 @@ quest id.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line102">line 102</a>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line114">line 114</a>
     </li></ul></dd>
     
 
@@ -1160,7 +1380,361 @@ number of flags.</td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line230">line 230</a>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line242">line 242</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="addFlagged"><span class="type-signature"></span>addFlagged<span class="signature">(username, questID, contID)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Adds the given contribution as flagged by the user with the given username.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>username</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The username of the user.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>questID</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The id of the quest to which the contribution belongs.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>contID</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The id of the contribution to add as flagged.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line613">line 613</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="addLiked"><span class="type-signature"></span>addLiked<span class="signature">(username, questID, contID)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Adds the given contribution as liked by the user with the given username.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>username</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The username of the user.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>questID</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The id of the quest to which the contribution belongs.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>contID</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The id of the contribution to add as liked.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line655">line 655</a>
     </li></ul></dd>
     
 
@@ -1339,7 +1913,7 @@ the specified quest ID.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line160">line 160</a>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line172">line 172</a>
     </li></ul></dd>
     
 
@@ -1518,7 +2092,7 @@ the specified quest ID.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line196">line 196</a>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line208">line 208</a>
     </li></ul></dd>
     
 
@@ -1675,7 +2249,7 @@ number of votes.</td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line290">line 290</a>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line302">line 302</a>
     </li></ul></dd>
     
 
@@ -1807,7 +2381,7 @@ the author.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line60">line 60</a>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line72">line 72</a>
     </li></ul></dd>
     
 
@@ -1939,7 +2513,7 @@ the author.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line76">line 76</a>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line88">line 88</a>
     </li></ul></dd>
     
 
@@ -2070,7 +2644,7 @@ the author.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line402">line 402</a>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line414">line 414</a>
     </li></ul></dd>
     
 
@@ -2247,7 +2821,7 @@ and with the given contribution ID.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line442">line 442</a>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line454">line 454</a>
     </li></ul></dd>
     
 
@@ -2400,7 +2974,7 @@ and with the given contribution ID.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line420">line 420</a>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line432">line 432</a>
     </li></ul></dd>
     
 
@@ -2553,7 +3127,7 @@ and with the given contribution ID.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line494">line 494</a>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line506">line 506</a>
     </li></ul></dd>
     
 
@@ -2730,7 +3304,7 @@ contribution ID and for the quest with the specified quest ID.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line569">line 569</a>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line581">line 581</a>
     </li></ul></dd>
     
 
@@ -2885,7 +3459,7 @@ contribution ID and for the quest with the specified quest ID.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line538">line 538</a>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line550">line 550</a>
     </li></ul></dd>
     
 
@@ -2908,6 +3482,312 @@ contribution ID and for the quest with the specified quest ID.
 
 
 
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getFlagged"><span class="type-signature"></span>getFlagged<span class="signature">(username)</span><span class="type-signature"> &rarr; {array.&lt;<a href="global.html#UserContFlag">UserContFlag</a>>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Fetches the contributions flagged by the user with the given username.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>username</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The username of the user.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line763">line 763</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The contributions flagged by the user.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">array.&lt;<a href="global.html#UserContFlag">UserContFlag</a>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getLiked"><span class="type-signature"></span>getLiked<span class="signature">(username)</span><span class="type-signature"> &rarr; {array.&lt;<a href="global.html#UserContLike">UserContLike</a>>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Fetches the contributions liked by the user with the given username.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>username</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The username of the user.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line781">line 781</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The contributions liked by the user.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">array.&lt;<a href="global.html#UserContLike">UserContLike</a>></span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -3040,7 +3920,7 @@ favourite authors.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line472">line 472</a>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line484">line 484</a>
     </li></ul></dd>
     
 
@@ -3195,7 +4075,7 @@ favourite authors.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line513">line 513</a>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line525">line 525</a>
     </li></ul></dd>
     
 
@@ -3352,7 +4232,361 @@ number of flags.</td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line260">line 260</a>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line272">line 272</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="removeFlagged"><span class="type-signature"></span>removeFlagged<span class="signature">(username, questID, contID)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Removes the given contribution as flagged by the user with the given username.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>username</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The username of the user.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>questID</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The id of the quest to which the contribution belongs.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>contID</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The id of the contribution to remove as flagged.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line697">line 697</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="removeLiked"><span class="type-signature"></span>removeLiked<span class="signature">(username, questID, contID)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Removes the given contribution as liked by the user with the given username.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>username</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The username of the user.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>questID</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The id of the quest to which the contribution belongs.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>contID</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The id of the contribution to add as liked.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line731">line 731</a>
     </li></ul></dd>
     
 
@@ -3509,7 +4743,7 @@ number of votes.</td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line320">line 320</a>
+        <a href="Database.js.html">Database.js</a>, <a href="Database.js.html#line332">line 332</a>
     </li></ul></dd>
     
 
@@ -3557,7 +4791,7 @@ number of votes.</td>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Fri Mar 18 2016 16:54:07 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon Mar 21 2016 12:15:22 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -27,7 +27,7 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
-* Defines actions taken during events involving HTML elements, 
+* Defines actions taken during events involving HTML elements,
 * mainly onclick events.
 *
 * @module EventConfig
@@ -43,7 +43,10 @@ $(document).ready(function(){
 	$("#infoBox").hide();
 	$("#blackBox").hide();
 	//Load fancybox
-	$(".fancybox").fancybox();
+	//$(".fancybox").fancybox();
+	$(".fancybox").fancybox({
+  	arrows : false
+	});
 
 	//Hide guidelines so they can be shown later using jquery
 	$("#guidelinesWrapper").hide();
@@ -56,11 +59,11 @@ $(document).ready(function(){
 	function removeOldFileSelections(){
 		var filenames = document.getElementsByClassName("choose-file");
 		for (var i = 0; i &lt; filenames.length; ++i){
-			filenames[i].value = "";	
-		}	
+			filenames[i].value = "";
+		}
 	}
 
-	/**	
+	/**
 	* Close simpleTextStart window, i.e. the quest text window.
 	*/
 	document.getElementById("okButton").onclick = function () {
@@ -143,7 +146,13 @@ $(document).ready(function(){
 
 	// Show create simple text / contribution
 	document.getElementById("contributeCreate").onclick = function () {
+
+		var questID = document.getElementById("questID").innerHTML;
+		var questText = questTexts[questID];
+
 		document.getElementById("contributions").style.visibility = "hidden";
+
+		document.getElementById("originalTextOnCreate").value = questText;
 		document.getElementById("createContribution").style.visibility = "visible";
 		document.getElementById("newTextArea").focus();
 	};
@@ -153,6 +162,7 @@ $(document).ready(function(){
 	document.getElementById("cancelCreateText").onclick = function () {
 		document.getElementById("createContribution").style.visibility = "hidden";
 		document.getElementById("contributions").style.visibility = "visible";
+		document.getElementById("newTextArea").value="";
 		removeOldFileSelections();
 	};
 
@@ -175,17 +185,18 @@ $(document).ready(function(){
 		var filenames = document.getElementsByClassName("choose-file");
 		var selectionMade = false;
 		for (var i = 0; i &lt; filenames.length; ++i){
-			if(filenames[i].value !== ""){	
+			if(filenames[i].value !== ""){
 				selectionMade = true;
 			}
 		}
 		// Add contribution. Img also if one has been choosen
 		var textByUser = document.getElementById("newTextArea").value;
+		document.getElementById("newTextArea").value="";
 		var questID = document.getElementById("questID").innerHTML;
 		var contrID = SimpleText.database.addContribution(questID, SimpleText.username, textByUser);
 		if(selectionMade){
-			var imgPath = "assets/web/printScreen02.png"; //OBS HARDCODED FILE PATH 
-			SimpleText.database.addPicture(questID, contrID, picture);  
+			var imgPath = "assets/web/printScreen02.png"; //OBS HARDCODED FILE PATH
+			SimpleText.database.addPicture(questID, contrID, imgPath);
 		}
 
 		listContributions();
@@ -194,7 +205,7 @@ $(document).ready(function(){
 		var infoBox = $("#infoBox").fadeIn(300);
 		/*var message =*/ document.getElementById("infoMessage").innerHTML = "Thank you, your contribution has been added!";
 		infoBox.delay(3000).fadeOut(500);
-		
+
 		// Remove old file selections
 		removeOldFileSelections();
 	};
@@ -405,12 +416,70 @@ function viewSingleContribution(contribution){
 			listComments(questID, contribution.contID);
 		};
 	})(document.getElementById("commentContribution").onclick);
+
+	// Adjust the like contibution function and like button.
+	var arrLiked = SimpleText.database.getLiked(SimpleText.username)
+					.filter(function(Elem){
+						return Elem.questID === questID &amp;&amp;
+								Elem.contID === contribution.contID;
+					});
+	if (arrLiked.length > 0){
+		// The like button needs to be adjusted if the author likes the contribution.
+		likesAuthor = true;
+		document.getElementById("likeContribution").src = "assets/web/likeFilled.png";
+		document.getElementById("likeContribution").onclick = (function(oldFunc){
+			return function(){
+				// oldFunc();
+				SimpleText.database.removeLiked(SimpleText.username, questID, contribution.contID);
+			};
+		})(document.getElementById("likeContribution").onclick);
+
+	} else {
+		likesAuthor = false;
+		document.getElementById("likeContribution").src = "assets/web/like.png";
+		document.getElementById("likeContribution").onclick = (function(oldFunc){
+			return function(){
+				// oldFunc();
+				SimpleText.database.addLiked(SimpleText.username, questID, contribution.contID);
+			};
+		})(document.getElementById("likeContribution").onclick);
+	}
+
+	// Adjust the flag contibution function and flag button.
+	var arrFlagged = SimpleText.database.getFlagged(SimpleText.username)
+					.filter(function(Elem){
+						return Elem.questID === questID &amp;&amp;
+								Elem.contID === contribution.contID;
+					});
+	if (arrFlagged.length > 0){
+		flagged = true;
+		document.getElementById("flagSingleContribution").src = "assets/web/flagFilled.png";
+		document.getElementById("flagSingleContribution").onclick = (function(oldFunc){
+			return function(){
+				// oldFunc();
+				SimpleText.database.removeFlagged(SimpleText.username, 
+												questID, 
+												contribution.contID);
+			};
+		})(document.getElementById("flagSingleContribution").onclick);
+
+	} else {
+		flagged = false;
+		document.getElementById("flagSingleContribution").src = "assets/web/flag.png";
+
+		document.getElementById("flagSingleContribution").onclick = (function(oldFunc){
+			return function(){
+				// oldFunc();
+				SimpleText.database.addFlagged(SimpleText.username, questID, contribution.contID);
+			};
+		})(document.getElementById("flagSingleContribution").onclick);
+	}
 } // viewSingleContribution
 
 
 
 /**
-* Check if the contribution has images, load if there are some. 
+* Check if the contribution has images, load if there are some.
 * If there are none, do nothing.
 *
 * @param {string} questID
@@ -424,7 +493,6 @@ function loadImages(questID, contID){
 	//Both fancyBox wrapper and the img tag needs the source to the actual image
 	var fancyBoxWrappers = document.getElementsByClassName("fancybox");
 	var documentImages = document.getElementsByClassName("user-image");
-	console.log(fancyBoxWrappers);
 	for(var i = 0; i &lt; images.length; ++i){
 		var imgPath = images[i];
 		fancyBoxWrappers[i].removeAttribute("hidden");
@@ -459,7 +527,7 @@ function hideAndResetContributionImages(){
 * The ID of the contribution for which to add the sound file.
 */
 function loadAudio(questID, contID){
-	
+
 	var soundArray = SimpleText.database.fetchSound(questID, contID);
 	if(soundArray.length &lt; 1){
 		document.getElementById("audioplayerNoSound").removeAttribute("hidden");
@@ -490,7 +558,7 @@ function listContributions(){
 				return true;
 			}
 			return false;
-		}); 
+		});
 	}
 	// Sort the contributions.
 	contributions.sort(contributionsSortFunction());
@@ -610,8 +678,8 @@ function listComments(questID, contID){
 		return function(){
 			var text = document.getElementById("createCommentArea").value.trim();
 			if (text.length > 0) {
-				SimpleText.database.addComment(questID, 
-											contID, 
+				SimpleText.database.addComment(questID,
+											contID,
 											SimpleText.username,
 											text);
 				oldFunc();
@@ -620,7 +688,6 @@ function listComments(questID, contID){
 		};
 	})(document.getElementById("submitCommment").onclick);
 } // listComments
-
 </code></pre>
         </article>
     </section>
@@ -637,7 +704,7 @@ function listComments(questID, contID){
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Fri Mar 18 2016 16:54:07 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon Mar 21 2016 12:15:22 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>
