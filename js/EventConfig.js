@@ -68,7 +68,6 @@ $(document).ready(function(){
 	document.getElementById("viewContributionBack").onclick = function () {
 		document.getElementById("viewSingleContribution").style.visibility = "hidden";
 		document.getElementById("contributions").style.visibility = "visible";
-
 		//Hide loaded images
 		hideAndResetContributionImages();
 
@@ -81,6 +80,7 @@ $(document).ready(function(){
 			element.outerHTML = "";
 			delete document.getElementById("audioplayerHasSound");
 		}
+		$("#infoBox").hide();
 	};
 
 	// Go to comment quest contribution
@@ -173,6 +173,7 @@ $(document).ready(function(){
 		listContributions();
 
 		document.getElementById("contributions").style.visibility = "visible";
+
 		var infoBox = $("#infoBox").fadeIn(300);
 		/*var message =*/ document.getElementById("infoMessage").innerHTML = "Thank you, your contribution has been added!";
 		infoBox.delay(3000).fadeOut(500);

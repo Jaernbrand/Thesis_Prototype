@@ -165,7 +165,7 @@ function create() {
     //Start next to friend
     player = game.add.sprite(520, game.world.height - 285, 'player');
     //Start next to map
-    // player = game.add.sprite(960, game.world.height - 285, 'player');
+    //player = game.add.sprite(960, game.world.height - 285, 'player');
     player.animations.add('left', [0, 1, 2], 12, true);
     player.animations.add('up', [3, 4, 5], 12, true);
     player.animations.add('right', [6, 7, 8], 12, true);

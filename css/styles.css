@@ -153,7 +153,7 @@ p{
     height: 510px;
     border: 1px solid rgba(0, 0, 0, 0.3);
     overflow-y: scroll;
-	background-color: white;
+	  background-color: white;
 }
 
 #contributions #contributionsBtnsWrapper{
