@@ -163,15 +163,15 @@ function create() {
     //Real start position
     //player = game.add.sprite(100, game.world.height - 69, 'player');
     //Start next to friend
-    player = game.add.sprite(520, game.world.height - 285, 'player');
+    //player = game.add.sprite(520, game.world.height - 285, 'player');
     //Start next to map
-    // player = game.add.sprite(960, game.world.height - 285, 'player');
+    player = game.add.sprite(960, game.world.height - 285, 'player');
     player.animations.add('left', [0, 1, 2], 12, true);
     player.animations.add('up', [3, 4, 5], 12, true);
     player.animations.add('right', [6, 7, 8], 12, true);
     player.animations.add('down', [9, 10, 11], 12, true);
     player.hasTalked = false;
-    player.inMenu = false
+    player.inMenu = true;
     game.physics.enable(player);
 
     friend = game.add.sprite(480, game.world.height - 285, 'friend');
@@ -182,12 +182,9 @@ function create() {
     game.physics.enable(wall);
     wall.body.immovable = true;
 
-    //4th argument makes the music loop
-    music.play('', 0, 1, true);
-
-	friendMap = game.add.sprite(950, game.world.height - 330, 'map');
-	friendMap.scale.setTo(0.5, 0.5);
-	friendMap.isCollected = false;
+		friendMap = game.add.sprite(950, game.world.height - 330, 'map');
+		friendMap.scale.setTo(0.5, 0.5);
+		friendMap.isCollected = false;
     game.physics.enable(friendMap);
 }
 
@@ -270,13 +267,11 @@ function collectItem(player, item) {
 */
 function collectMap(player, item) {
 	showQuestWindow();
-
 	// Sound is played when user collects map
-    foundMapSound.play();
-
-    item.kill();
-    music.volume = 0.15;
-    player.inMenu = true;
+  foundMapSound.play();
+  item.kill();
+  music.volume = 0.15;
+  player.inMenu = true;
 }
 
 /**
@@ -287,9 +282,9 @@ function collectMap(player, item) {
 */
 function talkWithFriend(){
 	showQuestWindow();
-    player.hasTalked = true;
-    wall.kill();
-    music.volume = 0.15;
+	player.hasTalked = true;
+	wall.kill();
+	music.volume = 0.15;
 	player.inMenu = true;
 }
 
@@ -322,6 +317,10 @@ function musicVolumeAndRestart(vol, restart){
     music.volume = vol;
     if(restart){
         music.restart();
+				setTimeout(function(){
+					music.fadeOut(3000); }
+				, 5000);
+
     }
 }
 
@@ -339,4 +338,15 @@ function incrementCurrentQuest(){
 	var body = currQuest.substring(0, tailStart);
 
 	currQuest = body + newNumber;
+}
+
+/**
+* Start the game by enabling the player to start moving and
+* by starting the sound.
+* Called within EventConfig when the start button is clicked by user.
+*/
+function startGame(){
+	player.inMenu = false;
+	//4th argument makes the music loop
+	music.play('', 0, 1, true);
 }

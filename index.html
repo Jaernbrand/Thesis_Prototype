@@ -26,13 +26,17 @@
   	<!-- fancyBox END -->
   </head>
 <body>
-<!-- BLACK BOX -->
+<!-- BLACK BOX (shown when game is over)-->
 <div id="blackBox">
 	<h1 id="blackHeading">THE GAME IS OVER</h1>
 </div>
+<!-- BLACK BOX END-->
 
-
-
+<!-- START SCREEN START-->
+<div id="startScreen">
+	<button type="button" name="button" id="startGameBtn">START</button>
+</div>
+<!-- START SCREEN END-->
 
 <!-- SIMPLE TEXT START -->
 <div id="simpleTextStart" class="mainWindow">
@@ -42,7 +46,7 @@
 		<textarea name="test" readonly>
 		</textarea>
 
-		<img src="assets/web/flag.png" id="flagButton" data-toggle="tooltip" title="Mark as complex text"/>
+		<img src="assets/web/flag.png" id="flagButton" data-toggle="tooltip" title="Simple text needed"/>
 		<button type="button" id="simpleTextButton" data-toggle="tooltip" title="View or create simple text">SIMPLE TEXT</button>
 		<button type="button" id="okButton">OK</button>
 	</div>
@@ -115,7 +119,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
 
 		<div class="bottomAreaWrapper">
 			<!-- Audioplayer is inserted here if there is audio -->
-			<img hidden src="assets/web/playerNoSound.png" alt="" id="audioplayerNoSound"/>
+			<img hidden src="assets/web/playerNoSound.png" alt="" id="audioplayerNoSound" data-toggle="tooltip" title="No audio available"/>
 
 			<div id="authorNameAndAddAuthorBtn">
 				<p>BY: <span id="singleContributionAuthor">John</span></p>
@@ -134,17 +138,14 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
     <button type="button" id="viewContributionBack">BACK</button>
 	</div>
 </div>
+</div>
 <!-- VIEW SINGLE CONTRIBUTION END -->
-
-
-
 
 <!-- INFO BOX START -->
 <div id="infoBox">
 	<p id="infoMessage"></p>
 </div>
 <!-- INFO BOX END -->
-
 
 <!-- CREATE SIMPLE TEXT START -->
 <div id="createContribution" class="mainWindow">
@@ -178,6 +179,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
 			<button type="button" id="submitCreateText">SUBMIT</button>
 		</div>
 </div>
+</div>
 <!-- CREATE SIMPLE TEXT END -->
 
 
@@ -206,7 +208,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
 
 <!-- SINGLE COMMENT TEMPLATE -->
 <div id="singleCommentTemplate" class="singleCommentWrapper">
-	<p class="commenter">Coco</p>
+	<p class="commenter"></p>
 	<p class="comment"></p>
 </div>
 <!-- SINGLE COMMENT TEMPLATE -->

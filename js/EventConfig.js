@@ -8,6 +8,13 @@
 // Run when the DOM is loaded and ready
 $(document).ready(function(){
 
+	//Makes the startScreen fade out and starts the game
+	$("#startGameBtn").click(function(){
+		startGame(); //Enables player to move and starts music
+		$("#startScreen").fadeOut(2000);
+	});
+
+
 	// Needed to be able to fade-in/fade-out infoBox when user clicks any icon
 	// when viewing a single contribution.
 	// If visibility is set with css, jQuery function fadeIn() & fadeOut() can't
@@ -15,7 +22,6 @@ $(document).ready(function(){
 	$("#infoBox").hide();
 	$("#blackBox").hide();
 	//Load fancybox
-	//$(".fancybox").fancybox();
 	$(".fancybox").fancybox({
   	arrows : false
 	});
@@ -69,7 +75,6 @@ $(document).ready(function(){
 	document.getElementById("viewContributionBack").onclick = function () {
 		document.getElementById("viewSingleContribution").style.visibility = "hidden";
 		document.getElementById("contributions").style.visibility = "visible";
-
 		//Hide loaded images
 		hideAndResetContributionImages();
 
@@ -82,6 +87,7 @@ $(document).ready(function(){
 			element.outerHTML = "";
 			delete document.getElementById("audioplayerHasSound");
 		}
+		$("#infoBox").hide();
 	};
 
 	// Go to comment quest contribution
@@ -174,6 +180,7 @@ $(document).ready(function(){
 		listContributions();
 
 		document.getElementById("contributions").style.visibility = "visible";
+
 		var infoBox = $("#infoBox").fadeIn(300);
 		/*var message =*/ document.getElementById("infoMessage").innerHTML = "Thank you, your contribution has been added!";
 		infoBox.delay(3000).fadeOut(500);

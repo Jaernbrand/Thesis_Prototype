@@ -63,7 +63,7 @@ SimpleText.Database.prototype.addAuthor = function(name){
 };
 
 /**
-* Decrements the number of users that favourited 
+* Decrements the number of users that favourited
 * the author.
 *
 * @param {string} name
@@ -79,7 +79,7 @@ SimpleText.Database.prototype.defavouriteAuthor = function(name){
 };
 
 /**
-* Increments the number of users that favourited 
+* Increments the number of users that favourited
 * the author.
 *
 * @param {string} name
@@ -119,7 +119,7 @@ SimpleText.Database.prototype.addContribution = function(questID, author, text){
 
 	if (!this.contributions[questID]){
 		this.contributions[questID] = []
-	}	
+	}
 
 	if (!this.authors[author]){
 		this.addAuthor(author);
@@ -156,7 +156,7 @@ SimpleText.Database.prototype.addContribution = function(questID, author, text){
 };
 
 /**
-* Adds a path to a pictrue to the contribution with 
+* Adds a path to a pictrue to the contribution with
 * the specified contribution ID and for the quest with
 * the specified quest ID.
 *
@@ -192,7 +192,7 @@ SimpleText.Database.prototype.addPicture = function(questID, contID, picture){
 }
 
 /**
-* Adds a path to a sound file to the contribution with 
+* Adds a path to a sound file to the contribution with
 * the specified contribution ID and for the quest with
 * the specified quest ID.
 *
@@ -228,7 +228,7 @@ SimpleText.Database.prototype.addSound = function(questID, contID, sound){
 }
 
 /**
-* Increments the number of flags by one for the contribution with 
+* Increments the number of flags by one for the contribution with
 * the specified contribution ID for the quest with
 * the specified quest ID.
 *
@@ -258,7 +258,7 @@ SimpleText.Database.prototype.addFlag = function(questID, contID){
 }
 
 /**
-* Decrements the number of flags by one for the contribution with 
+* Decrements the number of flags by one for the contribution with
 * the specified contribution ID for the quest with
 * the specified quest ID.
 *
@@ -288,7 +288,7 @@ SimpleText.Database.prototype.removeFlag = function(questID, contID){
 }
 
 /**
-* Increments the number of votes by one for the contribution with 
+* Increments the number of votes by one for the contribution with
 * the specified contribution ID for the quest with
 * the specified quest ID.
 *
@@ -318,7 +318,7 @@ SimpleText.Database.prototype.addVote = function(questID, contID){
 }
 
 /**
-* Decrements the number of votes by one for the contribution with 
+* Decrements the number of votes by one for the contribution with
 * the specified contribution ID for the quest with
 * the specified quest ID.
 *
@@ -349,7 +349,7 @@ SimpleText.Database.prototype.removeVote = function(questID, contID){
 
 /**
 * Adds a comment to the contribution for the quest
-* with the given quest ID and with the given 
+* with the given quest ID and with the given
 * contribution ID.
 *
 * @param {string} questID
@@ -362,7 +362,7 @@ SimpleText.Database.prototype.removeVote = function(questID, contID){
 * The author of the comment.
 *
 * @param {string} text
-* The comment text. 
+* The comment text.
 *
 * @return {string}
 * The comment id of the newly added comment.
@@ -377,12 +377,12 @@ SimpleText.Database.prototype.addComment = function(questID, contID, author, tex
 				" Expected string.";
 	}
 
-	var id; 
+	var id;
 
 	for(var i=0; i < this.contributions[questID].length; ++i){
 		if (this.contributions[questID][i].contID === contID){
 			id = this.contributions[questID][i].comments.length.toString();
-	
+
 			/**
 			* @typedef {object} Comment
 			*
@@ -416,7 +416,7 @@ SimpleText.Database.prototype.fetchAuthor = function(name){
 		throw "name: Invalid type " + (typeof name) +
 				" Expected string.";
 	}
-	
+
 	return this.authors[name] || null;
 };
 
@@ -538,7 +538,7 @@ SimpleText.Database.prototype.removeFavouriteAuthor = function(username, authorN
 };
 
 /**
-* Get a sound array containing hard-coded paths to audio files from the specified 
+* Get a sound array containing hard-coded paths to audio files from the specified
 * contribution ID and for the quest with the specified quest ID.
 *
 * @param {string} questID
@@ -569,7 +569,7 @@ SimpleText.Database.prototype.fetchSound = function(questID, contID){
 
 
 /**
-* Get a picture array containing hard-coded paths to img files from the specified 
+* Get a picture array containing hard-coded paths to img files from the specified
 * contribution ID and for the quest with the specified quest ID.
 *
 * @param {string} questID
@@ -789,4 +789,3 @@ SimpleText.Database.prototype.getLiked = function(username){
 
 
 SimpleText.database = new SimpleText.Database();
-
