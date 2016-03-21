@@ -5,6 +5,24 @@
 * @module EventConfig
 */
 
+/**
+* @property {boolean} filled
+* Is filled if the current user is added as favourite.
+*/
+var filled = false;
+
+/**
+* @property {boolean} flagged
+* True if the current user flagged the current contribution.
+*/
+var flagged = false;
+
+/**
+* @property {boolean} flagged
+* True if the current user liked the current contribution
+*/
+var likesAuthor = false;
+
 // Run when the DOM is loaded and ready
 $(document).ready(function(){
 
@@ -213,8 +231,7 @@ $(document).ready(function(){
 
 
 	// Add author as favourite
-	var filled = false;
-	$("#favouriteAuthor").click(function() {
+	document.getElementById("favouriteAuthor").onclick = function() {
 		if(!filled){
 			filled = true;
 			var message = "Added as favourite author";
@@ -223,6 +240,7 @@ $(document).ready(function(){
 
 			var authorName = document.getElementById("singleContributionAuthor").innerHTML;
 			SimpleText.database.favouriteAuthor(authorName);
+			SimpleText.database.addFavouriteAuthor(SimpleText.username, authorName);
 
 		}else{
 			filled = false;
@@ -232,13 +250,13 @@ $(document).ready(function(){
 
 			var authorName = document.getElementById("singleContributionAuthor").innerHTML;
 			SimpleText.database.defavouriteAuthor(authorName);
+			SimpleText.database.removeFavouriteAuthor(SimpleText.username, authorName);
 		}
 
-	});
+	};
 
 
 	// Flag single contribution
-	var flagged = false;
 	$("#flagSingleContribution").click(function() {
 		if(!flagged){
 			flagged = true;
@@ -265,7 +283,6 @@ $(document).ready(function(){
 
 
 	// Like single contribution
-	var likesAuthor = false;
 	$("#likeContribution").click(function() {
 		if(!likesAuthor){
 			likesAuthor = true;
@@ -376,6 +393,22 @@ function viewSingleContribution(contribution){
 	document.getElementById("contributions").style.visibility = "hidden";
 	document.getElementById("viewSingleContribution").style.visibility = "visible";
 
+	// Adjust favourite author button.
+	var arrAuthor = SimpleText.database.fetchFavouriteAuthors(SimpleText.username)
+					.filter(function(Elem){
+						return Elem === contribution.author;
+					});
+	console.log(arrAuthor); // TODO DELTE
+	console.log(contribution.author); // TODO DELTE
+	if (arrAuthor.length > 0){
+		filled = true;
+		document.getElementById("favouriteAuthor").src = "assets/web/addFilled.png";
+	} else {
+		filled = false;
+		document.getElementById("favouriteAuthor").src  = "assets/web/add.png";
+
+	}
+
 	// Adjust the submit comment function.
 	document.getElementById("commentContribution").onclick = (function(oldFunc){
 		return function(){
@@ -394,22 +427,20 @@ function viewSingleContribution(contribution){
 		// The like button needs to be adjusted if the author likes the contribution.
 		likesAuthor = true;
 		document.getElementById("likeContribution").src = "assets/web/likeFilled.png";
-		document.getElementById("likeContribution").onclick = (function(oldFunc){
+		document.getElementById("likeContribution").onclick = (function(){
 			return function(){
-				// oldFunc();
 				SimpleText.database.removeLiked(SimpleText.username, questID, contribution.contID);
 			};
-		})(document.getElementById("likeContribution").onclick);
+		})();
 
 	} else {
 		likesAuthor = false;
 		document.getElementById("likeContribution").src = "assets/web/like.png";
-		document.getElementById("likeContribution").onclick = (function(oldFunc){
+		document.getElementById("likeContribution").onclick = (function(){
 			return function(){
-				// oldFunc();
 				SimpleText.database.addLiked(SimpleText.username, questID, contribution.contID);
 			};
-		})(document.getElementById("likeContribution").onclick);
+		})();
 	}
 
 	// Adjust the flag contibution function and flag button.
@@ -421,25 +452,23 @@ function viewSingleContribution(contribution){
 	if (arrFlagged.length > 0){
 		flagged = true;
 		document.getElementById("flagSingleContribution").src = "assets/web/flagFilled.png";
-		document.getElementById("flagSingleContribution").onclick = (function(oldFunc){
+		document.getElementById("flagSingleContribution").onclick = (function(){
 			return function(){
-				// oldFunc();
 				SimpleText.database.removeFlagged(SimpleText.username, 
 												questID, 
 												contribution.contID);
 			};
-		})(document.getElementById("flagSingleContribution").onclick);
+		})();
 
 	} else {
 		flagged = false;
 		document.getElementById("flagSingleContribution").src = "assets/web/flag.png";
 
-		document.getElementById("flagSingleContribution").onclick = (function(oldFunc){
+		document.getElementById("flagSingleContribution").onclick = (function(){
 			return function(){
-				// oldFunc();
 				SimpleText.database.addFlagged(SimpleText.username, questID, contribution.contID);
 			};
-		})(document.getElementById("flagSingleContribution").onclick);
+		})();
 	}
 } // viewSingleContribution
 

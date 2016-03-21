@@ -481,7 +481,7 @@ SimpleText.Database.prototype.fetchComments = function(questID, contID){
 * @param {string} authorName
 * Name of the author.
 */
-SimpleText.Database.prototype.removeFavouriteAuthor = function(username, authorName){
+SimpleText.Database.prototype.addFavouriteAuthor = function(username, authorName){
 	if (typeof username !== "string"){
 		throw "username: Invalid type " + (typeof username) +
 				" Expected string.";
@@ -491,29 +491,15 @@ SimpleText.Database.prototype.removeFavouriteAuthor = function(username, authorN
 				" Expected string.";
 	}
 
+	if (!this.favourites[username]){
+		this.favourites[username] = [];
+	}
+
 	this.favourites[username].push(authorName);
 };
 
 /**
-* Fetches the favourite authors of the user with the given username.
-*
-* @param {string} username
-* Name of the user.
-*
-* @return {array.<string>}
-* Array containing the names of the user's favourite authors.
-*/
-SimpleText.Database.prototype.fetchFavouriteAuthors = function(username){
-	if (typeof username !== "string"){
-		throw "username: Invalid type " + (typeof username) +
-				" Expected string.";
-	}
-
-	return this.favourites[username] || [];
-};
-
-/**
-* Removes the author with the specified name from the user's
+* Removes the author with the specified name as one of the user's
 * favourite authors.
 *
 * @param {string} username
@@ -532,9 +518,29 @@ SimpleText.Database.prototype.removeFavouriteAuthor = function(username, authorN
 				" Expected string.";
 	}
 
-	this.favourites[username] = this.favorites[username].filter(function(elem){
-		return elem !== authorName;
-	});
+	for (var i=0; i < this.favourites[username].length; ++i){
+		if (this.favourites[username][i] === authorName){
+			delete this.favourites[username][i];
+		}
+	}
+};
+
+/**
+* Fetches the favourite authors of the user with the given username.
+*
+* @param {string} username
+* Name of the user.
+*
+* @return {array.<string>}
+* Array containing the names of the user's favourite authors.
+*/
+SimpleText.Database.prototype.fetchFavouriteAuthors = function(username){
+	if (typeof username !== "string"){
+		throw "username: Invalid type " + (typeof username) +
+				" Expected string.";
+	}
+
+	return this.favourites[username] || [];
 };
 
 /**
