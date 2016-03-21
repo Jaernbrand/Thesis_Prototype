@@ -24,6 +24,18 @@ SimpleText.Database = function(){
 	* Map of author names with usernames as the key
 	*/
 	this.favourites = {};
+
+	/**
+	* @property {object<string, UserContLike>} liked
+	* Map of the contributions liked by the users.
+	*/
+	this.liked = {};
+
+	/**
+	* @property {object<string, UserContFlag>} flagged
+	* Map of the contributions flagged by the users.
+	*/
+	this.flagged = {};
 };
 
 /**
@@ -586,7 +598,194 @@ SimpleText.Database.prototype.fetchPictures = function(questID, contID){
 	return pics || null;
 };
 
+/**
+* Adds the given contribution as flagged by the user with the given username.
+*
+* @param {string} username
+* The username of the user.
+*
+* @param {string} questID
+* The id of the quest to which the contribution belongs.
+*
+* @param {string} contID
+* The id of the contribution to add as flagged.
+*/
+SimpleText.Database.prototype.addFlagged = function(username, questID, contID){
+	if (typeof username !== "string"){
+		throw "username: Invalid type " + (typeof username) +
+				" Expected string.";
+	}
+	if (typeof questID !== "string"){
+		throw "questID: Invalid type " + (typeof questID) +
+				" Expected string.";
+	}
+	if (typeof contID !== "string"){
+		throw "contID: Invalid type " + (typeof contID) +
+				" Expected string.";
+	}
+	
+	if (!this.flagged[username]){
+		this.flagged[username] = [];
+	}
 
+	/**
+	* @typedef {object} UserContFlag
+	*
+	* @property {string} questID
+	* @property {string} contID
+	*/
+	this.flagged[username].push({
+		questID: questID,
+		contID: contID
+	});
+};
+
+/**
+* Adds the given contribution as liked by the user with the given username.
+*
+* @param {string} username
+* The username of the user.
+*
+* @param {string} questID
+* The id of the quest to which the contribution belongs.
+*
+* @param {string} contID
+* The id of the contribution to add as liked.
+*/
+SimpleText.Database.prototype.addLiked = function(username, questID, contID){
+	if (typeof username !== "string"){
+		throw "username: Invalid type " + (typeof username) +
+				" Expected string.";
+	}
+	if (typeof questID !== "string"){
+		throw "questID: Invalid type " + (typeof questID) +
+				" Expected string.";
+	}
+	if (typeof contID !== "string"){
+		throw "contID: Invalid type " + (typeof contID) +
+				" Expected string.";
+	}
+
+	if (!this.liked[username]){
+		this.liked[username] = [];
+	}
+
+	/**
+	* @typedef {object} UserContLike
+	*
+	* @property {string} questID
+	* @property {string} contID
+	*/
+	this.liked[username].push({
+		questID: questID,
+		contID: contID
+	});
+};
+
+/**
+* Removes the given contribution as flagged by the user with the given username.
+*
+* @param {string} username
+* The username of the user.
+*
+* @param {string} questID
+* The id of the quest to which the contribution belongs.
+*
+* @param {string} contID
+* The id of the contribution to remove as flagged.
+*/
+SimpleText.Database.prototype.removeFlagged = function(username, questID, contID){
+	if (typeof username !== "string"){
+		throw "username: Invalid type " + (typeof username) +
+				" Expected string.";
+	}
+	if (typeof questID !== "string"){
+		throw "questID: Invalid type " + (typeof questID) +
+				" Expected string.";
+	}
+	if (typeof contID !== "string"){
+		throw "contID: Invalid type " + (typeof contID) +
+				" Expected string.";
+	}
+
+	for (var i=0; i < this.flagged[username]; ++i){
+		if (this.flagged[username][i].questID === questID &&
+			this.flagged[username][i].contID === contID){
+			delete this.flagged[username];
+		}
+	}
+};
+
+/**
+* Removes the given contribution as liked by the user with the given username.
+*
+* @param {string} username
+* The username of the user.
+*
+* @param {string} questID
+* The id of the quest to which the contribution belongs.
+*
+* @param {string} contID
+* The id of the contribution to add as liked.
+*/
+SimpleText.Database.prototype.removeLiked = function(username, questID, contID){
+	if (typeof username !== "string"){
+		throw "username: Invalid type " + (typeof username) +
+				" Expected string.";
+	}
+	if (typeof questID !== "string"){
+		throw "questID: Invalid type " + (typeof questID) +
+				" Expected string.";
+	}
+	if (typeof contID !== "string"){
+		throw "contID: Invalid type " + (typeof contID) +
+				" Expected string.";
+	}
+
+	for (var i=0; i < this.liked[username]; ++i){
+		if (this.liked[username][i].questID === questID &&
+			this.liked[username][i].contID === contID){
+
+			delete this.liked[username];
+		}
+	}
+};
+
+/**
+* Fetches the contributions flagged by the user with the given username.
+*
+* @param {string} username
+* The username of the user.
+*
+* @return {array.<UserContFlag>}
+* The contributions flagged by the user.
+*/
+SimpleText.Database.prototype.getFlagged = function(username){
+	if (typeof username !== "string"){
+		throw "username: Invalid type " + (typeof username) +
+				" Expected string.";
+	}
+
+	return this.flagged[username] || [];
+};
+
+/**
+* Fetches the contributions liked by the user with the given username.
+*
+* @param {string} username
+* The username of the user.
+*
+* @return {array.<UserContLike>}
+* The contributions liked by the user.
+*/
+SimpleText.Database.prototype.getLiked = function(username){
+	if (typeof username !== "string"){
+		throw "username: Invalid type " + (typeof username) +
+				" Expected string.";
+	}
+
+	return this.liked[username] || [];
+};
 
 
 SimpleText.database = new SimpleText.Database();
