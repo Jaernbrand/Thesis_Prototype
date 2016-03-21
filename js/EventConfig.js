@@ -91,6 +91,7 @@ $(document).ready(function(){
 
 	// Go back to contributions list from view single contribution
 	document.getElementById("viewContributionBack").onclick = function () {
+		listContributions();
 		document.getElementById("viewSingleContribution").style.visibility = "hidden";
 		document.getElementById("contributions").style.visibility = "visible";
 		//Hide loaded images
@@ -398,8 +399,6 @@ function viewSingleContribution(contribution){
 					.filter(function(Elem){
 						return Elem === contribution.author;
 					});
-	console.log(arrAuthor); // TODO DELTE
-	console.log(contribution.author); // TODO DELTE
 	if (arrAuthor.length > 0){
 		filled = true;
 		document.getElementById("favouriteAuthor").src = "assets/web/addFilled.png";
