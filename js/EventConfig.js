@@ -8,6 +8,13 @@
 // Run when the DOM is loaded and ready
 $(document).ready(function(){
 
+	//Makes the startScreen fade out and starts the game
+	$("#startGameBtn").click(function(){
+		startGame(); //Enables player to move and starts music
+		$("#startScreen").fadeOut(2000);
+	});
+
+
 	// Needed to be able to fade-in/fade-out infoBox when user clicks any icon
 	// when viewing a single contribution.
 	// If visibility is set with css, jQuery function fadeIn() & fadeOut() can't

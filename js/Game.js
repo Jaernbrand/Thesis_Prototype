@@ -171,7 +171,7 @@ function create() {
     player.animations.add('right', [6, 7, 8], 12, true);
     player.animations.add('down', [9, 10, 11], 12, true);
     player.hasTalked = false;
-    player.inMenu = false
+    player.inMenu = true;
     game.physics.enable(player);
 
     friend = game.add.sprite(480, game.world.height - 285, 'friend');
@@ -181,9 +181,6 @@ function create() {
     wall = game.add.sprite(478, game.world.height - 241, 'wall')
     game.physics.enable(wall);
     wall.body.immovable = true;
-
-    //4th argument makes the music loop
-    //music.play('', 0, 1, true);
 
 		friendMap = game.add.sprite(950, game.world.height - 330, 'map');
 		friendMap.scale.setTo(0.5, 0.5);
@@ -270,13 +267,11 @@ function collectItem(player, item) {
 */
 function collectMap(player, item) {
 	showQuestWindow();
-
 	// Sound is played when user collects map
-    foundMapSound.play();
-
-    item.kill();
-    music.volume = 0.15;
-    player.inMenu = true;
+  foundMapSound.play();
+  item.kill();
+  music.volume = 0.15;
+  player.inMenu = true;
 }
 
 /**
@@ -339,4 +334,15 @@ function incrementCurrentQuest(){
 	var body = currQuest.substring(0, tailStart);
 
 	currQuest = body + newNumber;
+}
+
+/**
+* Start the game by enabling the player to start moving and
+* by starting the sound.
+* Called within EventConfig when the start button is clicked by user.
+*/
+function startGame(){
+	player.inMenu = false;
+	//4th argument makes the music loop
+	music.play('', 0, 1, true);
 }
