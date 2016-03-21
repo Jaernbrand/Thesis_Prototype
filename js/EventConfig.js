@@ -604,22 +604,22 @@ function contributionsSortFunction(){
 	var sortOn = document.getElementById("sortContributions").value;
 	switch (sortOn){
   		case "highest":
-			sortFunc = function(rhs, lhs){
-				return lhs.votes - rhs.votes;
+			sortFunc = function(lhs, rhs){
+				return rhs.votes - lhs.votes;
 			};
 			break;
   		case "newest":
-			sortFunc = function(rhs, lhs){
+			sortFunc = function(lhs, rhs){
 				return rhs.timestamp - lhs.timestamp;
 			};
 			break;
   		case "oldest":
-			sortFunc = function(rhs, lhs){
+			sortFunc = function(lhs, rhs){
 				return lhs.timestamp - rhs.timestamp;
 			};
 			break;
   		case "author":
-			sortFunc = function(rhs, lhs){
+			sortFunc = function(lhs, rhs){
 				return lhs.votes - rhs.votes;
 			};
 			break;
