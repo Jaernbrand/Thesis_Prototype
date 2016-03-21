@@ -97,18 +97,6 @@ $(document).ready(function(){
 		document.getElementById("createCommentArea").focus();
 	};
 
-	// Submit written comment
-	document.getElementById("submitCommment").onclick = function () {
-		// Stay on page, user sees its own comment and chooses to go back.
-		// Disabeling textarea & submit button after submitting comment.
-		// Forces user to go back after viewing the cubmitted comment.
-		document.getElementById("createCommentArea").disabled = true;
-		document.getElementById("submitCommment").disabled = true;
-
-		document.getElementById("createCommentArea").value = "";
-	};
-
-
 	// Cancel comment
 	document.getElementById("cancelComment").onclick = function () {
 		document.getElementById("createComment").style.visibility = "hidden";
@@ -665,5 +653,18 @@ function listComments(questID, contID){
 				listComments(questID, contID);
 			}
 		};
-	})(document.getElementById("submitCommment").onclick);
+	})(submitWrittenComment);
 } // listComments
+
+/**
+* Adjusts the GUI after a comment has been submitted.
+*/
+function submitWrittenComment() {
+	// Stay on page, user sees its own comment and chooses to go back.
+	// Disabeling textarea & submit button after submitting comment.
+	// Forces user to go back after viewing the cubmitted comment.
+	document.getElementById("createCommentArea").disabled = true;
+	document.getElementById("submitCommment").disabled = true;
+
+	document.getElementById("createCommentArea").value = "";
+}
