@@ -15,7 +15,6 @@ $(document).ready(function(){
 	$("#infoBox").hide();
 	$("#blackBox").hide();
 	//Load fancybox
-	//$(".fancybox").fancybox();
 	$(".fancybox").fancybox({
   	arrows : false
 	});

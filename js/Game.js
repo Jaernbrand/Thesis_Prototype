@@ -183,11 +183,11 @@ function create() {
     wall.body.immovable = true;
 
     //4th argument makes the music loop
-    music.play('', 0, 1, true);
+    //music.play('', 0, 1, true);
 
-	friendMap = game.add.sprite(950, game.world.height - 330, 'map');
-	friendMap.scale.setTo(0.5, 0.5);
-	friendMap.isCollected = false;
+		friendMap = game.add.sprite(950, game.world.height - 330, 'map');
+		friendMap.scale.setTo(0.5, 0.5);
+		friendMap.isCollected = false;
     game.physics.enable(friendMap);
 }
 

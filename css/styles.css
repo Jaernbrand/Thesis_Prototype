@@ -330,20 +330,19 @@ p{
     left: 50%;
     top: 50%;
     height: 80px;
-    width: 350px;
-    margin-top: -50px;
-    margin-left: -125px;
-
+    width: 480px;
+    margin-top: -40px;
+    margin-left: -240px;
     text-align: center;
     border: 1px solid rgba(0, 0, 0, 0.7);
-	border-radius: 10px;
-	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
+	  border-radius: 10px;
+	  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
     background-color: white;
     z-index: 3;
-	font-size: 1em;
-	text-align: center;
-	vertical-align: middle;
-	line-height: 80px;       /* the same as div height */
+	  font-size: 1em;
+	  text-align: center;
+	  vertical-align: middle;
+	  line-height: 80px;       /* the same as div height */
 }
 
 #infoBox #infoMessage{
@@ -397,14 +396,14 @@ p{
 
 #createContribution .content #guidelines{
     position:relative;
-    top: 35px;
+    top: 20px;
 }
 
 
 #createContribution .content .navigationButtonsWrapper{
 	position: relative;
 	left: 610px;
-	top: -5px;
+	top: -20px;
 }
 /*CREATE SIMPLE TEXT END*/
 
@@ -443,8 +442,8 @@ p{
 #guidelinesWrapper h1{
 	font-size:30px;
 	text-align: center;
-    margin: -50px 0px 5px 5px;
-    padding: 0px;
+  margin: -50px 0px 5px 5px;
+  padding: 0px;
 	font-family: bit8;
 }
 
