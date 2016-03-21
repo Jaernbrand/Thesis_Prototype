@@ -388,6 +388,64 @@ function viewSingleContribution(contribution){
 			listComments(questID, contribution.contID);
 		};
 	})(document.getElementById("commentContribution").onclick);
+
+	// Adjust the like contibution function and like button.
+	var arrLiked = SimpleText.database.getLiked(SimpleText.username)
+					.filter(function(Elem){
+						return Elem.questID === questID &&
+								Elem.contID === contribution.contID;
+					});
+	if (arrLiked.length > 0){
+		// The like button needs to be adjusted if the author likes the contribution.
+		likesAuthor = true;
+		document.getElementById("likeContribution").src = "assets/web/likeFilled.png";
+		document.getElementById("likeContribution").onclick = (function(oldFunc){
+			return function(){
+				// oldFunc();
+				SimpleText.database.removeLiked(SimpleText.username, questID, contribution.contID);
+			};
+		})(document.getElementById("likeContribution").onclick);
+
+	} else {
+		likesAuthor = false;
+		document.getElementById("likeContribution").src = "assets/web/like.png";
+		document.getElementById("likeContribution").onclick = (function(oldFunc){
+			return function(){
+				// oldFunc();
+				SimpleText.database.addLiked(SimpleText.username, questID, contribution.contID);
+			};
+		})(document.getElementById("likeContribution").onclick);
+	}
+
+	// Adjust the flag contibution function and flag button.
+	var arrFlagged = SimpleText.database.getFlagged(SimpleText.username)
+					.filter(function(Elem){
+						return Elem.questID === questID &&
+								Elem.contID === contribution.contID;
+					});
+	if (arrFlagged.length > 0){
+		flagged = true;
+		document.getElementById("flagSingleContribution").src = "assets/web/flagFilled.png";
+		document.getElementById("flagSingleContribution").onclick = (function(oldFunc){
+			return function(){
+				// oldFunc();
+				SimpleText.database.removeFlagged(SimpleText.username, 
+												questID, 
+												contribution.contID);
+			};
+		})(document.getElementById("flagSingleContribution").onclick);
+
+	} else {
+		flagged = false;
+		document.getElementById("flagSingleContribution").src = "assets/web/flag.png";
+
+		document.getElementById("flagSingleContribution").onclick = (function(oldFunc){
+			return function(){
+				// oldFunc();
+				SimpleText.database.addFlagged(SimpleText.username, questID, contribution.contID);
+			};
+		})(document.getElementById("flagSingleContribution").onclick);
+	}
 } // viewSingleContribution
 
 
