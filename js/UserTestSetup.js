@@ -157,6 +157,14 @@ function fillDatabase(){
 			// Note! Same comments as on Fred's contribution.
 			SimpleText.database.addComment(questID, currContId, fComNames[j], fComTexts[j]);
 		}
+
+
+		//Makes the contributions have a timedifferance.
+		for(var i=0; i < SimpleText.database.contributions[questID].length; ++i){
+			if (SimpleText.database.contributions[questID][i].contID === fredContId){
+					SimpleText.database.contributions[questID][i].timestamp += i;
+			}
+		}
 	 } // populateQuest1
 
 	/**
@@ -224,7 +232,7 @@ function fillDatabase(){
 		}
 
 		//Makes Freds contribution a bit older, makes it's possibe to sort on date
-		for(var i=0; i < 	SimpleText.database.contributions[questID].length; ++i){
+		for(var i=0; i < SimpleText.database.contributions[questID].length; ++i){
 			if (SimpleText.database.contributions[questID][i].contID === fredContId){
 					SimpleText.database.contributions[questID][i].timestamp = Date.now() + 3000;
 			}
