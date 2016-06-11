@@ -4,6 +4,8 @@ The prototype consists of two parts: (1) a very simple game
 built with [Phaser](http://phaser.io/) and (2) the GUI for the text 
 simplification program.
 
+The prototype can be played [here](https://jaernbrand.github.io/Thesis_Prototype/).
+
 ## Game Assets
 The game uses the following sound assets:
 - Castle Theme by [Visager](http://freemusicarchive.org/music/Visager/)
